@@ -4,7 +4,7 @@
   "description": "Midea Meeting System",
   "main": "index.js",
   "scripts": {
-    "server": "webpack-dev-server"
+    "server": "webpack-dev-server --inline --hot --progress"
   },
   "author": "lznism@lznism.com",
   "license": "MIT",
