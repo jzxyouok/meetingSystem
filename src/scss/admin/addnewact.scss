@@ -1,0 +1,32 @@
+form {
+	width: 1115px;
+	box-sizing: border-box;
+	border-top: 2px solid #ff5303;
+	position: relative;
+
+	.form-title {
+		display: block;
+		background: #ff5303;
+		width: 149px;
+		height: 48px;
+		text-align: center;
+		margin-left: 50px;
+		margin-top: -6px;
+		margin-bottom: 42px;
+		font: 20px/50px 'Microsoft Yahei';
+		color: #fff;
+	}
+
+	:global(.form-item) {
+		width: 979px;
+		height: 44px;
+		margin-bottom: 44px;
+	}
+
+	:global(.actName) {
+		box-sizing: border-box;
+		width: 861px;
+		height: 42px;
+		padding: 8px;
+	}
+}
