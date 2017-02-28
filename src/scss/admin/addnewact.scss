@@ -1,5 +1,5 @@
 form {
-	width: 1115px;
+	width: 870px;
 	box-sizing: border-box;
 	border-top: 2px solid #ff5303;
 	position: relative;
@@ -18,15 +18,52 @@ form {
 	}
 
 	:global(.form-item) {
-		width: 979px;
-		height: 44px;
-		margin-bottom: 44px;
+		width: 850px;
+		margin-bottom: 15px;
+		text-align: center;
 	}
 
-	:global(.actName) {
+	:global(.cLabel) {
+		font: 14px/34px 'Microsoft Yahei';
+		font-weight: normal;
+		color: #4a4a4a;
+	}
+
+	:global(.pl) {
+		padding-left: 15px;
+	}
+
+	:global(.pr) {
+		padding-right: 15px;
+	}
+
+	:global(.tl) {
+		text-align: left;
+	}
+	
+	:global(.preview) {
+		width: 360px;
+		height: 200px;
+		background: url(../../../static/img/admin-addimg.png) no-repeat 0 0;
+		background-size: cover; 
+	}
+
+	:global(.imgupload) {
 		box-sizing: border-box;
-		width: 861px;
-		height: 42px;
-		padding: 8px;
+		padding-left: 10px;
+		color: #4a4a4a;
+		font: 14px/20px 'Microsoft Yahei';
+
+		p {
+			margin-top: 8px;
+		}
+	}
+
+	:global(.input-group-addon) {
+		background-color: #fff;
+		color: #00a0e8;
+		border-left: 1px solid #00a0e8 !important;
+		border: 1px solid #00a0e8;
+		margin-left: 5px;
 	}
 }

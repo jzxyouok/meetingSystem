@@ -3,55 +3,87 @@ import CSSModules from 'react-css-modules';
 import classNames from 'classnames';
 import styles from '../../scss/admin/addnewact.scss';
 
-import {Button, Form, FormGroup, Col, FormControl, InputGroup} from 'react-bootstrap';
+import {Button, Form, FormGroup, Col, FormControl, InputGroup, ControlLabel, Row} from 'react-bootstrap';
 
 class AddNewActForm extends Component {
 	render() {
 		return <Form horizontal>
 			<span styleName="form-title">活动信息</span>
-			<FormGroup bsClass="form-item">
-				<Col md={2}>活动名称</Col>
-				<Col md={10}>
+			<FormGroup bsClass="form-item form-group" controlId="actName">
+				<Col sm={2}>
+					<ControlLabel bsClass="cLabel">活动名称</ControlLabel>
+				</Col>
+				<Col sm={10}>
 					<FormControl bsClass="form-control actName" type="text" placeholder="请输入活动名称" />
 				</Col>
 			</FormGroup>
-			<FormGroup>
-				<Col md={2}>活动时间</Col>
-				<Col md={5}>
-					<p>起始时间</p>
-					<FormControl type="date" />
+			
+			<Row bsClass="form-item form-group">
+				<Col sm={2}>
+					<ControlLabel bsClass="cLabel">活动时间</ControlLabel>
 				</Col>
-				<Col md={5}>
-					<p>起始时间</p>
-					<FormControl type="date" />
+				<Col sm={5}>
+					<FormGroup controlId="beginTime" bsClass="pl tl form-group">
+						<ControlLabel bsClass="cLabel">起始时间</ControlLabel>
+						<FormControl type="date" />
+					</FormGroup>
 				</Col>
-			</FormGroup>
-			<FormGroup>
-				<Col md={2}>活动地点</Col>
-				<Col md={10}>
-					<FormControl componentClass="select">
-						<option value="1">1</option>
-						<option value="2">2</option>
-					</FormControl>
+				<Col sm={5}>
+					<FormGroup controlId="endTime" bsClass="pr tl form-group">
+						<ControlLabel bsClass="cLabel">起始时间</ControlLabel>
+						<FormControl type="date" />
+					</FormGroup>
 				</Col>
-			</FormGroup>
-			<FormGroup>
-				<Col md={10} mdOffset={2}>
+			</Row>
+
+			<Row bsClass="form-item form-group">
+				<Col sm={2}>
+					<ControlLabel bsClass="cLabel">活动地点</ControlLabel>
+				</Col>
+				<Col sm={5}>
+					<FormGroup bsClass="pl form-group">
+						<FormControl componentClass="select">
+							<option value="1">1</option>
+							<option value="2">2</option>
+						</FormControl>
+					</FormGroup>
+				</Col>
+				<Col sm={5}>
+					<FormGroup bsClass="pr form-group">
+						<FormControl componentClass="select">
+							<option value="1">1</option>
+							<option value="2">2</option>
+						</FormControl>
+					</FormGroup>
+				</Col>
+			</Row>
+			
+			<FormGroup controlId="detailAddress" bsClass="form-item form-group">
+				<Col sm={2}>
+					<ControlLabel bsClass="cLabel">详细地址</ControlLabel>
+				</Col>
+				<Col sm={10}>
 					<FormControl type="text" placeholder="请输入详细地址" />
 				</Col>
 			</FormGroup>
-			<FormGroup>
-				<Col md={2}>主办方</Col>
-				<Col md={10}>
+
+			<FormGroup controlId="host" bsClass="form-item form-group">
+				<Col sm={2}>
+					<ControlLabel bsClass="cLabel">主办　方</ControlLabel>
+				</Col>
+				<Col sm={10}>
 					<InputGroup>
 						<FormControl type="text"/>
 						<InputGroup.Addon>添加主办方</InputGroup.Addon>
 					</InputGroup>
 				</Col>
 			</FormGroup>
-			<FormGroup>
-				<Col md={2}>活动分类</Col>
-				<Col md={10}>
+
+			<FormGroup controlId="actCategory" bsClass="form-item form-group">
+				<Col sm={2}>
+					<ControlLabel bsClass="cLabel">活动分类</ControlLabel>
+				</Col>
+				<Col sm={10}>
 				    <InputGroup>
 					    <FormControl componentClass="select">
 						    <option value="1">1</option>
@@ -61,26 +93,35 @@ class AddNewActForm extends Component {
 				    </InputGroup>
 				</Col>
 			</FormGroup>
-			<FormGroup>
-				<Col md={2}>活动海报</Col>
-				<Col md={5}>
+
+			<FormGroup bsClass="form-item form-group">
+				<Col sm={2}>
+					<ControlLabel bsClass="cLabel">活动海报</ControlLabel>
+				</Col>
+				<Col sm={6}>
 					<div className="preview"></div>
 				</Col>
-				<Col md={5}>
-					<Button>上传图片</Button>
+				<Col sm={4} bsClass="tl imgupload col">
+					<Button bsStyle="primary">上传图片</Button>
 					<p>温馨提示</p>
 					<p>此图片将作为此活动的封面，一张漂亮的封面图片可以提高浏览者视觉体验，同时可以宣传活动内容。如果您并没有合适的图片，可以在系统图库中选择一张图片。建议上传尺寸 <strong>1080px*640px</strong> 的.png、.jpg、.gif图片，图片小于1M</p>
 				</Col>
 			</FormGroup>
-			<FormGroup>
-				<Col md={2}>活动详情</Col>
-				<Col md={10}>
+
+			<FormGroup controlId="actDetail" bsClass="form-item form-group">
+				<Col sm={2}>
+					<ControlLabel bsClass="cLabel">活动详情</ControlLabel>
+				</Col>
+				<Col sm={10}>
 					<FormControl componentClass="textarea"></FormControl>
 				</Col>
 			</FormGroup>
-			<FormGroup>
-				<Col md={2}>活动标签</Col>
-				<Col md={10}>
+
+			<FormGroup controlId="actTags" bsClass="form-item form-group">
+				<Col sm={2}>
+					<ControlLabel bsClass="cLabel">活动标签</ControlLabel>
+				</Col>
+				<Col sm={10}>
 					<InputGroup>
 						<FormControl type="text" />
 						<InputGroup.Addon>添加标签</InputGroup.Addon>
