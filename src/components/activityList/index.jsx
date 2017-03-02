@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import '../../scss/admin/actList.scss';
 import ActItem from './actItem';
+import PageControl from './PageControl';
 
 class ActList extends Component {
 	render() {
@@ -11,6 +12,7 @@ class ActList extends Component {
 				<ActItem />
 				<ActItem />
 				<ActItem />
+				<PageControl />
 			</div>
 		)
 	}
