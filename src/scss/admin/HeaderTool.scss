@@ -1,0 +1,53 @@
+.headertool {
+	height: 62px;
+	width: calc(100% - 220px);
+	background-color: #fff;
+	position: absolute;
+	top: 0;
+	left: 220px;
+
+	& > span.glyphicon {
+		float: right;
+		font: 30px/30px 'Microsoft Yahei';
+		margin-top: 15px;
+		color: #000;
+		padding-right: 30px;
+	}
+
+	.userinfo {
+		float: right;
+		height: 100%;
+		font: 18px/62px 'Microsoft Yahei';
+		color: #929292;
+		padding: 0 12px 0 28px;
+
+		span.glyphicon {
+			&:nth-of-type(1) {
+				display: inline-block;
+				border-radius: 50%;
+				background-color: #f2f2f2;
+				color: #1bbae4;
+				padding: 3px;
+				margin-right: 10px;
+			}
+			&:nth-last-of-type(1) {
+				margin-right: 40px;
+			}
+		}
+
+		.dropDownHandler {
+			position: absolute;
+			bottom: -118px;
+			right: 0;
+			border: 1px solid #e6e6e6;
+
+			& > a {
+				display: inline-block;
+				width: 118px;
+				height: 40px;
+				font: 12px/40px 'Microsoft Yahei';
+				text-align: center;
+			}
+		}
+	}
+}

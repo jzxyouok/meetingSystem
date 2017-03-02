@@ -28,12 +28,25 @@ a {
 }
 
 .actList {
+	position: absolute;
+	top: 62px;
+	left: 220px;
+	width: calc(100% - 220px);
+	background: #f5f5f5;
+}
+
+.actItem {
 	height: 164px;
-	width: 1140px;
+	width: calc(100% - 40px);
 	border-top: 1px solid #cecece;
-	border-bottom: 1px solid #cecece;
-	box-sizing: border-box;
+	background-color: #fff;
+	box-sizing: padding-box;
 	padding: 42px 0 0 8px;
+	margin-left: 20px;
+
+	&:nth-last-of-type(1) {
+		border-bottom: 1px solid #cecece;
+	}
 
 	.actImg {
 		width: 120px;
@@ -119,6 +132,7 @@ a {
 			font: 12px/12px 'Microsoft Yahei';
 			background: #1dbbe3;
 			border-radius: 3px;
+			margin-right: 26px;
 		}
 	}
 }

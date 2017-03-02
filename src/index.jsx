@@ -1,7 +1,6 @@
-import {render} from 'react-dom';
 import React, {Component} from 'react';
-import CSSModules from 'react-css-modules';
+import {render} from 'react-dom';
  
-import Forms from './components/FormSet/registerForm';
+import IndexContainerProvider from './redux/index.redux';
 
-render(<Forms />, document.getElementById('app'));
+render(<IndexContainerProvider />, document.getElementById('app'));
