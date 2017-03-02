@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const rootPath = path.resolve(__dirname);
 const appPath = path.resolve(rootPath, 'src');
@@ -27,10 +26,10 @@ module.exports = {
 	module: {
 		loaders: [{
 			test: /\.css$/,
-			loader: 'style!css?modules&localIdentName=[name]-[local]-[hash:base64:5]'
+			loader: 'style!css'
 		}, {
 			test: /\.scss$/,
-			loader: 'style!css?modules&localIdentName=[name]-[local]-[hash:base64:5]!sass',
+			loader: 'style!css!sass',
 		}, {
 			test: /\.jsx$/,
 			loader: 'babel',

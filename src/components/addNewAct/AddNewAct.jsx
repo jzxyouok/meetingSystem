@@ -1,14 +1,12 @@
 import React, {Component} from 'react';
-import CSSModules from 'react-css-modules';
-import classNames from 'classnames';
-import styles from '../../scss/admin/addnewact.scss';
+import '../../scss/admin/addnewact.scss';
 
 import {Button, Form, FormGroup, Col, FormControl, InputGroup, ControlLabel, Row} from 'react-bootstrap';
 
-class AddNewActForm extends Component {
+export default class AddNewActForm extends Component {
 	render() {
 		return <Form horizontal>
-			<span styleName="form-title">活动信息</span>
+			<span className="form-title">活动信息</span>
 			<FormGroup bsClass="form-item form-group" controlId="actName">
 				<Col sm={2}>
 					<ControlLabel bsClass="cLabel">活动名称</ControlLabel>
@@ -132,4 +130,3 @@ class AddNewActForm extends Component {
 	}
 }
 
-export default CSSModules(AddNewActForm, styles);

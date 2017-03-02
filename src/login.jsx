@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
-import styles from './scss/login/login.scss';
-import {getCookie, setCookie, delCookie} from './utils/handleCookie';
-import {Forms} from './components/login/login.jsx'
+import {FormsContainer} from './redux/loginRedux';
+import {Provider} from 'react-redux';
+import {store} from './store/loginStore';
 
-render(<Forms />, document.getElementById('app'));
+render(<Provider store={store}><FormsContainer /></Provider>, document.getElementById('app'));

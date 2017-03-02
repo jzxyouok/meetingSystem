@@ -2,11 +2,6 @@ import {render} from 'react-dom';
 import React, {Component} from 'react';
 import CSSModules from 'react-css-modules';
  
-// import NavBar from './components/admin/NavBar';
-// import styles from './scss/admin/admin.scss';
+import Forms from './components/FormSet/registerForm';
 
-// import AddNewAct from './components/FormSet/registerForm';
-
-import ActList from './components/activityList/index';
-
-render(<ActList />, document.getElementById('app'));
+render(<Forms />, document.getElementById('app'));

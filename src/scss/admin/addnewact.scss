@@ -17,38 +17,38 @@ form {
 		color: #fff;
 	}
 
-	:global(.form-item) {
+	.form-item {
 		width: 850px;
 		margin-bottom: 15px;
 		text-align: center;
 	}
 
-	:global(.cLabel) {
+	.cLabel {
 		font: 14px/34px 'Microsoft Yahei';
 		font-weight: normal;
 		color: #4a4a4a;
 	}
 
-	:global(.pl) {
+	.pl {
 		padding-left: 15px;
 	}
 
-	:global(.pr) {
+	.pr {
 		padding-right: 15px;
 	}
 
-	:global(.tl) {
+	.tl {
 		text-align: left;
 	}
 	
-	:global(.preview) {
+	.preview {
 		width: 360px;
 		height: 200px;
 		background: url(../../../static/img/admin-addimg.png) no-repeat 0 0;
 		background-size: cover; 
 	}
 
-	:global(.imgupload) {
+	.imgupload {
 		box-sizing: border-box;
 		padding-left: 10px;
 		color: #4a4a4a;
@@ -59,7 +59,7 @@ form {
 		}
 	}
 
-	:global(.input-group-addon) {
+	.input-group-addon {
 		background-color: #fff;
 		color: #00a0e8;
 		border-left: 1px solid #00a0e8 !important;

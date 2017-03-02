@@ -12,19 +12,7 @@ import {
     Glyphicon,
     Checkbox
 } from 'react-bootstrap';
-import {
-	title,
-	label,
-	form,
-	others,
-	toolbox,
-	toolboxTitle,
-	commons,
-	customizeOptions,
-	iconfont,
-	tongzhi,
-	handle
-} from '../../scss/admin/registerForm.scss';
+import '../../scss/admin/registerForm.scss';
 
 const CommonChoiceButton = ({buttonDes}) => <Button>{buttonDes}</Button>;
 const CustomizeOptionLi = ({liDes}) => <li><Glyphicon glyph="edit"/>{liDes}<Glyphicon glyph="plus-sign"/></li>;
@@ -35,8 +23,8 @@ class CommonChoice extends Component {
 		const buttonDes = ['姓名', '手机号', '性别', '照片', '与会类型', '上衣尺寸', '交通方式', '航班/列车号', '到站地点', '到站时间', '餐饮住宿', '饮食偏好', '返程方式', '送机/站时间', '备注'];
 		let arr = buttonDes.map((item, index) => <CommonChoiceButton buttonDes={item} key={`btn-${index}`} />);
 		return <div>
-					<p className={toolboxTitle}>常用选项</p>
-					<div className={commons}>
+					<p className='toolboxTitle'>常用选项</p>
+					<div className='commons'>
 						<Button disabled>姓名</Button>
 						<Button disabled>手机号</Button>
 						<Button>性别</Button>
@@ -60,8 +48,8 @@ class CommonChoice extends Component {
 class CustomizeOption extends Component {
 	render() {
 		return  <div>
-					<p className={toolboxTitle}>自定义项</p>
-					<ul className={customizeOptions}>
+					<p className='toolboxTitle'>自定义项</p>
+					<ul className='customizeOptions'>
 						<li><a href="#"><Glyphicon glyph="edit"/>普通文本框<Glyphicon glyph="plus-sign"/></a></li>
 						<li><a href="#"><Glyphicon glyph="edit"/>多行文本框<Glyphicon glyph="plus-sign"/></a></li>
 						<li><a href="#"><Glyphicon glyph="edit"/>日期<Glyphicon glyph="plus-sign"/></a></li>
@@ -76,7 +64,7 @@ class CustomizeOption extends Component {
 
 class ToolBox extends Component {
 	render() {
-		return <div className={toolbox}>
+		return <div className='toolbox'>
 					<CommonChoice />
 					<CustomizeOption />
 				</div>
@@ -86,10 +74,10 @@ class ToolBox extends Component {
 export default class Forms extends Component {
 	render() {
 		return  <div>
-					<Form horizontal className={form}>
-						<span className={title}>报名表单设置</span>
+					<Form horizontal className='form'>
+						<span className='title'>报名表单设置</span>
 						<FormGroup controlId="name">
-							<Col xs={2} className={label}>
+							<Col xs={2} className='label'>
 								<ControlLabel>姓名</ControlLabel>
 							</Col>
 							<Col xs={8}>
@@ -98,7 +86,7 @@ export default class Forms extends Component {
 						</FormGroup>
 
 						<FormGroup controlId="tel">
-							<Col xs={2} className={label}>
+							<Col xs={2} className='label'>
 								<ControlLabel>手机号</ControlLabel>
 							</Col>
 							<Col xs={8}>
@@ -106,16 +94,16 @@ export default class Forms extends Component {
 							</Col>	
 						</FormGroup>
 
-						<p className={others}>其他添加报名表单收集项</p>
+						<p className='others'>其他添加报名表单收集项</p>
 						
 						<FormGroup>
-							<Col xs={2} className={label}>
+							<Col xs={2} className='label'>
 								<Checkbox inline>必填</Checkbox>
 							</Col>
 							<Col xs={8}>
 								<FormControl type="text" placeholder="请在此输入标题"></FormControl>
 							</Col>
-							<Col xs={2} className={handle}>
+							<Col xs={2} className='handle'>
 								<Glyphicon glyph="cog"/>
 								<Glyphicon glyph="trash"/>
 							</Col>
