@@ -1,0 +1,143 @@
+.baseInfo {
+	position: absolute;
+	top: 62px;
+	left: 220px;
+	width: calc(100% - 220px);
+	background-color: #f5f5f5;
+	
+	.col-sm-6 {
+		padding: 0;
+	}
+
+	.form-group {
+		margin-bottom: 20px;
+	}
+
+	@mixin input-text {
+		width: 680px;
+		height: 32px;
+	}
+
+	@mixin label {
+		font: 12px/24px 'Microsoft Yahei';
+	}
+
+	.control-label {
+		@include label;
+	}
+
+	input[type=text],
+	input[type=textarea] {
+		@include input-text;
+	}
+
+	h3 {
+		margin: 0;
+		font-size: 16px;
+		font-family: 'Microsoft Yahei';
+		line-height: 48px;
+		padding-left: 60px;
+	}
+
+	form.baseInfoForm {
+		width: calc(100% - 40px);
+		margin-left: 20px;
+		background-color: #fff;
+		box-sizing: border-box;
+		margin-top: 0;
+		border-top: 1px solid #dfdfdf;
+		padding-left: 70px;
+		padding-top: 20px;
+		
+		.time, .address {
+			width: 680px;
+			& > div {
+				padding: 0;
+			}
+		}
+
+		.time {
+			input, select {
+				width: 50%;
+			}
+		}
+		
+		.poster {
+			.posterImg {
+				width: 260px;
+				height: 160px;
+
+				img {
+					width: 100%;
+					height: 100%;
+				}
+			}
+
+			.uploadBtn {
+				margin-left: 30px;
+
+				button {
+					width: 120px;
+					height: 34px;
+					color: #fff;
+					background-color: #29a7ff;
+					border: none;
+				}
+
+				p.advice {
+					font: 12px/18px 'Microsoft Yahei';
+					color: #b7aba8;
+					margin-top: 20px;
+				}
+			}
+		}
+
+		.saveChange {
+			text-align: center;
+
+			button {
+				width: 138px;
+				height: 32px;
+				background-color: #fff;
+				color: #fdb17a;
+				border: 1px solid #fdb17a;
+				transition: 1s all;
+
+				&:hover {
+					color: #fff;
+					background-color: #29a7ff;
+					border: none;
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,12 +1,24 @@
+.newAct {
+	position: absolute;
+	width: calc(100% - 220px);
+	position: absolute;
+	top: 62px;
+	left: 220px;
+	background: #f5f5f5;
+}
+
 form {
-	width: 870px;
 	box-sizing: border-box;
-	border-top: 2px solid #ff5303;
-	position: relative;
+	border-top: 2px solid #2bbbe3;
+	margin: 20px auto;
+	width: 850px;
+	background-color: #fff;
+	padding-bottom: 20px;
+
 
 	.form-title {
 		display: block;
-		background: #ff5303;
+		background: #2bbbe3;
 		width: 149px;
 		height: 48px;
 		text-align: center;
@@ -54,6 +66,11 @@ form {
 		color: #4a4a4a;
 		font: 14px/20px 'Microsoft Yahei';
 
+		button {
+			background-color: #2bbbe3;
+			border: none;
+		}
+
 		p {
 			margin-top: 8px;
 		}
@@ -66,4 +83,25 @@ form {
 		border: 1px solid #00a0e8;
 		margin-left: 5px;
 	}
+
+	.submitAct {
+		margin-top: 30px;
+
+		button {
+			width: 150px;
+			margin: 0 auto;
+			background-color: #2bbbe3;
+			border: none;
+		}
+	}
+
+
+
+
+
+
+
+
+
+
 }

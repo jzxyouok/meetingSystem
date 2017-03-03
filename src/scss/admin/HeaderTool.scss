@@ -2,7 +2,8 @@
 	height: 62px;
 	width: calc(100% - 220px);
 	background-color: #fff;
-	position: absolute;
+	position: fixed;
+	z-index: 2;
 	top: 0;
 	left: 220px;
 	border-bottom: 1px solid #cecece;
