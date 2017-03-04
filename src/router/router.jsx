@@ -6,6 +6,7 @@ import AddNewActForm from '../components/addNewAct/addNewAct';
 import ActList from '../components/activityList/index';
 import BaseInfo from '../components/BaseInfo/BaseInfo';
 import AttendInfo from '../components/AttendInfo/AttendInfo';
+import Register from '../components/FormSet/registerForm';
 
 const routes = (
 	<Route path="/" component={NavBar}>
@@ -14,6 +15,7 @@ const routes = (
 		<Route path="baseInfo" component={BaseInfo}></Route>
 		<Route path="meetingManager" component={ActList}></Route>
 		<Route path="attendees" component={AttendInfo}></Route>
+		<Route path="registerForm" componnet={Register}></Route>
 	</Route>
 );
 

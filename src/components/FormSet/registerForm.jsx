@@ -71,7 +71,7 @@ class ToolBox extends Component {
 	}
 }
 
-export default class Forms extends Component {
+export default class Register extends Component {
 	render() {
 		return  <div>
 					<Form horizontal className='form'>
