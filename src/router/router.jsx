@@ -15,7 +15,7 @@ const routes = (
 		<Route path="baseInfo" component={BaseInfo}></Route>
 		<Route path="meetingManager" component={ActList}></Route>
 		<Route path="attendees" component={AttendInfo}></Route>
-		<Route path="registerForm" componnet={Register}></Route>
+		<Route path="registerForm" component={Register}></Route>
 	</Route>
 );
 
