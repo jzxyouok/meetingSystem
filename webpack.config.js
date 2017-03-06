@@ -11,7 +11,7 @@ module.exports = {
 	entry: {
 		login: path.resolve(appPath, 'login.jsx'),
 		home: path.resolve(appPath, entryFilename),
-		vendor: ['react', 'react-dom', 'react-router']
+		vendor: ['react', 'react-dom', 'react-router', 'react-bootstrap']
 	},
 	output: {
 		filename: '[name].js',
@@ -66,31 +66,3 @@ module.exports = {
 		new webpack.HotModuleReplacementPlugin()
 	]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
