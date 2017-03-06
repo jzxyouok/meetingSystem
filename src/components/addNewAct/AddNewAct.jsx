@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import store from '../../store/index.store';
 import '../../scss/admin/addnewact.scss';
 
 import {Form} from 'react-bootstrap';
@@ -12,6 +14,7 @@ import ActPoster from './ActPoster';
 import ActDetail from './ActDetail';
 import ActTag from './ActTag';
 import ActSubmit from './ActSubmit';
+import {AddOfficalModal, AddCategoryModal, AddTagsModal} from './ActModal';
 
 export default class AddNewActForm extends Component {
 	render() {
@@ -29,9 +32,12 @@ export default class AddNewActForm extends Component {
 					<ActDetail />
 					<ActTag />
 					<ActSubmit />
+
+					<AddOfficalModal />
+					<AddCategoryModal />
+					<AddTagsModal />
 				</Form>
 			</div>
 		)
 	}
 }
-

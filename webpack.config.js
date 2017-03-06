@@ -9,7 +9,7 @@ const entryFilename = 'index.jsx';
 
 module.exports = {
 	entry: {
-		login: path.resolve(appPath, 'login.jsx'),
+		// login: path.resolve(appPath, 'login.jsx'),
 		home: path.resolve(appPath, entryFilename),
 		vendor: ['react', 'react-dom', 'react-router', 'react-bootstrap']
 	},
@@ -53,13 +53,13 @@ module.exports = {
 			template: './src/template/index.html',
 			chunks: ['vendor', 'home']
 		}),
-		new HtmlWebpackPlugin({
-			title: '会议系统登录',
-			filename: 'login.html',
-			inject: 'body',
-			template: './src/template/login.html',
-			chunks: ['vendor', 'login']
-		}),
+		// new HtmlWebpackPlugin({
+		// 	title: '会议系统登录',
+		// 	filename: 'login.html',
+		// 	inject: 'body',
+		// 	template: './src/template/login.html',
+		// 	chunks: ['vendor', 'login']
+		// }),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor'
 		}),
