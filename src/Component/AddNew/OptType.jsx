@@ -37,7 +37,9 @@ export class TextArea extends Component {
 		this.handleClick = this.handleClick.bind(this);
 	}
 	handleClick(e) {
-		console.log($(e.target).parents('.textarea').index());
+		const {changeNe} = this.props;
+		let index = $(e.target).parents('.textarea').index();
+		changeNe(index);
 	}
 	render() {
 		return (
@@ -65,7 +67,9 @@ export class Radio extends Component {
 		this.handleClick = this.handleClick.bind(this);
 	}
 	handleClick(e) {
+		const {changeNe} = this.props;
 		let index = $(e.target).parents('.radio').index();
+		changeNe(index);
 	}
 	render() {
 		return (
@@ -76,7 +80,7 @@ export class Radio extends Component {
 				<div className="fgroup">
 					<input type="text" className="finput" value="单选题，请输入标题" />
 					<div className="choice">
-						<input type="radio" />
+						<input type="radio" readOnly />
 						<span className="iconfont icon-del2"></span>
 						<input type="text" className="finput" value="请输入选项"/>
 					</div>
@@ -95,11 +99,20 @@ export class Radio extends Component {
 }
 
 export class Checkbox extends Component {
+	constructor(props) {
+		super(props);
+		this.handleClick = this.handleClick.bind(this);
+	}
+	handleClick(e) {
+		const {changeNe} = this.props;
+		let index = $(e.target).parents('.checkbox').index();
+		changeNe(index);
+	}
 	render() {
 		return (
 			<div className="frow checkbox">
 				<div className="flabel">
-					<label><input type="checkbox"/>必填</label>
+					<label><input type="checkbox" onChange={this.handleClick}/>必填</label>
 				</div>
 				<div className="fgroup">
 					<input type="text" className="finput" value="多选题，请输入标题" />
@@ -123,11 +136,20 @@ export class Checkbox extends Component {
 }
 
 export class Select extends Component {
+	constructor(props) {
+		super(props);
+		this.handleClick = this.handleClick.bind(this);
+	}
+	handleClick(e) {
+		const {changeNe} = this.props;
+		let index = $(e.target).parents('.select').index();
+		changeNe(index);
+	}
 	render() {
 		return (
 			<div className="frow select">
 				<div className="flabel">
-					<label><input type="checkbox"/>必填</label>
+					<label><input type="checkbox" onChange={this.handleClick}/>必填</label>
 				</div>
 				<div className="fgroup">
 					<input type="text" className="finput" value="下拉框题，请输入标题" />
@@ -151,11 +173,20 @@ export class Select extends Component {
 }
 
 export class File extends Component {
+	constructor(props) {
+		super(props);
+		this.handleClick = this.handleClick.bind(this);
+	}
+	handleClick(e) {
+		const {changeNe} = this.props;
+		let index = $(e.target).parents('.file').index();
+		changeNe(index);
+	}
 	render() {
 		return (
 			<div className="frow file">
 				<div className="flabel">
-					<label><input type="checkbox"/>必填</label>
+					<label><input type="checkbox" onChange={this.handleClick}/>必填</label>
 				</div>
 				<div className="fgroup">
 					<input type="text" className="finput" value="文件" />
@@ -172,11 +203,20 @@ export class File extends Component {
 }
 
 export class Address extends Component {
+	constructor(props) {
+		super(props);
+		this.handleClick = this.handleClick.bind(this);
+	}
+	handleClick(e) {
+		const {changeNe} = this.props;
+		let index = $(e.target).parents('.address').index();
+		changeNe(index);
+	}
 	render() {
 		return (
 			<div className="frow address">
 				<div className="flabel">
-					<label><input type="checkbox"/>必填</label>
+					<label><input type="checkbox" onChange={this.handleClick}/>必填</label>
 				</div>
 				<div className="fgroup">
 					<select className="finput" disabled>
@@ -200,11 +240,20 @@ export class Address extends Component {
 }
 
 export class Date extends Component {
+	constructor(props) {
+		super(props);
+		this.handleClick = this.handleClick.bind(this);
+	}
+	handleClick(e) {
+		const {changeNe} = this.props;
+		let index = $(e.target).parents('.date').index();
+		changeNe(index);
+	}
 	render() {
 		return (
 			<div className="frow date">
 				<div className="flabel">
-					<label><input type="checkbox"/>必填</label>
+					<label><input type="checkbox" onChange={this.handleClick}/>必填</label>
 				</div>
 				<div className="fgroup">
 					<input type="text" className="finput" value="日期" />

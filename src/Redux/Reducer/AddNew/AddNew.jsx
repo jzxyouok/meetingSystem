@@ -4,28 +4,35 @@ export const addFormOptReducer = (state, action) => {
 	switch(action.type) { 
 		case 'addFormOpt':
 			let formData = state.toJS();
-			let keys = Object.keys(formData),
-				lastKey = keys[keys.length - 1], 
-				nowIndex = ++lastKey;
-			if(action.defaultOptions) {
-				return state.setIn(['formData', nowIndex], {
-					title: action.defaultTitle,
-					name: action.name,
-					type: action.type,
-					options: action.defaultOptions
-				});
+			let keys = Object.keys(formData);
+			let nowIndex = null;
+			if(keys.length == 0) {
+				nowIndex = '0'
 			} else {
-				return state.setIn(['formData', nowIndex], {
+				let	lastKey = keys[keys.length - 1];
+				nowIndex = (++lastKey)+'';
+			}
+			if(action.defaultOptions) {
+				return state.set(nowIndex, Immutable.fromJS({
 					title: action.defaultTitle,
+					necessary: false,
 					name: action.name,
-					type: action.type
-				});
+					optType: action.optType,
+					options: action.defaultOptions
+				}));
+			} else {
+				return state.set(nowIndex, Immutable.fromJS({
+					title: action.defaultTitle,
+					necessary: false,
+					name: action.name,
+					optType: action.optType
+				}));
 			}
 
 		case 'changeNe':
-			let newState = state.updateIn(['formData', action.index + '', 'necessary'], x => !x);
-			console.log(newState.toJS()['formData'][0]);
-			return newState;
+			console.log(state.toJS());
+			return state.updateIn([action.index+'', 'necessary'], x => !x);
+			break;
 		default:
 			return state;
 	}
