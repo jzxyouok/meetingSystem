@@ -10,6 +10,6 @@ import store from './Redux/Store/store';
 
 render((
 	<Provider store={store}>
-		{routes}
+		{routes} 
 	</Provider>
 ), document.getElementById('app'));

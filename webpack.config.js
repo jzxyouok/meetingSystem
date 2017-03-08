@@ -34,6 +34,7 @@ module.exports = {
 			test: /\.jsx$/,
 			loader: 'babel',
 			exclude: /node_modules/,
+			include: path.resolve(__dirname, 'src'),
 			query: {
 				presets: ['stage-0', 'react', 'es2015']
 			}

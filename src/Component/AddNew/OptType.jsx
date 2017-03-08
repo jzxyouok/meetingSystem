@@ -1,11 +1,21 @@
 import React, {Component} from 'react';
+import $ from 'jquery';
 
 export class Text extends Component {
+	constructor(props) {
+		super(props);
+		this.handleClick = this.handleClick.bind(this);
+	}
+	handleClick(e) {
+		const {changeNe} = this.props;
+		let index = $(e.target).parents('.text').index();
+		changeNe(index);
+	}
 	render() {
 		return (
 			<div className="frow text">
 				<div className="flabel">
-					<label><input type="checkbox"/>必填</label>
+					<label><input type="checkbox" onChange={this.handleClick}/>必填</label>
 				</div>
 				<div className="fgroup">
 					<input type="text" className="finput" value="普通文本框，请输入标题" />
@@ -22,11 +32,18 @@ export class Text extends Component {
 }
 
 export class TextArea extends Component {
+	constructor(props) {
+		super(props);
+		this.handleClick = this.handleClick.bind(this);
+	}
+	handleClick(e) {
+		console.log($(e.target).parents('.textarea').index());
+	}
 	render() {
 		return (
 			<div className="frow textarea">
 				<div className="flabel">
-					<label><input type="checkbox"/>必填</label>
+					<label><input type="checkbox" onChange={this.handleClick}/>必填</label>
 				</div>
 				<div className="fgroup">
 					<input type="text" className="finput" value="多行文本框，请输入标题" />
@@ -43,11 +60,18 @@ export class TextArea extends Component {
 }
 
 export class Radio extends Component {
+	constructor(props) {
+		super(props);
+		this.handleClick = this.handleClick.bind(this);
+	}
+	handleClick(e) {
+		let index = $(e.target).parents('.radio').index();
+	}
 	render() {
 		return (
 			<div className="frow radio">
 				<div className="flabel">
-					<label><input type="checkbox"/>必填</label>
+					<label><input type="checkbox" onChange={this.handleClick}/>必填</label>
 				</div>
 				<div className="fgroup">
 					<input type="text" className="finput" value="单选题，请输入标题" />
