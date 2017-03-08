@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const rootPath = path.resolve(__dirname);
 const appPath = path.resolve(rootPath, 'src');
 const buildPath = path.resolve(rootPath, 'build');
-const entryFilename = 'index.jsx';
+const entryFilename = 'Index.jsx';
 
 module.exports = {
 	entry: {
@@ -50,7 +50,7 @@ module.exports = {
 			title: '美的厨电会议管理系统',
 			filename: 'index.html',
 			inject: 'body',
-			template: './src/template/index.html',
+			template: './src/Template/index.html',
 			chunks: ['vendor', 'home']
 		}),
 		// new HtmlWebpackPlugin({

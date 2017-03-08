@@ -1,5 +1,7 @@
 /node_modules
 /build
 .DS_Store
-/static/img
 npm-debug.log
+/models
+/doc
+/test
