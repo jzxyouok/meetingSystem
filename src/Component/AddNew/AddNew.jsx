@@ -21,43 +21,108 @@ class ApplicationForm extends Component {
 		
 	}
 	render() {
-		let {formData, changeNe, addItem} = this.props;
+		let {formData, changeNe, addItem, moveUp, moveDown} = this.props;
 		console.log('render', formData.toJS());
 		const CommonOpts = [{id:1, name: '性别', operation: 'sex'}, {id:2, name: '照片', operation: 'photo'}, {id:3, name: '与会类型', operation: 'type'}, {id:4, name: '上衣尺寸', operation: 'size'}];
 		const CustomOpts = [{id:1, name: '普通文本框'}, {id:2, name: '多行文本框'}, {id:3, name: '日期'}, {id:4, name: '单项选择'}, {id:5, name: '多项选择'}, {id:6, name: '下拉框'}, {id:7, name: '文件'}];
 		const CommmonOptArr = CommonOpts.map(item => {
-			return <CommonOpt name={item.name} key={item.id} operation={item.operation} addItem={addItem} />
+			return <CommonOpt 
+					name={item.name} 
+					key={item.id} 
+					operation={item.operation} 
+					addItem={addItem} 
+					/>
 		});
 		const CustomOptArr = CustomOpts.map(item => {
-			return <CustomOpt name={item.name} key={item.id} />
+			return <CustomOpt 
+					name={item.name} 
+					key={item.id} 
+					/>
 		});
 		let formOptsArr = [];
 		formData = formData.toJS();
 		for(let i of Object.keys(formData)) {
+			let {title, options = {}} = formData[i];
 			switch(formData[i].optType) {
 				case 'text':
-					formOptsArr.push(<Text key={i} changeNe={changeNe} />);
+					formOptsArr.push(<Text 
+										key={i} 
+										changeNe={changeNe}
+										title={title}
+										options={options}
+										moveUp={moveUp}
+										moveDown={moveDown}
+										/>);
 					break;
 				case 'textarea':
-					formOptsArr.push(<TextArea key={i} changeNe={changeNe} />);
+					formOptsArr.push(<TextArea 
+										key={i} 
+										changeNe={changeNe}
+										title={title}
+										options={options}
+										moveUp={moveUp}
+										moveDown={moveDown}
+										/>);
 					break;
 				case 'radio':
-					formOptsArr.push(<Radio key={i} changeNe={changeNe} />);
+					formOptsArr.push(<Radio 
+										key={i} 
+										changeNe={changeNe}
+										title={title}
+										options={options}
+										moveUp={moveUp}
+										moveDown={moveDown}
+										/>);
 					break;
 				case 'checkbox':
-					formOptsArr.push(<Checkbox key={i} changeNe={changeNe} />);
+					formOptsArr.push(<Checkbox 
+										key={i} 
+										changeNe={changeNe}
+										title={title}
+										options={options}
+										moveUp={moveUp}
+										moveDown={moveDown}
+										/>);
 					break;
 				case 'select':
-					formOptsArr.push(<Select key={i} changeNe={changeNe} />);
+					formOptsArr.push(<Select 
+										key={i} 
+										changeNe={changeNe}
+										title={title}
+										options={options}
+										moveUp={moveUp}
+										moveDown={moveDown}
+										/>);
 					break;
 				case 'address':
-					formOptsArr.push(<Address key={i} changeNe={changeNe} />);
+					formOptsArr.push(<Address 
+										key={i} 
+										changeNe={changeNe}
+										title={title}
+										options={options}
+										moveUp={moveUp}
+										moveDown={moveDown}
+										/>);
 					break;
 				case 'file':
-					formOptsArr.push(<File key={i} changeNe={changeNe} />);
+					formOptsArr.push(<File 
+										key={i} 
+										changeNe={changeNe}
+										title={title}
+										options={options}
+										moveUp={moveUp}
+										moveDown={moveDown}
+										/>);
 					break;
 				case 'date':
-					formOptsArr.push(<Date key={i} changeNe={changeNe} />);
+					formOptsArr.push(<Date 
+										key={i} 
+										changeNe={changeNe}
+										title={title}
+										options={options}
+										moveUp={moveUp}
+										moveDown={moveDown}
+										/>);
 					break;
 				default:
 					break;

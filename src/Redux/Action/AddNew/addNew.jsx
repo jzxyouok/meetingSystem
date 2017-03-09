@@ -32,3 +32,15 @@ export const addFormOpt = (name, defaultTitle, optType, defaultOptions = null) =
 	optType,
 	defaultOptions
 });
+
+// 向上移动表单项
+export const moveUp = (index) => ({
+	type: 'moveUp',
+	index
+});
+
+// 向下移动表单项
+export const moveDown = (index) => ({
+	type: 'moveDown',
+	index
+});

@@ -30,9 +30,24 @@ export const addFormOptReducer = (state, action) => {
 			}
 
 		case 'changeNe':
-			console.log(state.toJS());
 			return state.updateIn([action.index+'', 'necessary'], x => !x);
-			break;
+
+		case 'moveUp':
+			// 这里需要注意数字和字符串之间的转换
+			let idx1 = action.index + '';
+			let prevItem1 = state.get((idx1-1) + '');
+			let nowItem1  = state.get(idx1);
+			console.log(prevItem1, nowItem1);
+			return state.set(idx1, prevItem1)
+						.set((idx1-1)+'', nowItem1);
+
+		case 'moveDown':
+			let idx2 = action.index + '';
+			let nowItem2 = state.get(idx2);
+			let nextItem2 = state.get((+idx2+1) + '');
+			return state.set(idx2, nextItem2)
+						.set((+idx2+1)+'', nowItem2);
+
 		default:
 			return state;
 	}
