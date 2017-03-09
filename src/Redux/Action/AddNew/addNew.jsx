@@ -44,3 +44,39 @@ export const moveDown = (index) => ({
 	type: 'moveDown',
 	index
 });
+
+// 删除表单的某一项
+export const delFormItem = (index) => ({
+	type: 'delFormItem',
+	index
+});
+
+// 删除单选，多选，下拉框中的某一个选项
+export const delOption = (inputIndex, optIndex) => ({
+	type: 'delOption',
+	inputIndex,
+	optIndex
+});
+
+// 添加单选，多选，下拉框中的某一项
+export const addOption = (inputIndex, optIndex, value) => ({
+	type: 'addOption',
+	inputIndex,
+	optIndex,
+	value
+});
+
+// 改变题目的标题
+export const changeTitle = (inputIndex, value) => ({
+	type: 'changeTitle',
+	inputIndex,
+	value
+});
+
+// 改变选项的值
+export const changeOption = (inputIndex, optIndex, value) => ({
+	type: 'changeOption',
+	inputIndex,
+	optIndex,
+	value
+});

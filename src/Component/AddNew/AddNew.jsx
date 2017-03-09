@@ -21,10 +21,10 @@ class ApplicationForm extends Component {
 		
 	}
 	render() {
-		let {formData, changeNe, addItem, moveUp, moveDown} = this.props;
+		let {formData, changeNe, addItem, moveUp, moveDown, delFormItem, delOption, addOption, changeTitle, changeOption} = this.props;
 		console.log('render', formData.toJS());
 		const CommonOpts = [{id:1, name: '性别', operation: 'sex'}, {id:2, name: '照片', operation: 'photo'}, {id:3, name: '与会类型', operation: 'type'}, {id:4, name: '上衣尺寸', operation: 'size'}];
-		const CustomOpts = [{id:1, name: '普通文本框'}, {id:2, name: '多行文本框'}, {id:3, name: '日期'}, {id:4, name: '单项选择'}, {id:5, name: '多项选择'}, {id:6, name: '下拉框'}, {id:7, name: '文件'}];
+		const CustomOpts = [{id:1, name: '普通文本框', operation: 'addText'}, {id:2, name: '多行文本框', operation: 'addTextArea'}, {id:3, name: '日期', operation: 'addDate'}, {id:4, name: '单项选择', operation: 'addRadio'}, {id:5, name: '多项选择', operation: 'addCheckbox'}, {id:6, name: '下拉框', operation: 'addSelect'}, {id:7, name: '文件', operation: 'addFile'}];
 		const CommmonOptArr = CommonOpts.map(item => {
 			return <CommonOpt 
 					name={item.name} 
@@ -36,7 +36,9 @@ class ApplicationForm extends Component {
 		const CustomOptArr = CustomOpts.map(item => {
 			return <CustomOpt 
 					name={item.name} 
-					key={item.id} 
+					key={item.id}
+					operation={item.operation}
+					addItem={addItem}
 					/>
 		});
 		let formOptsArr = [];
@@ -52,6 +54,8 @@ class ApplicationForm extends Component {
 										options={options}
 										moveUp={moveUp}
 										moveDown={moveDown}
+										delFormItem={delFormItem}
+										changeTitle={changeTitle}
 										/>);
 					break;
 				case 'textarea':
@@ -62,6 +66,8 @@ class ApplicationForm extends Component {
 										options={options}
 										moveUp={moveUp}
 										moveDown={moveDown}
+										delFormItem={delFormItem}
+										changeTitle={changeTitle}
 										/>);
 					break;
 				case 'radio':
@@ -72,6 +78,11 @@ class ApplicationForm extends Component {
 										options={options}
 										moveUp={moveUp}
 										moveDown={moveDown}
+										delFormItem={delFormItem}
+										delOption={delOption}
+										addOption={addOption}
+										changeTitle={changeTitle}
+										changeOption={changeOption}
 										/>);
 					break;
 				case 'checkbox':
@@ -82,6 +93,11 @@ class ApplicationForm extends Component {
 										options={options}
 										moveUp={moveUp}
 										moveDown={moveDown}
+										delFormItem={delFormItem}
+										delOption={delOption}
+										addOption={addOption}
+										changeTitle={changeTitle}
+										changeOption={changeOption}
 										/>);
 					break;
 				case 'select':
@@ -92,6 +108,11 @@ class ApplicationForm extends Component {
 										options={options}
 										moveUp={moveUp}
 										moveDown={moveDown}
+										delFormItem={delFormItem}
+										delOption={delOption}
+										addOption={addOption}
+										changeTitle={changeTitle}
+										changeOption={changeOption}
 										/>);
 					break;
 				case 'address':
@@ -102,6 +123,8 @@ class ApplicationForm extends Component {
 										options={options}
 										moveUp={moveUp}
 										moveDown={moveDown}
+										delFormItem={delFormItem}
+										changeTitle={changeTitle}
 										/>);
 					break;
 				case 'file':
@@ -112,6 +135,8 @@ class ApplicationForm extends Component {
 										options={options}
 										moveUp={moveUp}
 										moveDown={moveDown}
+										delFormItem={delFormItem}
+										changeTitle={changeTitle}
 										/>);
 					break;
 				case 'date':
@@ -122,6 +147,8 @@ class ApplicationForm extends Component {
 										options={options}
 										moveUp={moveUp}
 										moveDown={moveDown}
+										delFormItem={delFormItem}
+										changeTitle={changeTitle}
 										/>);
 					break;
 				default:

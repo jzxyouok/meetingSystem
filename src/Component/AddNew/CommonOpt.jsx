@@ -11,8 +11,8 @@ class CommonOpt extends Component {
 		switch(operation) {
 			case 'sex':
 				addItem('sex', '请选择性别', 'radio', {
-					'1': '男',
-					'2': '女'
+					'0': '男',
+					'1': '女'
 				});
 				break;
 			case 'photo':
@@ -23,8 +23,8 @@ class CommonOpt extends Component {
 				break;
 			case 'size':
 				addItem('size', '请填写衣服尺寸', 'select', {
-					'1': 'L',
-					'2': 'S'
+					'0': 'L',
+					'1': 'S'
 				});
 				break;
 			default:

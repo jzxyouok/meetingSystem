@@ -1,4 +1,5 @@
 import Immutable from 'immutable';
+import {delItem} from '../../../Resource/utils/util';
 
 export const addFormOptReducer = (state, action) => {
 	switch(action.type) { 
@@ -47,6 +48,27 @@ export const addFormOptReducer = (state, action) => {
 			let nextItem2 = state.get((+idx2+1) + '');
 			return state.set(idx2, nextItem2)
 						.set((+idx2+1)+'', nowItem2);
+
+		case 'delFormItem':
+			let oState = state.toJS();
+			let oNewState = delItem(oState, action.index);
+			return Immutable.fromJS(oNewState);
+
+		case 'delOption':
+			let options = state.getIn([action.inputIndex+'', 'options']);
+			let newOptions = delItem(options.toJS(), action.optIndex);
+			return state.setIn([action.inputIndex+'', 'options'], Immutable.fromJS(newOptions));
+
+		case 'addOption':
+			let _options = state.getIn([action.inputIndex+'', 'options']).toJS();
+			_options[action.optIndex+''] = action.value;
+			return state.setIn([action.inputIndex+'', 'options'], Immutable.fromJS(_options));
+
+		case 'changeTitle':
+			return state.setIn([action.inputIndex+'', 'title'], action.value);
+
+		case 'changeOption':
+			return state.setIn([action.inputIndex+'', 'options', action.optIndex+''], action.value);
 
 		default:
 			return state;
