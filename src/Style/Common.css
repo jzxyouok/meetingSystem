@@ -57,3 +57,8 @@ li {
 button {
     border: none;
 }
+select {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0px !important;
+    border-radius: 0px !important;
+}
