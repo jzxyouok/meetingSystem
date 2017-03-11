@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const rootPath = path.resolve(__dirname);
 const appPath = path.resolve(rootPath, 'src');
@@ -9,7 +10,6 @@ const entryFilename = 'Index.jsx';
 
 module.exports = {
 	entry: {
-		// login: path.resolve(appPath, 'login.jsx'),
 		home: path.resolve(appPath, entryFilename),
 		vendor: ['react', 'react-dom', 'react-router', 'react-bootstrap']
 	},
@@ -26,10 +26,10 @@ module.exports = {
 	module: {
 		loaders: [{
 			test: /\.css$/,
-			loader: 'style!css'
+			loader: ExtractTextPlugin.extract('style', 'css')
 		}, {
 			test: /\.scss$/,
-			loader: 'style!css!sass',
+			loader: ExtractTextPlugin.extract('style', 'css!sass')
 		}, {
 			test: /\.jsx$/,
 			loader: 'babel',
@@ -54,13 +54,7 @@ module.exports = {
 			template: './src/Template/index.html',
 			chunks: ['vendor', 'home']
 		}),
-		// new HtmlWebpackPlugin({
-		// 	title: '会议系统登录',
-		// 	filename: 'login.html',
-		// 	inject: 'body',
-		// 	template: './src/template/login.html',
-		// 	chunks: ['vendor', 'login']
-		// }),
+		new ExtractTextPlugin('style.css'),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor'
 		}),
