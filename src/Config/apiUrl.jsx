@@ -1,0 +1,1 @@
+export const submitFormUrl = '/meeting/index.php/meetingadmin/form/addForm';

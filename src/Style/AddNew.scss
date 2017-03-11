@@ -215,6 +215,18 @@
 
 
 		}
+
+		.submit {
+			text-align: center;
+			button {
+				width: 200px;
+				height: 40px;
+				background-color: #05a2e8;
+				font: 16px/35px 'Microsoft Yahei';
+				color: #fff;
+				border-radius: 3px;
+			}
+		}
 	}
 
 	.ftool {

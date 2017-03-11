@@ -80,3 +80,9 @@ export const changeOption = (inputIndex, optIndex, value) => ({
 	optIndex,
 	value
 });
+
+// 提交报名表单
+export const submitForm = (value) => ({
+	type: 'submitForm',
+	value
+});

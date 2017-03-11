@@ -6,6 +6,7 @@ import NeOptions from './NeOptions';
 import CommonOpt from './CommonOpt';
 import CustomOpt from './CustomOpt';
 import {Text, TextArea, Radio, Checkbox, Select, Date, Address, File} from './OptType';
+import store from '../../Redux/Store/store';
 
 class ApplicationForm extends Component {
 	shouldComponentUpdate(nextprops, nextstate) {
@@ -21,7 +22,7 @@ class ApplicationForm extends Component {
 		
 	}
 	render() {
-		let {formData, changeNe, addItem, moveUp, moveDown, delFormItem, delOption, addOption, changeTitle, changeOption} = this.props;
+		let {formData, changeNe, addItem, moveUp, moveDown, delFormItem, delOption, addOption, changeTitle, changeOption, submitForm} = this.props;
 		console.log('render', formData.toJS());
 		const CommonOpts = [{id:1, name: '性别', operation: 'sex'}, {id:2, name: '照片', operation: 'photo'}, {id:3, name: '与会类型', operation: 'type'}, {id:4, name: '上衣尺寸', operation: 'size'}];
 		const CustomOpts = [{id:1, name: '普通文本框', operation: 'addText'}, {id:2, name: '多行文本框', operation: 'addTextArea'}, {id:3, name: '日期', operation: 'addDate'}, {id:4, name: '单项选择', operation: 'addRadio'}, {id:5, name: '多项选择', operation: 'addCheckbox'}, {id:6, name: '下拉框', operation: 'addSelect'}, {id:7, name: '文件', operation: 'addFile'}];
@@ -164,6 +165,14 @@ class ApplicationForm extends Component {
 					<p className="description">其他添加报名表单收集项</p>
 					<div className="customCfg">
 						{formOptsArr}
+					</div>
+					<div className="submit">
+						<button onClick={
+							() => {
+								let state = store.getState().toJS();
+								submitForm.call(null, JSON.stringify(state.formData));
+							}
+						}>立即提交</button>
 					</div>
 				</div>
 				<div className="ftool">
