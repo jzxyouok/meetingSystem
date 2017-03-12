@@ -1,7 +1,8 @@
 import Immutable from 'immutable';
 import {delItem} from '../../../Resource/utils/util';
 
-export const addFormOptReducer = (state, action) => {
+const initialState = Immutable.fromJS({});
+const addFormOptReducer = (state = initialState, action) => {
 	switch(action.type) { 
 		case 'addFormOpt':
 			let formData = state.toJS();
@@ -73,4 +74,8 @@ export const addFormOptReducer = (state, action) => {
 		default:
 			return state;
 	}
+}
+
+export default {
+	formData: addFormOptReducer
 }
