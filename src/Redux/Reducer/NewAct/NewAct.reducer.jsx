@@ -26,12 +26,37 @@ const act_end_time = (state = fromJS({end_time: ''}), action) => {
 	}
 }
 
-const act_address = (state = fromJS({province: '', city: '', detail: ''}), action) => {
+const act_province = (state = fromJS({province: ''}), action) => {
 	switch(action.type) {
-		case 'act_address':
-			return state.set('province', action.province)
-						.set('city', action.city)
-						.set('detail', action.detail);
+		case 'act_province':
+			return state.set('province', action.value);
+		default:
+			return state;
+	}
+}
+
+const act_city = (state = fromJS({city: ''}), action) => {
+	switch(action.type) {
+		case 'act_city':
+			return state.set('city', action.value);
+		default:
+			return state;
+	}
+}
+
+const act_detail_address = (state = fromJS({detail_address: ''}), action) => {
+	switch(action.type) {
+		case 'act_detail_address':
+			return state.set('detail_address', action.value);
+		default:
+			return state;
+	}
+}
+
+const show_add_offical_modal = (state = fromJS({isShow: false}), action) => {
+	switch(action.type) {
+		case 'show_add_offical_modal':
+			return state.update('isShow', value => !value);
 		default:
 			return state;
 	}
@@ -73,7 +98,16 @@ const add_act_category = (state = fromJS({now_categorys: []}), action) => {
 	}
 }
 
-const act_poster = (state = fromJS({poster: ''}), action) => {
+const show_add_category_modal = (state = fromJS({isShow: false}), action) => {
+	switch(action.type) {
+		case 'show_add_category_modal':
+			return state.update('isShow', value => !value);
+		default:
+			return state;
+	}
+}
+
+const act_poster = (state = fromJS({poster: './src/Resource/images/upload.jpg'}), action) => {
 	switch(action.type) {
 		case 'act_poster':
 			return state.set('poster', action.value);
@@ -95,11 +129,15 @@ export default {
 	act_name,
 	act_begin_time,
 	act_end_time,
-	act_address,
+	act_province,
+	act_city,
+	act_detail_address,
 	act_official,
+	show_add_offical_modal,
 	add_act_official,
 	act_category,
 	add_act_category,
+	show_add_category_modal,
 	act_poster,
 	act_details
 }

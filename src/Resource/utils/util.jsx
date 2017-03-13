@@ -32,3 +32,6 @@ export const delItem = (obj, index) => {
 	newKeys.forEach((item, index) => newObj[item] = newValues[index]);
 	return newObj;
 }
+
+// 图片预览时创建URL
+export const createUrl = (fileObj) => window.URL.createObjectURL(fileObj);

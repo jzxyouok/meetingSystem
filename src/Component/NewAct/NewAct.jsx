@@ -11,7 +11,7 @@ import ActSubmit from './ActSubmit';
 
 class NewAct extends Component {
 	render() {
-		return <div className="newAct">
+		return <form accept="image/*" encType="multipart/form-data" className="newAct">
 			<p className="title">活动信息</p>
 			<ActName />
 			<ActTime />
@@ -21,7 +21,7 @@ class NewAct extends Component {
 			<ActPoster />
 			<ActDetails />
 			<ActSubmit />
-		</div>
+		</form>
 	}
 }
 export default NewAct;

@@ -147,6 +147,21 @@
 		}
 	}
 }
+.offical_modal {
+	input {
+		@include input(260px);
+		height: 30px;
+		display: block;
+	}
+
+	button {
+		color: #fff;
+		background: #1ba9ea;
+		width: 60px;
+		height: 30px;
+		margin: 10px 8px 0 0;
+	}
+}
 
 
 

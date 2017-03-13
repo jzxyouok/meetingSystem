@@ -22,7 +22,7 @@ class ActName extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	act_name: state.get('name')
+	act_name: state.getIn(['act_name', 'name'])
 })
 
 const mapDispatchToProps = (dispatch) => ({
