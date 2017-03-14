@@ -1,13 +1,17 @@
 import React from 'react';
-import {Route, Router, hashHistory} from 'react-router';
+import {Route, Router, hashHistory, IndexRedirect} from 'react-router';
 import ApplicationForm from '../Component/AddNew/Index';
 import NewAct from '../Component/NewAct/NewAct';
+import Sidebar from '../Component/Sidebar/Index';
+import NowAct from '../Component/NowAct/Index';
 
 const routes = (
 	<Router history={hashHistory}>
-		<Route path="/">
+		<Route path="/" component={Sidebar}>
+			<IndexRedirect to='/nowAct'></IndexRedirect>
 			<Route path="/registerform" component={ApplicationForm}></Route>
 			<Route path="/newAct" component={NewAct}></Route>
+			<Route path="/nowAct" component={NowAct}></Route>
 		</Route>
 	</Router>
 );

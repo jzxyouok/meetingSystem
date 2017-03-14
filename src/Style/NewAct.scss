@@ -47,6 +47,9 @@
 	width: 1250px;
 	box-sizing: border-box;
 	border-top: 1px solid #ff5303;
+	background-color: #fff;
+	margin: 0 auto;
+	padding-bottom: 24px;
 	.title {
 		@include button(150px, 50px);
 		background-color: #ff5303;
