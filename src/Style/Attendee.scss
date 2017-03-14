@@ -1,0 +1,116 @@
+$button_bgcolor: #00a0e8;
+$theme_bgcolor: #ecf1f4;
+
+@mixin tab($width, $height) {
+	width: $width;
+	height: $height;
+	text-align: center;
+	font: 14px/54px 'Microsoft Yahei';
+	color: #fff;
+	background-color: $button_bgcolor;
+}
+
+@mixin input($width) {
+	width: $width;
+	height: 38px;
+	outline: none;
+	box-sizing: border-box;
+	border: 1px solid #e1e1e1;
+	padding-left: 8px;
+	font-size: 14px;
+	font-family: 'Microsoft Yahei';
+}
+
+.clearfix:after {
+	content: ' ';
+	display: block;
+	height: 0;
+	clear: both;
+}
+
+.attendee {
+	background-color: #fff;
+	width: 1618px;
+	box-sizing: border-box;
+	padding: 26px;
+	.operate {
+		@extend .clearfix;
+		background-color: $theme_bgcolor;
+		height: 54px;
+
+		.all, .no_check {
+			float: left;
+			@include tab(158px, 54px);
+			color: #5f6060;
+			background-color: $theme_bgcolor;
+
+			&.active {
+				color: #fff;
+				background-color: $button_bgcolor;
+			}
+		}
+		.in_output {
+			float: right;
+			a {
+				display: inline-block;
+				@include tab(132px, 38px);
+				line-height: 38px;
+				margin-top: 8px;
+				margin-right: 5px;
+			}
+		}
+	}
+	.search {
+		height: 158px;
+		background-color: $theme_bgcolor;
+		box-sizing: border-box;
+		padding: 18px;
+		margin-top: 18px;
+
+		.search_text {
+			@include input(770px);
+			display: block;
+			margin-bottom: 10px;
+		}
+
+		.condition {
+			margin-bottom: 10px;
+			select, input {
+				@include input(128px);
+				margin: 0 28px;
+			}
+			label {
+				font: 14px/38px 'Microsoft Yahei';
+				color: #505152;
+			}
+		}
+
+		.search_button {
+			button {
+				width: 80px;
+				height: 38px;
+				color: #fff;
+				background-color: $button_bgcolor;
+				font-size: 14px;
+			}
+		}
+	}
+	table {
+		width: 100%;
+		border: 1px solid #333;
+		td {
+			text-align: center;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
