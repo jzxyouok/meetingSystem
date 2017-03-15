@@ -32,7 +32,7 @@ export default class Attendee extends Component {
 					</div>
 				</div>
 				<div className="attendee_table">
-					<table border="1">
+					<table>
 						<thead>
 							<tr>
 								<th>序号</th>
@@ -58,8 +58,34 @@ export default class Attendee extends Component {
 								<td>已付款</td>
 								<td>备注</td>
 							</tr>
+							<tr>
+								<td>1</td>
+								<td>guolizhi</td>
+								<td>lznism@lznism.com</td>
+								<td>18688254520</td>
+								<td>免费票</td>
+								<td>网购</td>
+								<td>类型</td>
+								<td>已付款</td>
+								<td>备注</td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>guolizhi</td>
+								<td>lznism@lznism.com</td>
+								<td>18688254520</td>
+								<td>免费票</td>
+								<td>网购</td>
+								<td>类型</td>
+								<td>已付款</td>
+								<td>备注</td>
+							</tr>
 						</tbody>
 					</table>
+					<div className="pagination">
+						<a href="javascript:;" className="prev">上一页</a>
+						<a href="javascript:;" className="next">下一页</a>
+					</div>
 				</div>
 			</div>
 		)

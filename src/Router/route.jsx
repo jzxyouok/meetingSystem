@@ -12,7 +12,7 @@ const routes = (
 			<IndexRedirect to='/nowAct'></IndexRedirect>
 			<Route path="/registerform" component={ApplicationForm}></Route>
 			<Route path="/newAct" component={NewAct}></Route>
-			<Route path="/nowAct" component={Attendee}></Route>
+			<Route path="/nowAct" component={NowAct}></Route>
 		</Route>
 	</Router>
 );
