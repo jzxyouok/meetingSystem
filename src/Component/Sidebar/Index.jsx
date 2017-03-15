@@ -26,15 +26,6 @@ export default class Sidebar extends Component {
 						<div className="item">
 							<Link to="/newAct">创建活动</Link>
 						</div>
-						<div className="item">
-							<Link to="/newAct">创建活动</Link>
-						</div>
-						<div className="item">
-							<Link to="/newAct">创建活动</Link>
-						</div>
-						<div className="item">
-							<Link to="/newAct">创建活动</Link>
-						</div>
 					</div>
 					<div className="container">
 						{this.props.children}

@@ -1,7 +1,15 @@
 import React, {Component} from 'react';
+import ActItem from './ActItem';
+import '../../Style/NowAct.scss';
 
 export default class NowAct extends Component {
 	render() {
-		return <h1>当前活动页</h1>
+		return (
+			<div className="nowAct">
+				<ActItem />
+				<ActItem />
+				<ActItem />
+			</div>
+		)
 	}
 }
