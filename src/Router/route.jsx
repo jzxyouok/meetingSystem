@@ -4,6 +4,7 @@ import ApplicationForm from '../Component/AddNew/Index';
 import NewAct from '../Component/NewAct/NewAct';
 import Sidebar from '../Component/Sidebar/Index';
 import NowAct from '../Component/NowAct/Index';
+import Attendee from '../Component/Attendee/Index';
 
 const routes = (
 	<Router history={hashHistory}>
@@ -11,7 +12,7 @@ const routes = (
 			<IndexRedirect to='/nowAct'></IndexRedirect>
 			<Route path="/registerform" component={ApplicationForm}></Route>
 			<Route path="/newAct" component={NewAct}></Route>
-			<Route path="/nowAct" component={NowAct}></Route>
+			<Route path="/nowAct" component={Attendee}></Route>
 		</Route>
 	</Router>
 );

@@ -59,7 +59,7 @@ a {
 p, body, h3 {
     margin: 0;
 }
-ul {
+ul,table {
     margin: 0;
     padding: 0;
 }
@@ -77,4 +77,8 @@ select {
 body,html,#app {
     width: 100%;
     height: 100%;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
 }
