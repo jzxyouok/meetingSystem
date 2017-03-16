@@ -3,6 +3,16 @@ export const act_name = (value) => ({
 	value
 });
 
+export const register_beigin_time = (value) => ({
+	type: 'register_beigin_time',
+	value
+})
+
+export const register_end_time = (value) => ({
+	type: 'register_end_time',
+	value
+})
+
 export const act_begin_time = (value) => ({
 	type: 'act_begin_time',
 	value

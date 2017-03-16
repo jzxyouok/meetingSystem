@@ -15,7 +15,7 @@ module.exports = {
 	},
 	output: {
 		filename: '[name].js',
-		path: buildPath
+		path: buildPath,
 	},
 	devServer: {
 		historyApiFallback: true,
@@ -39,8 +39,12 @@ module.exports = {
 				presets: ['stage-0', 'react', 'es2015']
 			}
 		}, {
-			test: /\.(png|jpe?g|woff|svg|eot|ttf)\??.*$/,
-			loader: 'url?limit=8192'
+			test: /\.(woff|svg|eot|ttf)\??.*$/,
+			loader: 'url?limit=8192&name=[hash:5].[name].[ext]'
+		}, {
+			test: /\.(png|jpg|gif)$/,
+            exclude: /^node_modules$/,
+            loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]',
 		}]
 	},
 	resolve: {
@@ -54,7 +58,7 @@ module.exports = {
 			template: './src/Template/index.html',
 			chunks: ['vendor', 'home']
 		}),
-		new ExtractTextPlugin('style.css'),
+		new ExtractTextPlugin('[name].css'),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor'
 		}),

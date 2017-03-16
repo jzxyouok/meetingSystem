@@ -8,6 +8,24 @@ const act_name = (state = fromJS({name: ''}), action) => {
 	}
 }
 
+const register_begin_time = (state = fromJS({time: ''}), action) => {
+	switch(action.type) {
+		case 'register_begin_time':
+			return state.set('register_begin_time', action.value);
+		default:
+			return state;
+	}
+}
+
+const register_end_time = (state = fromJS({time: ''}), action) => {
+	switch(action.type) {
+		case 'register_end_time':
+			return state.set('register_end_time', action.value);
+		default:
+			return state;
+	}
+}
+
 const act_begin_time = (state = fromJS({begin_time: ''}), action) => {
 	switch(action.type) {
 		case 'act_begin_time':
@@ -127,6 +145,8 @@ const act_details = (state = fromJS({act_details: ''}), action) => {
 
 export default {
 	act_name,
+	register_begin_time,
+	register_end_time,
 	act_begin_time,
 	act_end_time,
 	act_province,

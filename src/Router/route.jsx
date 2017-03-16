@@ -13,6 +13,7 @@ const routes = (
 			<Route path="/registerform" component={ApplicationForm}></Route>
 			<Route path="/newAct" component={NewAct}></Route>
 			<Route path="/nowAct" component={NowAct}></Route>
+			<Route path="/attendee" component={Attendee}></Route>
 		</Route>
 	</Router>
 );
