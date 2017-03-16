@@ -3,5 +3,5 @@
 .DS_Store
 npm-debug.log
 /models
-/doc
+
 /test
