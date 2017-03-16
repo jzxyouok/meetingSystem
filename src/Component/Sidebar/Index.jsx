@@ -21,10 +21,10 @@ export default class Sidebar extends Component {
 				<div id="content">
 					<div className="sidebar">
 						<div className="item">
-							<Link to="/nowAct">当前活动</Link>
+							<Link to="/nowAct">当前会议</Link>
 						</div>
 						<div className="item">
-							<Link to="/newAct">创建活动</Link>
+							<Link to="/newAct">创建会议</Link>
 						</div>
 					</div>
 					<div className="container">

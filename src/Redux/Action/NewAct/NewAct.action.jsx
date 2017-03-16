@@ -3,8 +3,8 @@ export const act_name = (value) => ({
 	value
 });
 
-export const register_beigin_time = (value) => ({
-	type: 'register_beigin_time',
+export const register_begin_time = (value) => ({
+	type: 'register_begin_time',
 	value
 })
 
@@ -42,8 +42,8 @@ export const show_add_offical_modal = () => ({
 	type: 'show_add_offical_modal'
 })
 
-export const act_offical = (value) => ({
-	type: 'act_offical',
+export const act_official = (value) => ({
+	type: 'act_official',
 	value
 })
 

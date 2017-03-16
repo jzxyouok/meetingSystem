@@ -14,7 +14,7 @@ class ActName extends Component {
 		const {act_name} = this.props;
 		return (
 			<div className="row">
-				<Label htmlfor="name" name="活动名称"/>
+				<Label htmlfor="name" name="会议名称"/>
 				<input type="text" id="name" value={act_name} onChange={this.handleInp.bind(this)} />
 			</div>
 		)

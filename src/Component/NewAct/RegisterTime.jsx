@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Label from './Label';
-import {register_beigin_time, register_end_time} from '../../Redux/Action/NewAct/NewAct.action';
+import {register_begin_time, register_end_time} from '../../Redux/Action/NewAct/NewAct.action';
 
 class RegisterTime extends Component {
 	render() {
@@ -11,7 +11,7 @@ class RegisterTime extends Component {
 				<Label htmlfor="time" name="报名时间"/>
 				<div className="begin">
 					<Label htmlfor="register_begin_time" name="开始时间"/>
-					<input type="date" value={register_begin_time} id="register_beigin_time" onChange={(e) => change_register_begin_time(e.target.value)} />
+					<input type="date" value={register_begin_time} id="register_begin_time" onChange={(e) => change_register_begin_time(e.target.value)} />
 				</div>
 				<div className="end">
 					<Label htmlfor="register_end_time" name="结束时间"/>
@@ -28,7 +28,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-	change_register_begin_time: (value) => dispatch(register_beigin_time(value)),
+	change_register_begin_time: (value) => dispatch(register_begin_time(value)),
 	change_register_end_time: (value) => dispatch(register_end_time(value)),
 })
 

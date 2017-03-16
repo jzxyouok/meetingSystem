@@ -32,7 +32,7 @@ class ActOfficalModal extends Component {
 				contentLabel="add category Modal"
 				>
 				<div className="offical_modal">
-					<p>添加活动分类</p>
+					<p>添加会议分类</p>
 					<input type="text" />
 					<button>添加</button>
 					<button onClick={showModal}>取消</button>
@@ -48,13 +48,13 @@ class ActCategory extends Component {
 		return (
 			<div className="row addCatefory">
 				<ActOfficalModal isShow={isShow} showModal={showModal} />
-				<Label htmlfor="catogery" name="活动分类"/>
+				<Label htmlfor="catogery" name="会议分类"/>
 				<select id="catogory" onChange={e => change_category(e.target.value)}>
-					<option value="1">活动分类1</option>
-					<option value="2">活动分类2</option>
-					<option value="3">活动分类3</option>
+					<option value="1">会议分类1</option>
+					<option value="2">会议分类2</option>
+					<option value="3">会议分类3</option>
 				</select>
-				<button onClick={showModal}>添加活动分类</button>
+				<button onClick={showModal}>添加会议分类</button>
 			</div>
 		)
 	}

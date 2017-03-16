@@ -11,7 +11,7 @@ const act_name = (state = fromJS({name: ''}), action) => {
 const register_begin_time = (state = fromJS({time: ''}), action) => {
 	switch(action.type) {
 		case 'register_begin_time':
-			return state.set('register_begin_time', action.value);
+			return state.set('time', action.value);
 		default:
 			return state;
 	}
@@ -20,7 +20,7 @@ const register_begin_time = (state = fromJS({time: ''}), action) => {
 const register_end_time = (state = fromJS({time: ''}), action) => {
 	switch(action.type) {
 		case 'register_end_time':
-			return state.set('register_end_time', action.value);
+			return state.set('time', action.value);
 		default:
 			return state;
 	}
@@ -83,6 +83,7 @@ const show_add_offical_modal = (state = fromJS({isShow: false}), action) => {
 const act_official = (state = fromJS({official: ''}), action) => {
 	switch(action.type) {
 		case 'act_official':
+			console.log(action);
 			return state.set('official', action.value);
 		default:
 			return state;
@@ -125,7 +126,7 @@ const show_add_category_modal = (state = fromJS({isShow: false}), action) => {
 	}
 }
 
-const act_poster = (state = fromJS({poster: './src/Resource/images/upload.jpg'}), action) => {
+const act_poster = (state = fromJS({poster: ''}), action) => {
 	switch(action.type) {
 		case 'act_poster':
 			return state.set('poster', action.value);

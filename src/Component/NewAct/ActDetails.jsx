@@ -9,7 +9,7 @@ class ActDetails extends Component {
 		const {details, chang_details} = this.props;
 		return (
 			<div className="row">
-				<Label htmlfor="actDetails" name="活动详情"/>
+				<Label htmlfor="actDetails" name="会议详情"/>
 				<textarea id="actDetails" cols="30" rows="10" onChange={(e) => chang_details(e.target.value)}></textarea>
 			</div>
 		)

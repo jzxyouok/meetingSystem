@@ -10,7 +10,7 @@ class ActAddress extends Component {
 				change_province, change_city, change_detail_address } = this.props;
 		return (
 			<div className="row">
-				<Label htmlfor="address" name="活动地址"/>
+				<Label htmlfor="address" name="会议地址"/>
 				<div className="pc">
 					<select onChange={(e) => change_province(e.target.value)}>
 						<option value="1">北京</option>

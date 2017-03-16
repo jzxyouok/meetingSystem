@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Modal from 'react-modal';
 import {connect} from 'react-redux';
 import Label from './Label';
-import {show_add_offical_modal, act_offical} from '../../Redux/Action/NewAct/NewAct.action';
+import {show_add_offical_modal, act_official} from '../../Redux/Action/NewAct/NewAct.action';
 
 class ActOfficalModal extends Component {
 	render() {
@@ -49,7 +49,10 @@ class ActOffical extends Component {
 			<div className="row addOffical">
 				<ActOfficalModal isShow={isShow} showModal={showModal} />
 				<Label htmlfor="offical" name="主办　方"/>
-				<select id="offical" onChange={(e) => change_offical(e.target.value)}>
+				<select id="offical" onChange={(e) => {
+					console.log(e.target.value);
+					change_offical(e.target.value)}
+				}>
 					<option value="1">主办方1</option>
 					<option value="2">主办方2</option>
 					<option value="3">主办方3</option>
@@ -67,7 +70,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	showModal: () => dispatch(show_add_offical_modal()),
-	change_offical: (value) => dispatch(act_offical(value))
+	change_offical: (value) => dispatch(act_official(value))
 });
 
 export default connect(

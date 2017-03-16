@@ -8,7 +8,7 @@ class ActTime extends Component {
 		const {act_begin_time, act_end_time, change_begin_time, change_end_time} = this.props;
 		return (
 			<div className="row">
-				<Label htmlfor="time" name="活动时间"/>
+				<Label htmlfor="time" name="会议时间"/>
 				<div className="begin">
 					<Label htmlfor="begin_time" name="开始时间"/>
 					<input type="date" value={act_begin_time} id="beigin_time" onChange={(e) => change_begin_time(e.target.value)} />

@@ -13,7 +13,7 @@ import ActSubmit from './ActSubmit';
 class NewAct extends Component {
 	render() {
 		return <form accept="image/*" encType="multipart/form-data" className="newAct">
-			<p className="title">活动信息</p>
+			<p className="title">会议信息</p>
 			<ActName />
 			<RegisterTime />
 			<ActTime />

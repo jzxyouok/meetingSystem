@@ -12,7 +12,7 @@ export default class ActItem extends Component {
 					<img src="http://file.31huiyi.com/Uploads/neweventLogos/502.jpg" alt=""/>
 				</div>
 				<div className="actInfo">
-					<h3>活动标题 <span className="actId">(活动ID:516064982)</span></h3>
+					<h3>会议标题 <span className="actId">(会议ID:516064982)</span></h3>
 					<p>
 						<span className="actEndTime">截止时间：2016-11-27 12:00</span>
 						<span className="actAddress">广州香格里拉大酒店</span>
