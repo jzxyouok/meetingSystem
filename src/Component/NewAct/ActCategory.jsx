@@ -61,8 +61,8 @@ class ActCategory extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	isShow: state.getIn(['show_add_category_modal', 'isShow']),
-	category: state.getIn(['act_category', 'category'])
+	isShow: state.getIn(['createAct', 'show_add_category_modal', 'isShow']),
+	category: state.getIn(['createAct', 'act_category', 'category'])
 });
 
 const mapDispatchToProps = (dispatch) => ({

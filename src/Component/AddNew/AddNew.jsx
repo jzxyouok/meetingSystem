@@ -23,7 +23,6 @@ class ApplicationForm extends Component {
 	}
 	render() {
 		let {formData, changeNe, addItem, moveUp, moveDown, delFormItem, delOption, addOption, changeTitle, changeOption, submitForm} = this.props;
-		console.log('render', formData.toJS());
 		const CommonOpts = [{id:1, name: '性别', operation: 'sex'}, {id:2, name: '照片', operation: 'photo'}, {id:3, name: '与会类型', operation: 'type'}, {id:4, name: '上衣尺寸', operation: 'size'}];
 		const CustomOpts = [{id:1, name: '普通文本框', operation: 'addText'}, {id:2, name: '多行文本框', operation: 'addTextArea'}, {id:3, name: '日期', operation: 'addDate'}, {id:4, name: '单项选择', operation: 'addRadio'}, {id:5, name: '多项选择', operation: 'addCheckbox'}, {id:6, name: '下拉框', operation: 'addSelect'}, {id:7, name: '文件', operation: 'addFile'}];
 		const CommmonOptArr = CommonOpts.map(item => {

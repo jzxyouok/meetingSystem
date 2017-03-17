@@ -1,144 +1,145 @@
 import {fromJS} from 'immutable';
-const act_name = (state = fromJS({name: ''}), action) => {
+const initialState = fromJS({'createAct': {}});
+const act_name = (state = initialState, action) => {
 	switch(action.type) {
 		case 'act_name':
-			return state.set('name', action.value);
+			return state.setIn(['createAct', 'name'], action.value);
 		default:
 			return state;
 	}
 }
 
-const register_begin_time = (state = fromJS({time: ''}), action) => {
+const register_begin_time = (state = initialState, action) => {
 	switch(action.type) {
 		case 'register_begin_time':
-			return state.set('time', action.value);
+			return state.setIn(['createAct', 'time'], action.value);
 		default:
 			return state;
 	}
 }
 
-const register_end_time = (state = fromJS({time: ''}), action) => {
+const register_end_time = (state = initialState, action) => {
 	switch(action.type) {
 		case 'register_end_time':
-			return state.set('time', action.value);
+			return state.setIn(['createAct', 'time'], action.value);
 		default:
 			return state;
 	}
 }
 
-const act_begin_time = (state = fromJS({begin_time: ''}), action) => {
+const act_begin_time = (state = initialState, action) => {
 	switch(action.type) {
 		case 'act_begin_time':
-			return state.set('begin_time', action.value);
+			return state.setIn(['createAct', 'begin_time'], action.value);
 		default:
 			return state;
 	}
 }
 
-const act_end_time = (state = fromJS({end_time: ''}), action) => {
+const act_end_time = (state = initialState, action) => {
 	switch(action.type) {
 		case 'act_end_time':
-			return state.set('end_time', action.value);
+			return state.setIn(['createAct', 'end_time'], action.value);
 		default:
 			return state;
 	}
 }
 
-const act_province = (state = fromJS({province: ''}), action) => {
+const act_province = (state = initialState, action) => {
 	switch(action.type) {
 		case 'act_province':
-			return state.set('province', action.value);
+			return state.setIn(['createAct', 'province'], action.value);
 		default:
 			return state;
 	}
 }
 
-const act_city = (state = fromJS({city: ''}), action) => {
+const act_city = (state = initialState, action) => {
 	switch(action.type) {
 		case 'act_city':
-			return state.set('city', action.value);
+			return state.setIn(['createAct', 'city'], action.value);
 		default:
 			return state;
 	}
 }
 
-const act_detail_address = (state = fromJS({detail_address: ''}), action) => {
+const act_detail_address = (state = initialState, action) => {
 	switch(action.type) {
 		case 'act_detail_address':
-			return state.set('detail_address', action.value);
+			return state.setIn(['createAct', 'detail_address'], action.value);
 		default:
 			return state;
 	}
 }
 
-const show_add_offical_modal = (state = fromJS({isShow: false}), action) => {
+const show_add_offical_modal = (state = initialState, action) => {
 	switch(action.type) {
 		case 'show_add_offical_modal':
-			return state.update('isShow', value => !value);
+			return state.updateIn(['createAct', 'isShow'], value => !value);
 		default:
 			return state;
 	}
 }
 
-const act_official = (state = fromJS({official: ''}), action) => {
+const act_official = (state = initialState, action) => {
 	switch(action.type) {
 		case 'act_official':
 			console.log(action);
-			return state.set('official', action.value);
+			return state.setIn(['createAct', 'official'], action.value);
 		default:
 			return state;
 	}
 }
 
-const add_act_official = (state = fromJS({now_officials: []}), action) => {
+const add_act_official = (state = initialState, action) => {
 	switch(action.type) {
 		case 'add_act_official':
-			return state.update('now_officials', value => value.push(action.value));
+			return state.updateIn(['createAct', 'now_officials'], value => value.push(action.value));
 		default:
 			return state;
 	}
 }
 
-const act_category = (state = fromJS({category: ''}), action) => {
+const act_category = (state = initialState, action) => {
 	switch(action.type) {
 		case 'act_category':
-			return state.set('category', action.value);
+			return state.setIn(['createAct', 'category'], action.value);
 		default:
 			return state;
 	}
 }
 
-const add_act_category = (state = fromJS({now_categorys: []}), action) => {
+const add_act_category = (state = initialState, action) => {
 	switch(action.type) {
 		case 'add_act_category':
-			return state.update('now_categorys', value => value.push(action.value));
+			return state.updateIn(['createAct', 'now_categorys'], value => value.push(action.value));
 		default:
 			return state;
 	}
 }
 
-const show_add_category_modal = (state = fromJS({isShow: false}), action) => {
+const show_add_category_modal = (state = initialState, action) => {
 	switch(action.type) {
 		case 'show_add_category_modal':
-			return state.update('isShow', value => !value);
+			return state.updateIn(['createAct', 'isShow'], value => !value);
 		default:
 			return state;
 	}
 }
 
-const act_poster = (state = fromJS({poster: ''}), action) => {
+const act_poster = (state = initialState, action) => {
 	switch(action.type) {
 		case 'act_poster':
-			return state.set('poster', action.value);
+			return state.setIn(['createAct', 'poster'], action.value);
 		default:
 			return state;
 	}
 }
 
-const act_details = (state = fromJS({act_details: ''}), action) => {
+const act_details = (state = initialState, action) => {
 	switch(action.type) {
 		case 'act_details':
-			return state.set('act_details', action.value);
+			return state.setIn(['createAct', 'act_details'], action.value);
 		default:
 			return state;
 	}

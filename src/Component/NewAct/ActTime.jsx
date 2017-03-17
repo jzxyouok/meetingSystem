@@ -23,8 +23,8 @@ class ActTime extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	act_begin_time: state.getIn(['act_begin_time', 'begin_time']),
-	act_end_time: state.getIn(['act_end_time', 'end_time'])
+	act_begin_time: state.getIn(['createAct', 'act_begin_time', 'begin_time']),
+	act_end_time: state.getIn(['createAct', 'act_end_time', 'end_time'])
 })
 
 const mapDispatchToProps = (dispatch) => ({

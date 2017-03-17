@@ -11,13 +11,10 @@ import store from '../../Redux/Store/store';
 class ActPoster extends Component {
 	render() {
 		let {bgImg, imgUpload} = this.props;
-		if(typeof bgImg !== 'string') {
-			bgImg = createUrl(bgImg);
-		}
 		return (
 			<div className="row addPoster">
 				<Label htmlFor="poster" name="会议海报"/>
-				<div className="poster_img" style={{backgroundImage: `url(${bgImg})`}}></div>
+				<div className="poster_img"></div>
 				<div className="poster_upload">
 					<label htmlFor="p_upload">上传图片</label>
 					<input 
@@ -37,7 +34,7 @@ class ActPoster extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	bgImg: state.getIn(['act_poster', 'poster'])
+	bgImg: state.getIn(['createAct', 'act_poster', 'poster'])
 });
 
 const mapDispatchToProps = (dispatch) => ({

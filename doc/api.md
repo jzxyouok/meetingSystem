@@ -6,8 +6,8 @@
 id 				会议id
 title  			标题
 state  			会议状态(未发布/已发布/已截止)
-image 			会议封面图
-EndTime			会议截止时间
+image 			会议海报
+end_time		会议截止时间
 RegisterTime 	会议报名时间
 address 		会议地址
 publisher 		会议发布者
@@ -28,10 +28,10 @@ end_time                会议结束时间
 category                会议类别
 province                省
 city                    市
-detail_address          详细地址
+address                 详细地址
 details                 会议详情
 official                会议主办方
-poster                  会议海报
+image                   会议海报
 ```
 
 返回对象
@@ -41,7 +41,9 @@ code            状态码
 message         对应的状态信息[1: 请求成功; 2: 请求失败]
 ```
 
-### 添加主办方接口
+### 添加主办方接口 
+
+### 获取主办方接口
 请求方式: `GET`
 
 请求参数
@@ -57,6 +59,7 @@ code            状态码
 message         对应的状态信息[1: 请求成功; 2: 请求失败]
 ```
 
+### 获取会议类型接口
 ### 添加会议类型接口
 
 请求参数
@@ -72,7 +75,7 @@ code            状态码
 message         对应的状态信息[1: 请求成功; 2: 请求失败]
 ```
 
-
+### 获取省市接口
 
 
 
