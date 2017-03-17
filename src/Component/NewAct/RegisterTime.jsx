@@ -23,8 +23,8 @@ class RegisterTime extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	register_begin_time: state.getIn(['createAct', 'register_begin_time', 'time']),
-	register_end_time: state.getIn(['createAct', 'register_end_time', 'time']),
+	register_begin_time: state.getIn(['register_begin_time', 'time']),
+	register_end_time: state.getIn(['register_end_time', 'time']),
 })
 
 const mapDispatchToProps = (dispatch) => ({

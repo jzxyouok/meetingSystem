@@ -32,9 +32,9 @@ class ActAddress extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	province: state.getIn(['createAct', 'act_province', 'province']),
-	city: state.getIn(['createAct', 'act_city', 'city']),
-	detail_address: state.getIn(['createAct', 'act_detail_address', 'detail_address']),
+	province: state.getIn(['act_province', 'province']),
+	city: state.getIn(['act_city', 'city']),
+	detail_address: state.getIn(['act_detail_address', 'detail_address']),
 })
 
 const mapDispatchToProps = (dispatch) => ({

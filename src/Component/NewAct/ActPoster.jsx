@@ -34,7 +34,7 @@ class ActPoster extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	bgImg: state.getIn(['createAct', 'act_poster', 'poster'])
+	bgImg: state.getIn(['act_poster', 'poster'])
 });
 
 const mapDispatchToProps = (dispatch) => ({

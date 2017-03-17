@@ -64,8 +64,8 @@ class ActOffical extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	isShow: state.getIn(['createAct', 'show_add_offical_modal', 'isShow']),
-	offical: state.getIn(['createAct', 'act_official', 'official'])
+	isShow: state.getIn(['show_add_offical_modal', 'isShow']),
+	offical: state.getIn(['act_official', 'official'])
 });
 
 const mapDispatchToProps = (dispatch) => ({

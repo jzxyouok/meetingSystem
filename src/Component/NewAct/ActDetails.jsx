@@ -17,7 +17,7 @@ class ActDetails extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	details: state.getIn(['createAct', 'act_details', 'act_details'])
+	details: state.getIn(['act_details', 'act_details'])
 })
 
 const mapDispatchToProps = (dispatch) => ({
