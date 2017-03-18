@@ -7,7 +7,6 @@ class Option extends Component {
 		const {delOption} = this.props;
 		console.log(inputIndex, optIndex);
 		delOption(inputIndex, optIndex);
-
 	}
 	handleOptChange(e) {
 		let inputIndex = $(e.target).parents('.frow').index();
