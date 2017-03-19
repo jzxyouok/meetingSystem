@@ -11,10 +11,18 @@ import store from '../../Redux/Store/store';
 class ActPoster extends Component {
 	render() {
 		let {bgImg, imgUpload} = this.props;
+		let posterUrl = null;
+		if(bgImg) {
+			posterUrl = createUrl(bgImg);
+		} else {
+			posterUrl = require('../../Resource/images/upload.jpg');
+		}
 		return (
 			<div className="row addPoster">
 				<Label htmlFor="poster" name="会议海报"/>
-				<div className="poster_img"></div>
+				<div className="poster_img">
+					<img src={posterUrl} alt=""/>
+				</div>
 				<div className="poster_upload">
 					<label htmlFor="p_upload">上传图片</label>
 					<input 

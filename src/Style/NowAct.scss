@@ -113,13 +113,15 @@
 	}
 
 	.manager {
-		@include pull-left;
-		margin-left: 100px;
-		button {
+		@include pull-right;
+		margin-right: 200px;
+		a {
+			display: inline-block;
 			width: 80px;
 			height: 30px;
 			color: #fff;
-			font: 12px/12px 'Microsoft Yahei';
+			font: 12px/30px 'Microsoft Yahei';
+			text-align: center;
 			background: #1dbbe3;
 			border-radius: 3px;
 			margin-right: 26px;

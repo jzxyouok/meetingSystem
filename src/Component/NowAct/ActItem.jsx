@@ -29,7 +29,7 @@ export default class ActItem extends Component {
 					</div>
 				</div>
 				<div className="manager">
-					<button>管理</button>
+					<Link to={`/baseInfo/${id}`}>管理</Link>
 				</div>
 			</div>
 		)

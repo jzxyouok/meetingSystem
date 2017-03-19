@@ -1,10 +1,20 @@
 import React, {Component} from 'react';
 import Modal from 'react-modal';
 import {connect} from 'react-redux';
+import fetch from 'isomorphic-fetch';
+
 import Label from './Label';
-import {show_add_offical_modal, act_official} from '../../Redux/Action/NewAct/NewAct.action';
+import { show_add_offical_modal, act_official } from '../../Redux/Action/NewAct/NewAct.action';
+import { getOfficial, setOfficial } from '../../Config/apiUrl';
 
 class ActOfficalModal extends Component {
+
+	handleAddOfficial(e) {
+		const {add_official} = this.props;
+		e.preventDefault();
+		let official = this.refs.official.value;
+		add_official(official);
+	}
 	render() {
 		const overlay = {
 			position          : 'fixed',
@@ -24,7 +34,7 @@ class ActOfficalModal extends Component {
 		    width 				  : '300px',
 		    height 				  : '100px'
 		};
-		const {isShow, showModal} = this.props;
+		const {isShow, showModal, add_official} = this.props;
 		return (
 			<Modal 
 				style={{ overlay: overlay, content: content }}
@@ -33,8 +43,8 @@ class ActOfficalModal extends Component {
 				>
 				<div className="offical_modal">
 					<p>添加主办方</p>
-					<input type="text" />
-					<button>添加</button>
+					<input type="text" ref="official" />
+					<button onClick={this.handleAddOfficial.bind(this)}>添加</button>
 					<button onClick={showModal}>取消</button>
 				</div>
 			</Modal>
@@ -43,11 +53,19 @@ class ActOfficalModal extends Component {
 }
 
 class ActOffical extends Component {
+	componentDidMount() {
+		const {get_official} = this.props;
+		get_official()
+	}
 	render() {
-		const {showModal, isShow, offical, change_offical} = this.props;
+		const {showModal, isShow, offical, change_offical, add_official} = this.props;
 		return (
 			<div className="row addOffical">
-				<ActOfficalModal isShow={isShow} showModal={showModal} />
+				<ActOfficalModal 
+					isShow={isShow} 
+					showModal={showModal} 
+					add_official={add_official} 
+				/>
 				<Label htmlfor="offical" name="主办　方"/>
 				<select id="offical" onChange={(e) => {
 					console.log(e.target.value);
@@ -70,24 +88,30 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	showModal: () => dispatch(show_add_offical_modal()),
-	change_offical: (value) => dispatch(act_official(value))
+	change_offical: (value) => dispatch(act_official(value)),
+	add_official: (official) => dispatch(() => {
+		fetch(setOfficial, {
+			method: 'post',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+			},
+			body: `official=${official}`
+		})
+		.then(res => res.json())
+		.then(res => {
+			alert(res.message);
+			dispatch(show_add_offical_modal());
+		})
+		.catch(err => console.error(err));
+	}),
+	get_official: () => dispatch(() => {
+		fetch(getOfficial)
+			.then(res => res.json())
+			.then(res => console.log(`official => ${res}`))
+	})
 });
 
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(ActOffical);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
