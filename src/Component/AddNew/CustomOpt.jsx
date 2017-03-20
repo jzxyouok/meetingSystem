@@ -5,7 +5,8 @@ class CustomOpt extends Component {
 		super(props);
 		this.handleClick = this.handleClick.bind(this);
 	}
-	handleClick() {
+	handleClick(e) {
+		e.preventDefault();
 		const {operation, addItem} = this.props;
 		switch(operation) {
 			case 'addText':

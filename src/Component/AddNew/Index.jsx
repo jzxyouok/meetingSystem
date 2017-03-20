@@ -5,7 +5,7 @@ import * as apiUrl from '../../Config/apiUrl';
 import {changeNe, addFormOpt, moveUp, moveDown, delFormItem, delOption, addOption, changeTitle, changeOption, submitForm} from '../../Redux/Action/AddNew/addNew';
 
 const mapStateToProps = (state) => ({
-	formData: state
+	formData: state.get('formData')
 });
 
 const mapDispatchToProps = (dispatch) => ({

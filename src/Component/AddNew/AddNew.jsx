@@ -9,18 +9,6 @@ import {Text, TextArea, Radio, Checkbox, Select, Date, Address, File} from './Op
 import store from '../../Redux/Store/store';
 
 class ApplicationForm extends Component {
-	shouldComponentUpdate(nextprops, nextstate) {
-		if( Immutable.is(Immutable.fromJS(this.props), Immutable.fromJS(nextprops)) &&
-			Immutable.is(Immutable.fromJS(this.state), Immutable.fromJS(nextstate)) ) {
-			return false;
-		} else {
-			return true;
-		}
-		return true;
-	}
-	componentDidMount() {
-		
-	}
 	render() {
 		let {formData, changeNe, addItem, moveUp, moveDown, delFormItem, delOption, addOption, changeTitle, changeOption, submitForm} = this.props;
 		const CommonOpts = [{id:1, name: '性别', operation: 'sex'}, {id:2, name: '照片', operation: 'photo'}, {id:3, name: '与会类型', operation: 'type'}, {id:4, name: '上衣尺寸', operation: 'size'}];
