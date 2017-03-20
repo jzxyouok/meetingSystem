@@ -24,12 +24,12 @@ export default class ActItem extends Component {
 						<span className="actNumber">• 参会人数：126</span>
 					</p>
 					<div className="operator">
-						<Link to={`/baseInfo/${id}`}><span className="iconfont icon-jibenxinxi"></span>基本信息</Link>
-						<Link to={`/attendee/${id}`}><span className="iconfont icon-renyuan"></span>参会者管理</Link>
+						<Link to={`/${id}/baseInfo`}><span className="iconfont icon-jibenxinxi"></span>基本信息</Link>
+						<Link to={`/${id}/attendee`}><span className="iconfont icon-renyuan"></span>参会者管理</Link>
 					</div>
 				</div>
 				<div className="manager">
-					<Link to={`/baseInfo/${id}`}>管理</Link>
+					<Link to={`/${id}/baseInfo`}>管理</Link>
 				</div>
 			</div>
 		)

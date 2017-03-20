@@ -50,6 +50,26 @@
     content: "\e609"; 
 }
 
+.icon-chuangjian:before { 
+    content: "\f0089"; 
+}
+
+.icon-biaodan:before { 
+    content: "\e65c"; 
+}
+
+.icon-qiandao:before { 
+    content: "\e977"; 
+}
+
+.icon-zongwuhouqin:before { 
+    content: "\e63e"; 
+}
+
+.icon-dangqianhuiyi:before { 
+    content: "\e605"; 
+}
+
 /**
  * CSS RESET
  */

@@ -93,7 +93,11 @@ const act_official = (state = fromJS({official: ''}), action) => {
 const add_act_official = (state = fromJS({now_officials: []}), action) => {
 	switch(action.type) {
 		case 'add_act_official':
-			return state.update('now_officials', value => value.push(action.value));
+			if(Array.isArray(action.value)) {
+				return state.update('now_officials', value => value.concat(action.value));
+			} else {
+				return state.update('now_officials', value => value.push(action.value));
+			}
 		default:
 			return state;
 	}
@@ -111,7 +115,11 @@ const act_category = (state = fromJS({category: ''}), action) => {
 const add_act_category = (state = fromJS({now_categorys: []}), action) => {
 	switch(action.type) {
 		case 'add_act_category':
-			return state.update('now_categorys', value => value.push(action.value));
+			if(Array.isArray(action.value)) {
+				return state.update('now_categorys', value => value.concat(action.value));
+			} else {
+				return state.update('now_categorys', value => value.push(action.value));
+			}
 		default:
 			return state;
 	}

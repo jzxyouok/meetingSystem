@@ -47,8 +47,8 @@ export const act_official = (value) => ({
 	value
 })
 
-export const add_act_offical = (value) => ({
-	type: 'add_act_offical',
+export const add_act_official = (value) => ({
+	type: 'add_act_official',
 	value
 })
 

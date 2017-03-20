@@ -91,7 +91,7 @@ const mapDispatchToProps = (dispatch) => ({
 		formData.append('end_time', act_end_time.end_time);
 		formData.append('category', act_category.category);
 		formData.append('city', act_city.city);
-		formData.append('detail_address', act_detail_address.detail_address);
+		formData.append('address', act_detail_address.detail_address);
 		formData.append('details', act_details.act_details);
 		formData.append('title', act_name.name);
 		formData.append('official', act_official.official);

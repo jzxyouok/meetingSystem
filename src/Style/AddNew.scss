@@ -32,7 +32,9 @@
 .applicationForm {
 	width: 1600px;
 	box-sizing: border-box;
-	padding: 26px 46px 0 24px;
+	padding: 26px 46px 40px 24px;
+	margin: 0 auto;
+	background-color: #fff;
 	@extend .clearfix;
 	
 	.ftitle {

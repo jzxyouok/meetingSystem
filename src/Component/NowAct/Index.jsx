@@ -14,7 +14,6 @@ class NowAct extends Component {
 	}
 	render() {
 		const {meeting_list} = this.props;
-		console.log(meeting_list);
 		return (
 			<div className="nowAct">
 				{

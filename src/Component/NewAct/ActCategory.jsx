@@ -2,9 +2,16 @@ import React, {Component} from 'react';
 import Modal from 'react-modal';
 import {connect} from 'react-redux';
 import Label from './Label';
-import {show_add_category_modal, act_category} from '../../Redux/Action/NewAct/NewAct.action';
+import { show_add_category_modal, act_category, add_act_category } from '../../Redux/Action/NewAct/NewAct.action';
+import { getCategory, setCategory } from '../../Config/apiUrl';
 
 class ActOfficalModal extends Component {
+	handleClick(e) {
+		e.preventDefault()
+		const {add_category} = this.props;
+		const category = this.refs.category.value;
+		add_category(category);
+	}
 	render() {
 		const overlay = {
 			position          : 'fixed',
@@ -33,8 +40,8 @@ class ActOfficalModal extends Component {
 				>
 				<div className="offical_modal">
 					<p>添加会议分类</p>
-					<input type="text" />
-					<button>添加</button>
+					<input type="text" ref="category" />
+					<button onClick={this.handleClick.bind(this)}>添加</button>
 					<button onClick={showModal}>取消</button>
 				</div>
 			</Modal>
@@ -43,16 +50,25 @@ class ActOfficalModal extends Component {
 }
 
 class ActCategory extends Component {
+	componentDidMount() {
+		const {get_category} = this.props;
+		get_category();
+	}
 	render() {
-		const {showModal, isShow, category, change_category} = this.props;
+		const {showModal, isShow, category, change_category, now_categorys, add_category} = this.props;
 		return (
 			<div className="row addCatefory">
-				<ActOfficalModal isShow={isShow} showModal={showModal} />
+				<ActOfficalModal 
+					isShow={isShow} 
+					showModal={showModal} 
+					add_category={add_category} />
 				<Label htmlfor="catogery" name="会议分类"/>
 				<select id="catogory" onChange={e => change_category(e.target.value)}>
-					<option value="1">会议分类1</option>
-					<option value="2">会议分类2</option>
-					<option value="3">会议分类3</option>
+					{
+						now_categorys.map((item,index) => {
+							return <option value={item} key={index}>{item}</option>
+						})
+					}
 				</select>
 				<button onClick={showModal}>添加会议分类</button>
 			</div>
@@ -61,13 +77,35 @@ class ActCategory extends Component {
 }
 
 const mapStateToProps = (state) => ({
-	isShow: state.getIn(['createAct', 'show_add_category_modal', 'isShow']),
-	category: state.getIn(['createAct', 'act_category', 'category'])
+	isShow: state.getIn(['show_add_category_modal', 'isShow']),
+	category: state.getIn(['act_category', 'category']),
+	now_categorys: state.getIn(['add_act_category', 'now_categorys']).toJS()
 });
 
 const mapDispatchToProps = (dispatch) => ({
 	showModal: () => dispatch(show_add_category_modal()),
-	change_category: (value) => dispatch(act_category(value))
+	change_category: (value) => dispatch(act_category(value)),
+	get_category: () => dispatch(() => {
+		fetch(getCategory)
+			.then(res => res.json())
+			.then(res => dispatch(add_act_category(res)))
+			.catch(err => {throw err});
+	}),
+	add_category: (value) => dispatch(() => {
+		fetch(setCategory, {
+			method: 'post',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+			},
+			body: `category=${value}`
+		})
+		.then(res => res.json())
+		.then(res => {
+			alert(res.message);
+			dispatch(show_add_category_modal())
+		})
+		.catch(err => {throw err});
+	})
 });
 
 export default connect(

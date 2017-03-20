@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import fetch from 'isomorphic-fetch';
 
 import Label from './Label';
-import { show_add_offical_modal, act_official } from '../../Redux/Action/NewAct/NewAct.action';
+import { show_add_offical_modal, act_official, add_act_official } from '../../Redux/Action/NewAct/NewAct.action';
 import { getOfficial, setOfficial } from '../../Config/apiUrl';
 
 class ActOfficalModal extends Component {
@@ -58,7 +58,9 @@ class ActOffical extends Component {
 		get_official()
 	}
 	render() {
-		const {showModal, isShow, offical, change_offical, add_official} = this.props;
+		const {showModal, isShow, offical, change_offical, add_official, now_officials} = this.props;
+		let options = '';
+
 		return (
 			<div className="row addOffical">
 				<ActOfficalModal 
@@ -68,12 +70,13 @@ class ActOffical extends Component {
 				/>
 				<Label htmlfor="offical" name="主办　方"/>
 				<select id="offical" onChange={(e) => {
-					console.log(e.target.value);
 					change_offical(e.target.value)}
 				}>
-					<option value="1">主办方1</option>
-					<option value="2">主办方2</option>
-					<option value="3">主办方3</option>
+					{
+						now_officials.map((item, index) => {
+							return <option key={index} value={item}>{item}</option>;
+						})
+					}
 				</select>
 				<button onClick={showModal}>添加主办方</button>
 			</div>
@@ -83,7 +86,8 @@ class ActOffical extends Component {
 
 const mapStateToProps = (state) => ({
 	isShow: state.getIn(['show_add_offical_modal', 'isShow']),
-	offical: state.getIn(['act_official', 'official'])
+	offical: state.getIn(['act_official', 'official']),
+	now_officials: state.getIn(['add_act_official', 'now_officials']).toJS()
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -107,7 +111,10 @@ const mapDispatchToProps = (dispatch) => ({
 	get_official: () => dispatch(() => {
 		fetch(getOfficial)
 			.then(res => res.json())
-			.then(res => console.log(`official => ${res}`))
+			.then(res => {
+				dispatch(add_act_official(res));
+			})
+			.catch(err => {throw err});
 	})
 });
 
