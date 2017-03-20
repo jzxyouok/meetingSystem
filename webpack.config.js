@@ -56,7 +56,8 @@ module.exports = {
 			filename: 'index.html',
 			inject: 'body',
 			template: './src/Template/index.html',
-			chunks: ['vendor', 'home']
+			chunks: ['vendor', 'home'],
+			favicon: './src/Resource/images/favicon.png'
 		}),
 		new ExtractTextPlugin('[name].css'),
 		new webpack.optimize.CommonsChunkPlugin({
