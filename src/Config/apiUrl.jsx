@@ -33,3 +33,6 @@ export const updateMeetingBase = 'http://www.cfdq.midea.com/meeting/index.php/me
 
 // 导出所有报名人员接口
 export const getAllRegister = 'http://www.cfdq.midea.com/meeting/mock/downloadAllAttendee.php';
+
+// 获取参与人员表中数据
+export const getAttendeeTable = 'http://www.cfdq.midea.com/meeting/mock/getAttendeeTable.php';
