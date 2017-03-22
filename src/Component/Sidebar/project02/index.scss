@@ -1,0 +1,81 @@
+.clearfix:after {
+	display: block;
+	content: '';
+	height: 0;
+	clear: both;
+}
+
+html, body, #app {
+	height: 100%;
+}
+
+.meeting-app, .nav {
+	height: 100%;
+}
+
+.nav {
+	background-color: #fff;
+	.logo {
+		width: 100%;
+		overflow: hidden;
+	}
+}
+
+.ant-layout-header {
+	background-color: #fff;
+	padding: 0;
+	
+	.trigger {
+		font-size: 18px;
+		line-height: 64px;
+		padding: 0 16px;
+		cursor: pointer;
+		transition: color .3s;
+
+		&:hover {
+			color: #108ee9;
+		}
+	}
+}
+
+.ant-layout-sider-collapsed {
+	.anticon {
+		font-size: 16px;
+	}
+	.nav-text {
+		display: none;
+	}
+}
+
+.user-info {
+	position: absolute;
+	top: 0;
+	right: 0;
+	@extend .clearfix;
+	margin-top: 12px;
+	border-left: 1px solid #e2e2e2;
+
+	.head-img {
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background-color: #7362b2;
+		font: 16px/40px 'Microsoft Yahei';
+		color: #fff;
+		text-align: center;
+		float: left;
+		margin: 0 8px 0 16px;
+	}
+
+	.username {
+		float: left;
+		font: 14px/40px 'Microsoft Yahei';
+		color: #313131;
+		margin-right: 18px;
+	}
+
+	.anticon-caret-down {
+		margin-left: 5px;
+		font-size: 12px;
+	}
+}
