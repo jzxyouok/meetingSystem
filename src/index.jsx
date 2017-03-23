@@ -1,15 +1,12 @@
-import React, {Component} from 'react';
-import {render} from 'react-dom';
-import {Router} from 'react-router';
-import {Provider} from 'react-redux';
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux'
 
-import './Style/Common.css';
-import routes from './Router/route';
+import Routes from './Router/router';
 import store from './Redux/Store/store';
-
 
 render((
 	<Provider store={store}>
-		{routes} 
+		{Routes}
 	</Provider>
 ), document.getElementById('app'));
