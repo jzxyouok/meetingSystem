@@ -36,3 +36,6 @@ export const getAllRegister = 'http://www.cfdq.midea.com/meeting/mock/downloadAl
 
 // 获取参与人员表中数据
 export const getAttendeeTable = 'http://www.cfdq.midea.com/meeting/mock/getAttendeeTable.php';
+
+// 获取省市县接口
+export const getAddress = 'http://www.cfdq.midea.com/wechat/res/php/getCity.php';
