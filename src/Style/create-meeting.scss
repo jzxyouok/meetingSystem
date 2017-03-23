@@ -1,5 +1,17 @@
 .create-meeting {
+	background-color: #fff;
+	width: calc(100% - 100px);
+	margin: 40px auto;
+	padding: 40px 0 40px 0;
 	.ant-calendar-picker {
 		width: 100% !important;
 	}
+}
+.preview {
+	width: 400px;
+	height: 250px;
+}
+
+button[type=submit] {
+	margin-left: 20px;
 }

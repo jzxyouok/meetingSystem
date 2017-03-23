@@ -45,6 +45,9 @@ module.exports = {
 			test: /\.(png|jpg|gif)$/,
             exclude: /^node_modules$/,
             loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]',
+		}, {
+			test: /\.json$/,
+			loader: 'json'
 		}]
 	},
 	resolve: {
