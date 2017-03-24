@@ -1,7 +1,7 @@
-export const name = (state = '', action) => {
+export const title = (state = '', action) => {
 	switch(action.type) {
-		case 'update_name':
-			return action.name;
+		case 'update_title':
+			return action.title;
 		default:
 			return state;
 	}
@@ -11,6 +11,15 @@ export const reg_time = (state = '', action) => {
 	switch(action.type) {
 		case 'update_reg_time':
 			return action.reg_time;
+		default:
+			return state;
+	}
+}
+
+export const meeting_time = (state = '', action) => {
+	switch(action.type) {
+		case 'update_meeting_time':
+			return action.meeting_time;
 		default:
 			return state;
 	}
@@ -43,7 +52,7 @@ export const official = (state = '', action) => {
 	}
 }
 
-export const type = (state = '', action) => {
+export const category = (state = '', action) => {
 	switch(action.type) {
 		case 'update_type':
 			return action.act_type;
@@ -52,7 +61,7 @@ export const type = (state = '', action) => {
 	}
 }
 
-export const poster = (state = '', action) => {
+export const image = (state = '', action) => {
 	switch(action.type) {
 		case 'update_poster':
 			return action.poster;

@@ -13,3 +13,12 @@ export const get_date = () => {
 	
 	return `${year}-${toTwo(month)}-${toTwo(day)}`;
 }
+
+// 将对象转为表单对象
+export const serialize = (obj) => {
+	let form_data = new FormData();
+	for(let key in obj) {
+		form_data.append(key, obj[key]);
+	}
+	return form_data;
+}
