@@ -8,6 +8,7 @@ import options from '../../Resource/util/cascader-address-options';
 const FormItem = Form.Item;
 const RangePicker = DatePicker.RangePicker;
 
+
 const createUrl = (fileObj) => window.URL.createObjectURL(fileObj);
 class CreateMeeting extends Component {
 	state = {
@@ -74,12 +75,9 @@ class CreateMeeting extends Component {
 					hasFeedback
 					>
 					{getFieldDecorator('address', {
-						initialValue: ['广东省', '佛山市'],
 						rules: [{type: 'array', required: true, message: '请选择地址'}]
 					})(
-						<Cascader
-							options={options}
-						/>
+						<Cascader options={options} />
 					)}
 				</FormItem>
 				<FormItem 
@@ -105,7 +103,7 @@ class CreateMeeting extends Component {
 				<FormItem 
 					{...formItemLayout} 
 					hasFeedback 
-					label="活动类型">
+					label="会议类型">
 					{getFieldDecorator('act_type', {
 						rules: [{required: true, message: '活动类型不能为空'}]
 					})(
