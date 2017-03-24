@@ -99,6 +99,7 @@ class CreateMeeting extends Component {
 		const { getFieldDecorator } = this.props.form;
 		return (
 			<Form className="create-meeting" onSubmit={this.handleSubmit}>
+				<p className="title">会议信息</p>
 				<FormItem
 					{...formItemLayout}
 					label="会议主题"

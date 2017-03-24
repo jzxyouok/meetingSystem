@@ -19,7 +19,7 @@ class MeetingList extends Component {
 		return (
 			<div className="meeting-list">
 				{
-					list.map(item => <MeetingItem {...item} key={item.id} />)
+					list.map((item, idx) => <MeetingItem {...item} key={idx} />)
 				}
 			</div>
 		)
