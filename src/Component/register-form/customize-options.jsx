@@ -9,7 +9,7 @@ import {
 	update_options } 			from '../../Redux/Action/register-form.action';
 
 const CustomizeOptions = (props) => {
-
+	console.log(props.customize_options);
 	const options = props.customize_options.map((item, index) => {
 		switch(item.option_type) {
 			case 'radio':
@@ -23,7 +23,7 @@ const CustomizeOptions = (props) => {
 							onChange={(e) => {
 								const index   = e.target.dataset.index,
 									  title   = e.target.value;
-								props.handle_title_change(+index, title);
+								props.handle_title_change(index, title);
 							}} 
 						/>
 						<Row>
@@ -38,7 +38,8 @@ const CustomizeOptions = (props) => {
 									onChange={(e) => {
 										const index   = e.target.dataset.index,
 											  options = e.target.value.split('@');
-										props.handle_options_change(+index, options);
+										if(options.length === 0) return;
+										props.handle_options_change(index, options);
 									}} 
 								/>
 							</Col>
@@ -54,7 +55,7 @@ const CustomizeOptions = (props) => {
 							onChange={(e) => {
 								const index   = e.target.dataset.index,
 									  title   = e.target.value;
-								props.handle_title_change(+index, title);
+								props.handle_title_change(index, title);
 							}} 
 						/>	
 					</Item>
