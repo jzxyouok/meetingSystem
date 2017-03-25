@@ -32,6 +32,29 @@ export const customize = (state = fromJS([]), action) => {
 		
 		case 'update_options':
 			return state.setIn([action.index, 'options'], action.options);
+
+		case 'delete_option':
+			return state
+				.delete(index)
+				.map((item, index) => item.set('index', index));
+
+		case 'move_up_option':
+			// 先修改key值
+			let last_option = state.updateIn([index - 1, 'index'], x => x + 1).get(index-1),
+				now_option  = state.updateIn([index, 'index'], x => x - 1).get(index);
+			// 重排顺序
+			return state
+				.set(index-1, now_option)
+				.set(index, last_option);
+
+		case 'move_down_option':
+			// 先修改key值
+			let now_option_down  = state.updateIn([index, 'index'], x => x + 1).get(index),
+				next_option 	 = state.updateIn([index+1, 'index'], x => x - 1).get(index+1);
+			// 重排顺序
+			return state
+				.set(index, next_option)
+				.set(index + 1 , now_option_down);
 		
 		default:
 			return state;

@@ -14,4 +14,20 @@
 	.muti-options {
 		margin-top: 4px;
 	}
+	.customize-item-handler {
+		height: 28px;
+		& > div {
+			height: 100%;
+		}
+		i {
+			margin-left: 8px;
+			font: 16px/28px 'Microsoft Yahei';
+			transition: color .3s;
+
+			&:hover {
+				color: red;
+				cursor: pointer;
+			}
+		}
+	}
 }
