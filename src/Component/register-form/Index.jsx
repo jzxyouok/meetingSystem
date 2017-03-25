@@ -1,30 +1,33 @@
-import React, { Component } from 'react';
-import '../../Style/register-form.scss';
+import React, { Component } 		from 'react';
+import { Row, Col, Button, Icon } 	from 'antd';
 
-import NeOptions from './Necessary-options';
+import CustomOptions 				from './custom-options';
+import AddCustomize 				from './add-item-operator';
+import CustomizeOptions 			from './customize-options';
+
+import '../../Style/register-form.scss';
 
 export default class RegisterForm extends Component {
 	render() {
+		let row_label_layout = {
+			xs: { span: 24 },
+			sm: { span: 4 }
+		};
+		let row_item_layout = {
+			xs: { span: 24 },
+			sm: { span: 16 }
+		}
 		return (
-			<div className="applicationForm">
-				<p className="ftitle">报名表单设置</p>
-				<div className="config">
-					<NeOptions name="姓名" />
-					<NeOptions name="手机号" />
-					<p className="description">其他添加报名表单收集项</p>
-					<div className="customCfg"></div>
-					<div className="submit">
-						<button>立即提交</button>
-					</div>
-				</div>
-				<div className="ftool">
-					<p className="title">常用项</p>
-					<div className="common"></div>
-					<div className="custom">
-						<p className="title">自定义项</p>
-						<ul></ul>
-					</div>
-				</div>
+			<div className="register-form">
+				<Row>
+					<Col {...row_item_layout} offset={4}>添加表单固有项</Col>
+				</Row>
+				<CustomOptions />
+				<Row>
+					<Col {...row_item_layout} offset={4}>添加表单自定义项</Col>
+				</Row>
+				<AddCustomize />
+				<CustomizeOptions />
 			</div>
 		)
 	}

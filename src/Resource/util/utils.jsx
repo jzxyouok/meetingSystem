@@ -22,3 +22,25 @@ export const serialize = (obj) => {
 	}
 	return form_data;
 }
+
+// 题型判断
+export const subject_type = (subject) => {
+	switch(subject) {
+		case 'radio':
+			return '单选题';
+		case 'checkbox':
+			return '多选题';
+		case 'text':
+			return '普通文本框';
+		case 'textarea':
+			return '多行文本框';
+		case 'select':
+			return '下拉框';
+		case 'date':
+			return '日期';
+		case 'file':
+			return '文件';
+		default:
+			return '错误类型';
+	}
+}
