@@ -78,3 +78,12 @@ export const details = (state = '', action) => {
 			return state;
 	}
 }
+
+export const form_initial = (state = {}, action) => {
+	switch(action.type) {
+		case 'init_form':
+			return Object.assign({}, state, action.form_state);
+		default:
+			return state;
+	}
+}

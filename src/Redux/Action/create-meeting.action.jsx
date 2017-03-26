@@ -42,3 +42,9 @@ export const update_details = (details) => ({
 	type: 'update_details',
 	details
 });
+
+//会议信息页--获取整个表单的初始状态
+export const init_form = (form_state) => ({
+	type: 'init_form',
+	form_state
+});
