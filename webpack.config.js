@@ -11,7 +11,7 @@ const entryFilename = 'Index.jsx';
 module.exports = {
 	entry: {
 		home: path.resolve(appPath, entryFilename),
-		vendor: ['react', 'react-dom', 'react-router', 'react-bootstrap']
+		vendor: ['react', 'react-dom', 'react-router']
 	},
 	output: {
 		filename: '[name].js',

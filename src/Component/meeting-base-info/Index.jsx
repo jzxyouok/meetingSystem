@@ -10,7 +10,6 @@ class BaseInfo extends Component {
 	componentDidMount() {
 		const id = this.props.params.id;
 		const { get_form_state } = this.props;
-		console.log(id)
 		get_form_state(id);
 	}
 
