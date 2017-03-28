@@ -68,6 +68,12 @@ export default class SiderBar extends Component {
 							<span className="nav-text">会议后勤</span>
 						</Link>
 					</Menu.Item>
+					<Menu.Item key="9">
+						<Link to="/:id/notice">
+							<Icon type="notification" />
+							<span className="nav-text">会议通知</span>
+						</Link>
+					</Menu.Item>
 				</Menu>
 			</Sider>
 		)

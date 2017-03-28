@@ -1,7 +1,19 @@
 import React, { Component } from 'react';
+import { Button, Row, Col, Icon, Modal, Form, Input, DatePicker, Table, Select } from 'antd';
 
-export default class Attendee extends Component {
+import CheckinList from './check-list';
+import CheckDetail from './check-detail';
+import '../../Style/checkin.scss';
+
+const Option = Select.Option;
+
+export default class Checkin extends Component {
 	render() {
-		return <h1>checkin module</h1>
+		return (
+			<div className="checkin">
+				<CheckinList />
+				<CheckDetail />
+			</div>
+		)
 	}
 }

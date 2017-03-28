@@ -4,7 +4,7 @@ import { combineReducers } from 'redux-immutable';
 const list = (state = List(), action) => {
 	switch(action.type) {
 		case 'update_meeting_list':
-			return state.concat(List(action.list));
+			return List(action.list);
 		default:
 			return state;
 	}

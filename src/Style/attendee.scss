@@ -1,0 +1,26 @@
+.attendee {
+	width: 96%;
+	margin: 10px auto;
+	background-color: #fff;
+	padding: 20px 20px 40px;
+
+	.ant-row {
+		margin-bottom: 8px;
+	}
+
+	.participants {
+		button {
+			margin-right: 10px;
+		}
+	}
+	.output {
+		text-align: right;
+		padding-right: 40px;
+	}
+	.condition {
+		.ant-col-2 {
+			line-height: 28px;
+			text-align: center;
+		}
+	}
+}

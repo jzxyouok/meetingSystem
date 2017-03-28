@@ -1,0 +1,19 @@
+.checkin {
+	background-color: #fff;
+	width: 96%;
+	margin: 10px auto;
+	padding: 20px 20px 40px;
+	.ant-row {
+		margin-bottom: 8px;
+	}
+	table {
+		text-align: center;
+		th { text-align: center; }
+	}
+	.search {
+		margin: 0 8px;
+	}
+	.check_detail_title {
+		text-align: center;
+	}
+}

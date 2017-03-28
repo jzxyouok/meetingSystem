@@ -10,6 +10,7 @@ import BaseInfo from '../Component/meeting-base-info/Index';
 import Checkin from '../Component/checkin/Index';
 import Support from '../Component/support/Index';
 import Setting from '../Component/setting/Index';
+import Notice from '../Component/meeting-notice/Index';
 
 
 const router = (
@@ -25,6 +26,7 @@ const router = (
 				<Route path="checkin" component={Checkin}></Route>
 				<Route path="support" component={Support}></Route>
 				<Route path="setting" component={Setting}></Route>
+				<Route path="notice" component={Notice}></Route>
 			</Route>
 		</Route>
 	</Router>

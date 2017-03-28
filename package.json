@@ -4,7 +4,9 @@
   "description": "Midea Meeting System",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --inline --hot --progress"
+    "start": "webpack-dev-server --inline --hot --progress",
+    "build": "webpack --progress --watch --colors",
+    "dist": "NODE_ENV=production webpack --progress --colors"
   },
   "author": "lznism@lznism.com",
   "license": "MIT",
