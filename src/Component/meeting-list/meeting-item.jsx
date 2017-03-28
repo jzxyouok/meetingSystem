@@ -6,22 +6,23 @@ import { get_date } from '../../Resource/util/utils';
 
 export default class MeetingItem extends Component {
 	render() {
-		const { address, end_time, id, image, publisher, registertime, state, title} = this.props;
+		const { address, state ,end_time, meeting_time, id, image, publisher, reg_time , title} = this.props;
 		let state_des = '';
-		if(state == 0) {
-			state_des = '未发布';
-		} else {
-			if(get_date() > end_time) {
-				state_des = '已结束';
-			} else {
-				state_des = '进行中';
-			}
-		}
+		// switch(state) {
+		// 	case 0:
+		// 		return state_des = '未发布';
+		// 	case 1:
+		// 		return state_des = '进行中';
+		// 	case 2:
+		// 		return state_des = '已结束';
+		// 	default:
+		// 		break;
+		// }
 		return (
 			<div className="actItem">
 				<div className="actState">
 					<input type="checkbox"/>
-					<p>{state_des}</p>
+					<p>{state}</p>
 				</div>
 				<div className="actImg">
 					<img src={image} alt="会议封面"/>
@@ -29,11 +30,11 @@ export default class MeetingItem extends Component {
 				<div className="actInfo">
 					<h3>{title} <span className="actId">(会议ID:{id})</span></h3>
 					<p>
-						<span className="actEndTime">结束时间：{end_time}</span>
+						<span className="actEndTime">会议时间 {meeting_time}</span>
 						<span className="actAddress">{address}</span>
 					</p>
 					<p>
-						<span className="actTime">• 报名时间：{registertime}</span>
+						<span className="actTime">• 报名时间：{reg_time }</span>
 						<span className="publisher">• 发布者: {publisher}</span>
 						<span className="actNumber">• 参会人数：126</span>
 					</p>
