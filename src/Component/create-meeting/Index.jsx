@@ -74,6 +74,9 @@ class CreateMeeting extends Component {
 	    }
 	    return e && e.fileList;
   	}
+  	componentDidMount() {
+  		console.log('mounted');
+  	}
 	render() {
 		// 表单控件布局
 		const formItemLayout = {
@@ -271,6 +274,28 @@ export default connect(
 				default:
 					break;
 			}
+		}
+
+
+	},
+	mapPropsToFields: (props) => {
+  		if(props.id === undefined) {
+  			return {}
+  		}
+
+		let { title, reg_time, meeting_time, address, detail_address, official, category, details, image } = props.init_state;
+		
+		console.log(props.init_state);
+
+		return { 
+			title: { value: title },
+			reg_time: { defaultValue: reg_time.split(' ~ ').map(x => moment(x)) },
+			meeting_time: { defaultValue: meeting_time.split(' ~ ').map(x => moment(x)) },
+			address: { defaultValue: address.split(',') },
+			detail_address: { value: detail_address },
+			official: { value: official },
+			act_type: { value: category },
+			details: { value: details }
 		}
 	}
 })(CreateMeeting));

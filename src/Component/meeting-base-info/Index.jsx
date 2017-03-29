@@ -15,7 +15,8 @@ class BaseInfo extends Component {
 	}
 
 	render() {
-		return <CreateMeeting />
+		const id = this.props.params.id;
+		return <CreateMeeting id={id} />
 	}
 }
 

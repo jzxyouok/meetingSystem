@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Form } from 'antd';
 
+import options from '../../Resource/util/cascader-address-options';
+
 const FormItem = Form.Item;
 
 // 表单控件布局
@@ -29,6 +31,7 @@ class CreateMeetingForm extends Component {
 	}
 
 	render() {
+		const { img_url, save_isFetching, submit_isFetching } = this.props;
 		return (
 			<Form className="create-meeting" onSubmit={this.handleSubmit}>
 				<p className="title">会议信息</p>
@@ -114,10 +117,6 @@ class CreateMeetingForm extends Component {
 						getValueFromEvent: this.normFile
 					})(
 						<Upload listType="picture" accept="image/*" beforeUpload={(field, fieldList) => {
-							this.props.update_poster(field);
-							this.setState({
-								img_url: createUrl(field)
-							});
 							return false;
 						}}>
 							<Button>
@@ -128,7 +127,7 @@ class CreateMeetingForm extends Component {
 
 					<img
 						className="preview"
-						src={this.state.img_url === '' ? default_upload_img : this.state.img_url} 
+						src={img_url === '' ? default_upload_img : img_url} 
 						alt="preview" 
 					/>
 				</FormItem>
@@ -146,14 +145,14 @@ class CreateMeetingForm extends Component {
 					<Button 
 						type="primary"
 						onClick={this.handleSave}
-						loading={ this.state.save_isFetching ? true : false}>
-						{ this.state.save_isFetching ? '正在保存...' : '保存'}
+						loading={ save_isFetching ? true : false}>
+						{ save_isFetching ? '正在保存...' : '保存'}
 					</Button>
 					<Button 
 						type="primary" 
 						htmlType="submit"
-						loading= { this.state.submit_isFetching ? true : false}>
-						{ this.state.submit_isFetching ? '正在提交...' : '提交'}
+						loading= { submit_isFetching ? true : false}>
+						{ submit_isFetching ? '正在提交...' : '提交'}
 					</Button>
 				</FormItem>
 			</Form>
