@@ -9,7 +9,8 @@ export const mapStateToProps = (state) => ({
 	official: state.getIn(['create_meeting', 'official']),
 	act_type: state.getIn(['create_meeting', 'act_type']),
 	poster: state.getIn(['create_meeting', 'poster']),
-	details: state.getIn(['create_meeting', 'details'])
+	details: state.getIn(['create_meeting', 'details']),
+	init_state: state.getIn(['create_meeting', 'form_initial'])
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -22,4 +23,5 @@ export const mapDispatchToProps = (dispatch) => ({
 	update_type: (val) => dispatch( actions.update_type(val) ),
 	update_poster: (val) => dispatch( actions.update_poster(val) ),
 	update_details: (val) => dispatch( actions.update_details(val) ),
+	init_form: (val) => dispatch( actions.init_form(val) ),
 });

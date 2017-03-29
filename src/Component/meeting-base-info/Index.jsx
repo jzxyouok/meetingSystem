@@ -5,6 +5,7 @@ import { message } 				from 'antd';
 
 import CreateMeeting 			from '../create-meeting/Index';
 import { getMeetingBase } 		from '../../Config/apiUrl';
+import { init_form } 			from '../../Redux/Action/create-meeting.action';
 
 class BaseInfo extends Component {
 	componentDidMount() {
@@ -24,7 +25,14 @@ const mapDispatchToProps = (dispatch) => ({
 	get_form_state: (id) => dispatch(() => {
 		fetch(`${getMeetingBase}?id=${id}`)
 			.then(res => res.json())
-			.then(res => console.log(res))
+			.then(res => {
+				if(res.code === 1) {
+					console.log(res.message);
+					// dispatch( init_form(res.message) );
+				} else {
+					message.warn(res.message);
+				}
+			})
 			.catch(err => message.error('网络错误请稍后重试或者联系管理员解决'));
 	})
 });

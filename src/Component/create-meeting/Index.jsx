@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, Input, DatePicker, Cascader, Upload, Button, Icon, message } from 'antd';
 import fetch from 'isomorphic-fetch';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import '../../Style/create-meeting.scss';
 import options from '../../Resource/util/cascader-address-options';
@@ -9,6 +10,7 @@ import { mapStateToProps, mapDispatchToProps } from './index.conn';
 import store from '../../Redux/Store/store';
 import { serialize } from '../../Resource/util/utils';
 import { newActUrl } from '../../Config/apiUrl';
+import { init_form } from '../../Redux/Action/create-meeting.action';
 
 const FormItem = Form.Item;
 const RangePicker = DatePicker.RangePicker;
@@ -36,7 +38,7 @@ class CreateMeeting extends Component {
 		.then(res => {
 			message.success(res.message, 3);
 			setTimeout(function(){
-				location.href = '/#/meeting-list';
+				location.href = './#/meeting-list';
 			}, 3000);
 		})
 		.catch(err => {
@@ -257,7 +259,7 @@ export default connect(
 					let province = dirtyVal[0],
 						city = dirtyVal[1],
 						country = dirtyVal[2];
-					return props.update_address(province+city+country);
+					return props.update_address(province+','+city+','+country);
 				case 'detail_address':
 					return props.update_detail_address(dirtyVal);
 				case 'official':
@@ -270,7 +272,5 @@ export default connect(
 					break;
 			}
 		}
-
-
 	}
 })(CreateMeeting));

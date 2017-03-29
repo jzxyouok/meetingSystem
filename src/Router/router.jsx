@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+import { Router, Route, IndexRedirect, hashHistory } from 'react-router';
 import Nav from '../Component/nav/Index';
 import MeetingList from '../Component/meeting-list/Index';
 import CreateMeeting from '../Component/create-meeting/Index';
@@ -16,7 +16,7 @@ import Notice from '../Component/meeting-notice/Index';
 const router = (
 	<Router history={hashHistory}>
 		<Route path="/" component={Nav}>
-			<IndexRoute component={MeetingList}></IndexRoute>
+			<IndexRedirect to="meeting-list"></IndexRedirect>
 			<Route path="meeting-list" component={MeetingList}></Route>
 			<Route path="create-meeting" component={CreateMeeting}></Route>
 			<Route path="/:id">

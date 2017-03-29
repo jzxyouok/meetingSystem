@@ -79,7 +79,19 @@ export const details = (state = '', action) => {
 	}
 }
 
-export const form_initial = (state = {}, action) => {
+const initial_form_state = {
+	address:",,",
+	category:"",
+	detail_address:"",
+	details:"",
+	id:"",
+	image:"",
+	meeting_time:" ~ ",
+	official:"",
+	reg_time:" ~ ",
+	title:"",
+};
+export const form_initial = (state = initial_form_state, action) => {
 	switch(action.type) {
 		case 'init_form':
 			return Object.assign({}, state, action.form_state);
