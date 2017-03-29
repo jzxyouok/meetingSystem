@@ -279,13 +279,14 @@ export default connect(
 
 	},
 	mapPropsToFields: (props) => {
-  		if(props.id === undefined) {
+  		if(!props.id) {
   			return {}
   		}
 
-		let { title, reg_time, meeting_time, address, detail_address, official, category, details, image } = props.init_state;
-		
 		console.log(props.init_state);
+
+		let { title, reg_time, meeting_time, address, detail_address, official, category, details, image } = props.init_state;
+		console.log(`title => ${title}`);
 
 		return { 
 			title: { value: title },
