@@ -58,6 +58,8 @@ class CreateMeeting extends Component {
 	}
 	handleSubmit = (e) => {
 		e.preventDefault();
+		console.log(store.getState().toJS().create_meeting)
+		return;
 		this.props.form.validateFieldsAndScroll((err, values) => {
 			if(!err && !this.state.submit_isFetching) {
 				const form_data = this.getFormDate(1);
@@ -74,8 +76,14 @@ class CreateMeeting extends Component {
 	    }
 	    return e && e.fileList;
   	}
+  	componentWillReceiveProps(nextProps) {
+  		if(nextProps.id) {
+	  		this.setState({
+	  			img_url: nextProps.init_state.image
+	  		})
+  		}
+  	}
   	componentDidMount() {
-  		console.log('mounted');
   	}
 	render() {
 		// 表单控件布局
@@ -216,12 +224,16 @@ class CreateMeeting extends Component {
 					)}
 				</FormItem>
 				<FormItem {...buttonItemLayout}>
-					<Button 
-						type="primary"
-						onClick={this.handleSave}
-						loading={ this.state.save_isFetching ? true : false}>
-						{ this.state.save_isFetching ? '正在保存...' : '保存'}
-					</Button>
+					{
+						this.props.id 
+						? ''
+						: <Button 
+								type="primary"
+								onClick={this.handleSave}
+								loading={ this.state.save_isFetching ? true : false}>
+								{ this.state.save_isFetching ? '正在保存...' : '保存'}
+							</Button>
+					}
 					<Button 
 						type="primary" 
 						htmlType="submit"
@@ -282,17 +294,22 @@ export default connect(
   		if(!props.id) {
   			return {}
   		}
-
-		console.log(props.init_state);
-
 		let { title, reg_time, meeting_time, address, detail_address, official, category, details, image } = props.init_state;
-		console.log(`title => ${title}`);
+
+  		props.update_title(title);
+  		props.update_address(address);
+  		props.update_detail_address(detail_address);
+  		props.update_details(details);
+  		props.update_meeting_time(meeting_time);
+  		props.update_official(official);
+  		props.update_reg_time(reg_time);
+  		props.update_type(category);
 
 		return { 
 			title: { value: title },
-			reg_time: { defaultValue: reg_time.split(' ~ ').map(x => moment(x)) },
-			meeting_time: { defaultValue: meeting_time.split(' ~ ').map(x => moment(x)) },
-			address: { defaultValue: address.split(',') },
+			reg_time: { value: reg_time.split(' ~ ').map(x => moment(x)) },
+			meeting_time: { value: meeting_time.split(' ~ ').map(x => moment(x)) },
+			address: { value: address.split(',') },
 			detail_address: { value: detail_address },
 			official: { value: official },
 			act_type: { value: category },

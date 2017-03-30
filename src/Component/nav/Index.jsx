@@ -20,7 +20,7 @@ export default class Nav extends Component {
 		const { collapsed } = this.state;
 		return (
 			<Layout className="meeting-app ant-layout-has-sider">
-				<SiderBar collapsed={collapsed} />
+				<SiderBar collapsed={collapsed} id={this.props.params.id} />
 				<Layout>
 					<HeaderBar
 						collapsed={collapsed}

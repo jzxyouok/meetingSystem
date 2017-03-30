@@ -28,8 +28,7 @@ const mapDispatchToProps = (dispatch) => ({
 			.then(res => res.json())
 			.then(res => {
 				if(res.code === 1) {
-					console.log(res.message);
-					// dispatch( init_form(res.message) );
+					dispatch( init_form(res.message) );
 				} else {
 					message.warn(res.message);
 				}
