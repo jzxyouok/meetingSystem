@@ -19,6 +19,21 @@ html, body, #app {
 	.logo {
 		width: 100%;
 	}
+
+	.to-home {
+		text-align: center;
+		margin-top: 50px;
+
+		a{
+			border-radius: 50%;
+			height: 40px;
+			width: 40px;
+			line-height: 38px;
+			font-size: 20px;
+			display: inline-block;
+			border: 1px solid #ccc;
+		}
+	}
 }
 
 .ant-layout-header {

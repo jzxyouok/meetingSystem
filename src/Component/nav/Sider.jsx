@@ -23,45 +23,51 @@ export default class SiderBar extends Component {
 							mode="inline"
 							defaultSelectedKeys={['3']}>
 							<Menu.Item key="3">
-								<Link to="/:id/base-info">
+								<Link to={`/${id}/base-info`}>
 									<Icon type="exception" />
 									<span className="nav-text">基本信息</span>
 								</Link>
 							</Menu.Item>
 							<Menu.Item key="4">
-								<Link to="/:id/register-form">
+								<Link to={`/${id}/register-form`}>
 									<Icon type="schedule" />
 									<span className="nav-text">报名表单</span>
 								</Link>
 							</Menu.Item>
 							<Menu.Item key="5">
-								<Link to="/:id/attendee">
+								<Link to={`/${id}/attendee`}>
 									<Icon type="user" />
 									<span className="nav-text">参会人员</span>
 								</Link>
 							</Menu.Item>
 							<Menu.Item key="6">
-								<Link to="/:id/checkin">
+								<Link to={`/${id}/checkin`}>
 									<Icon type="key" />
 									<span className="nav-text">会议签到</span>
 								</Link>
 							</Menu.Item>
 							<Menu.Item key="7">
-								<Link to="/:id/setting">
+								<Link to={`/${id}/setting`}>
 									<Icon type="setting" />
 									<span className="nav-text">会议设置</span>
 								</Link>
 							</Menu.Item>
 							<Menu.Item key="8">
-								<Link to="/:id/support">
+								<Link to={`/${id}/support`}>
 									<Icon type="smile" />
 									<span className="nav-text">会议后勤</span>
 								</Link>
 							</Menu.Item>
 							<Menu.Item key="9">
-								<Link to="/:id/notice">
+								<Link to={`/${id}/notice`}>
 									<Icon type="notification" />
 									<span className="nav-text">会议通知</span>
+								</Link>
+							</Menu.Item>
+							<Menu.Item key="10">
+								<Link to={`/meeting-list`}>
+									<Icon type="rollback" />
+									<span className="nav-text">返回首页</span>
 								</Link>
 							</Menu.Item>
 						</Menu>
@@ -84,7 +90,6 @@ export default class SiderBar extends Component {
 						</Menu>
 					)
 				}
-				
 			</Sider>
 		)
 	}

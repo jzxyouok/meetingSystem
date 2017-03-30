@@ -19,12 +19,13 @@ export default class RegisterForm extends Component {
 		}
 		return (
 			<div className="register-form">
+				<p className="title">报名表单</p>
 				<Row>
-					<Col {...row_item_layout} offset={4}>添加表单固有项</Col>
+					<Col {...row_item_layout} className="options" offset={4}>添加表单固有项</Col>
 				</Row>
 				<CustomOptions />
 				<Row>
-					<Col {...row_item_layout} offset={4}>添加表单自定义项</Col>
+					<Col {...row_item_layout} className="options" offset={4}>添加表单自定义项</Col>
 				</Row>
 				<AddCustomize />
 				<CustomizeOptions />

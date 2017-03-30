@@ -1,20 +1,25 @@
-import React, { Component } from 'react';
 import { Form, Input, DatePicker, Cascader, Upload, Button, Icon, message } from 'antd';
-import fetch from 'isomorphic-fetch';
-import { connect } from 'react-redux';
-import moment from 'moment';
+
+import React, { Component } from 'react';
+import fetch 				from 'isomorphic-fetch';
+import { connect } 			from 'react-redux';
+import moment 				from 'moment';
+
+import options 				from '../../Resource/util/cascader-address-options';
+import { 
+	mapStateToProps, 
+	mapDispatchToProps 
+} 							from './meeting-info.conn';
+import store 				from '../../Redux/Store/store';
+import { serialize } 		from '../../Resource/util/utils';
+import { updateMeetingBase } 	from '../../Config/apiUrl';
+import { init_form } 		from '../../Redux/Action/create-meeting.action';
 
 import '../../Style/create-meeting.scss';
-import options from '../../Resource/util/cascader-address-options';
-import { mapStateToProps, mapDispatchToProps } from './index.conn';
-import store from '../../Redux/Store/store';
-import { serialize } from '../../Resource/util/utils';
-import { newActUrl } from '../../Config/apiUrl';
-import { init_form } from '../../Redux/Action/create-meeting.action';
+
 
 const FormItem = Form.Item;
 const RangePicker = DatePicker.RangePicker;
-
 
 const createUrl = (fileObj) => window.URL.createObjectURL(fileObj);
 class CreateMeeting extends Component {
@@ -23,14 +28,15 @@ class CreateMeeting extends Component {
 		submit_isFetching: false,
 		save_isFetching: false
 	}
-	getFormDate = (code) => {
+	getFormDate = (code, id) => {
 		const state = store.getState().get('create_meeting').toJS();
 		let form_data = serialize(state);
 		form_data.append('state', code);
+		form_data.append('id', id);
 		return form_data;
 	}
 	handleFetch = (data) => {
-		fetch(newActUrl, {
+		fetch(updateMeetingBase, {
 			method: 'post',
 			body: data
 		})
@@ -40,7 +46,7 @@ class CreateMeeting extends Component {
 				message.success(res.message);
 				setTimeout(function(){
 					location.href = './#/meeting-list';
-				}, 2000);
+				}, 3000);
 			} else {
 				message.warn(res.message);
 			}
@@ -50,9 +56,10 @@ class CreateMeeting extends Component {
 		});
 	}
 	handleSave = () => {
+		const _this = this;
 		this.props.form.validateFieldsAndScroll((err, values) => {
 			if(!err && !this.state.save_isFetching){
-				const form_data = this.getFormDate(0);
+				const form_data = this.getFormDate(0, this.props.id);
 				this.setState({
 					save_isFetching: true
 				});
@@ -64,7 +71,7 @@ class CreateMeeting extends Component {
 		e.preventDefault();
 		this.props.form.validateFieldsAndScroll((err, values) => {
 			if(!err && !this.state.submit_isFetching) {
-				const form_data = this.getFormDate(1);
+				const form_data = this.getFormDate(1, this.props.id);
 				this.setState({
 					submit_isFetching: true
 				});
@@ -77,6 +84,11 @@ class CreateMeeting extends Component {
 	    	return e;
 	    }
 	    return e && e.fileList;
+  	}
+  	componentWillReceiveProps(nextProps) {
+  		this.setState({
+  			img_url: nextProps.init_state.image
+  		})
   	}
 	render() {
 		// 表单控件布局
@@ -275,6 +287,30 @@ export default connect(
 				default:
 					break;
 			}
+		}
+	},
+	mapPropsToFields: (props) => {
+		let { 
+			title, 
+			reg_time = ' ~ ', 
+			meeting_time = ' ~ ', 
+			address = ',,', 
+			detail_address, 
+			official,
+			category,
+			details,
+			image
+		} = props;
+
+		return { 
+			title: { value: title },
+			reg_time: { value: reg_time.split(' ~ ').map(x => moment(x)) },
+			meeting_time: { value: meeting_time.split(' ~ ').map(x => moment(x)) },
+			address: { value: address.split(',') },
+			detail_address: { value: detail_address },
+			official: { value: official },
+			act_type: { value: category },
+			details: { value: details }
 		}
 	}
 })(CreateMeeting));

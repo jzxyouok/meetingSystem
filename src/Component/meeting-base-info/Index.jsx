@@ -3,9 +3,9 @@ import { connect } 				from 'react-redux';
 import fetch 					from 'isomorphic-fetch';
 import { message } 				from 'antd';
 
-import CreateMeeting 			from '../create-meeting/Index';
+import CreateMeeting 			from './meeting-info';
 import { getMeetingBase } 		from '../../Config/apiUrl';
-import { init_form } 			from '../../Redux/Action/create-meeting.action';
+import * as actions 			from '../../Redux/Action/meeting-base-info.action';
 
 class BaseInfo extends Component {
 	componentDidMount() {
@@ -28,7 +28,16 @@ const mapDispatchToProps = (dispatch) => ({
 			.then(res => res.json())
 			.then(res => {
 				if(res.code === 1) {
-					dispatch( init_form(res.message) );
+					dispatch( actions.init_form(res.message) );
+					dispatch( actions.update_title(res.message.title) );
+					dispatch( actions.update_reg_time(res.message.reg_time) );
+					dispatch( actions.update_meeting_time(res.message.meeting_time) );
+					dispatch( actions.update_address(res.message.address) );
+					dispatch( actions.update_detail_address(res.message.detail_address) );
+					dispatch( actions.update_official(res.message.official) );
+					dispatch( actions.update_type(res.message.category) );
+					dispatch( actions.update_details(res.message.details) );
+					// dispatch( actions.update_state(res.message.state) );
 				} else {
 					message.warn(res.message);
 				}
