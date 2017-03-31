@@ -60,3 +60,13 @@ export const customize = (state = fromJS([]), action) => {
 			return state;
 	}
 }
+
+// 表单常用选项
+export const custom = (state=[], action) => {
+	switch(action.type) {
+		case 'add_custom_option':
+			return [...state, action.value];
+		default:
+			return state;
+	}
+}

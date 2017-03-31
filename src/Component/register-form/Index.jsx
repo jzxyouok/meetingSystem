@@ -4,6 +4,7 @@ import { Row, Col, Button, Icon } 	from 'antd';
 import CustomOptions 				from './custom-options';
 import AddCustomize 				from './add-item-operator';
 import CustomizeOptions 			from './customize-options';
+import FormHandler 					from './form-handler';
 
 import '../../Style/register-form.scss';
 
@@ -29,6 +30,7 @@ export default class RegisterForm extends Component {
 				</Row>
 				<AddCustomize />
 				<CustomizeOptions />
+				<FormHandler />
 			</div>
 		)
 	}

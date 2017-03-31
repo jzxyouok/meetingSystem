@@ -1,3 +1,9 @@
+// 添加会议常用项
+export const update_custom_option = (value) => ({
+	type: 'update_custom_option',
+	value
+});
+
 // 添加单选
 export const add_single_choice = (index = 0, title = '', options = [], name = `radio-${Date.now()}`, option_type = 'radio') => ({
 	type: 'add_single_choice',
