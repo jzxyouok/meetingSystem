@@ -10,7 +10,7 @@ import {
 import CustomizeItemHandler 	from './customize-item-handler';
 
 const CustomizeOptions = (props) => {
-
+	console.log(props.customize_options);
 	const options_len = props.customize_options.length;
 	const options = props.customize_options.map((item, index) => {
 		switch(item.option_type) {
@@ -22,7 +22,8 @@ const CustomizeOptions = (props) => {
 						<Col span={20}>
 							<Input 
 								value={item.title} 
-								data-index={item.index} 
+								data-index={item.index}
+								placeholder="请输入本题题目"
 								onChange={(e) => {
 									const index   = e.target.dataset.index,
 										  title   = e.target.value;
@@ -38,6 +39,7 @@ const CustomizeOptions = (props) => {
 										data-index={item.index} 
 										className="muti-options"
 										value={item.options.join('@')}
+										placeholder="请输入本题选项，选项之间请用'@'符号间隔"
 										onChange={(e) => {
 											const index   = e.target.dataset.index,
 												  options = e.target.value.split('@');
@@ -60,6 +62,7 @@ const CustomizeOptions = (props) => {
 							<Input 
 								value={item.title} 
 								data-index={item.index}
+								placeholder="请输入本题题目"
 								onChange={(e) => {
 									const index   = e.target.dataset.index,
 										  title   = e.target.value;
