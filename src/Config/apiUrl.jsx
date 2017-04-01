@@ -5,7 +5,7 @@ export const submitFormUrl = 'http://www.cfdq.midea.com/meeting/index.php/meetin
 export const getRegisterForm = 'http://www.cfdq.midea.com/meeting/index.php/meetingadmin/form/viewForm';
 
 // 更新报名表单接口
-export const updateRegisterForm = 'http://www.cfdq.midea.com/meeting/index.php/meetingadmin/form/updateForm';
+// export const updateRegisterForm = 'http://www.cfdq.midea.com/meeting/index.php/meetingadmin/form/updateForm';
 
 // 添加会议接口
 export const newActUrl = 'http://www.cfdq.midea.com/meeting/index.php/meetingadmin/meetings/add';

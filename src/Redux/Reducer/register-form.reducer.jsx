@@ -64,8 +64,8 @@ export const customize = (state = fromJS([]), action) => {
 // 表单常用选项
 export const custom = (state=[], action) => {
 	switch(action.type) {
-		case 'add_custom_option':
-			return [...state, action.value];
+		case 'update_custom_option':
+			return action.value;
 		default:
 			return state;
 	}

@@ -10,11 +10,12 @@ import '../../Style/register-form.scss';
 
 export default class RegisterForm extends Component {
 	render() {
-		let row_label_layout = {
+		const id = this.props.params.id;
+		const row_label_layout = {
 			xs: { span: 24 },
 			sm: { span: 4 }
 		};
-		let row_item_layout = {
+		const row_item_layout = {
 			xs: { span: 24 },
 			sm: { span: 16 }
 		}
@@ -30,7 +31,7 @@ export default class RegisterForm extends Component {
 				</Row>
 				<AddCustomize />
 				<CustomizeOptions />
-				<FormHandler />
+				<FormHandler id={id} />
 			</div>
 		)
 	}

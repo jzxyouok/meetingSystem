@@ -36,12 +36,11 @@ const select_children = options.map(item => (
 class CustomOption extends Component {
 	handleChange = (value) => {
 		const custom_options = value.map(item => opts[item]);
-		console.log(custom_options);
 		this.props.update_custom_options(custom_options);
 	}
 
 	render() {
-		console.log(this.props);
+		console.log(this.props.opts);
 		return (
 			<Item desc="表单常用项">
 				<Select 

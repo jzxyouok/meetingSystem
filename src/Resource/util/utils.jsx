@@ -44,3 +44,15 @@ export const subject_type = (subject) => {
 			return '错误类型';
 	}
 }
+
+// fetch post 方法， 返回promise对象
+export const post_data = (url, data) => {
+	return fetch(url, {
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+		method: 'post',
+		body: data
+	})
+	.then(res => res.json())
+}

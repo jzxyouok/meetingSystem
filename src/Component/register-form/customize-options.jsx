@@ -10,7 +10,6 @@ import {
 import CustomizeItemHandler 	from './customize-item-handler';
 
 const CustomizeOptions = (props) => {
-	console.log(props.customize_options);
 	const options_len = props.customize_options.length;
 	const options = props.customize_options.map((item, index) => {
 		switch(item.option_type) {
