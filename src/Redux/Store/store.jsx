@@ -14,16 +14,21 @@ import * as registerFormReducer from '../Reducer/register-form.reducer';
 // 会议基本信息
 import * as meetingBaseInfoReducer from '../Reducer/meeting-base-info.reducer';
 
+// 参会人员
+import * as attendeeReducer from '../Reducer/attendee.reducer';
+
 
 const register_form_reducer = combineReducers(registerFormReducer);
 const create_meeting_reduer = combineReducers(createMeetingReducer);
 const base_info_reducer = combineReducers(meetingBaseInfoReducer);
+const attendee_reducer = combineReducers(attendeeReducer);
 
 const reducers = combineReducers({
 	meeting_list: meeting_list_reducer,
 	create_meeting: create_meeting_reduer,
 	register_form: register_form_reducer,
-	base_info: base_info_reducer
+	base_info: base_info_reducer,
+	attendee: attendee_reducer
 });
 
 const store = createStore(

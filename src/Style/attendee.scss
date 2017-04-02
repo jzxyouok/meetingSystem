@@ -16,11 +16,13 @@
 	.output {
 		text-align: right;
 		padding-right: 40px;
+		button {
+			margin-left: 8px;
+		}
 	}
 	.condition {
 		.ant-col-2 {
 			line-height: 28px;
-			text-align: center;
 		}
 	}
 }

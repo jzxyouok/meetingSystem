@@ -5,7 +5,7 @@ import { connect } 		from 'react-redux';
 const FormState = ({status}) => (
 	<Col offset={4}>
 		{
-			status === 0 ? <Tag color="#f50">本会议未发布</Tag> : <Tag color="#87d068">本会议已发布</Tag>
+			status === 0 ? <Tag color="#f50">本报名表未发布</Tag> : <Tag color="#87d068">本报名表已发布</Tag>
 		}
 	</Col>
 );
