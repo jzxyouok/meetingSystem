@@ -101,3 +101,9 @@ export const move_down_option = (index) => ({
 	type: 'move_down_option',
 	index
 });
+
+// 更新报名表单的发布和草稿状态
+export const update_form_state = (status) => ({
+	type: 'update_form_state',
+	status
+});

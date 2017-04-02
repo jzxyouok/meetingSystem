@@ -40,13 +40,14 @@ class CustomOption extends Component {
 	}
 
 	render() {
-		console.log(this.props.opts);
+		const selectValue = this.props.opts.map(item => item.name);
 		return (
 			<Item desc="表单常用项">
 				<Select 
 					multiple
 					style={{width: '100%'}}
 					placeholder="请选择本次表单的常用项"
+					value={selectValue}
 					onChange={this.handleChange}
 				>
 					{select_children}

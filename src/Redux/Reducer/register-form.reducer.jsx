@@ -70,3 +70,15 @@ export const custom = (state=[], action) => {
 			return state;
 	}
 }
+
+// 表单状态
+// 0 => 未发布
+// 1 => 已发布
+export const status = (state = 0, action) => {
+	switch(action.type) {
+		case 'update_form_state':
+			return action.status;
+		default:
+			return state;
+	}
+}
