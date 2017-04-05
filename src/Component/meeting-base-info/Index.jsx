@@ -37,7 +37,7 @@ const mapDispatchToProps = (dispatch) => ({
 					dispatch( actions.update_official(res.message.official) );
 					dispatch( actions.update_type(res.message.category) );
 					dispatch( actions.update_details(res.message.details) );
-					// dispatch( actions.update_state(res.message.state) );
+					dispatch( actions.update_poster(res.message.image) );
 				} else {
 					message.warn(res.message);
 				}

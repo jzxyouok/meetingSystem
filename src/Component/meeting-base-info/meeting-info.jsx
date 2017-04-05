@@ -91,6 +91,7 @@ class CreateMeeting extends Component {
   		})
   	}
 	render() {
+		console.log(this.props);
 		// 表单控件布局
 		const formItemLayout = {
 			labelCol: {
@@ -204,6 +205,7 @@ class CreateMeeting extends Component {
 							this.setState({
 								img_url: createUrl(field)
 							});
+							this.props.init_form(Object.assign({}, this.props.init_state, {image: createUrl(field)}));
 							return false;
 						}}>
 							<Button>
