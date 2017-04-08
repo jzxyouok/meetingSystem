@@ -21,3 +21,9 @@ export const unshift_checkin = (item) => ({
 	type: 'unshift_checkin',
 	item
 });
+
+// 要删除条目的oid
+export const del_oid = (oid) => ({
+	type: 'del_oid',
+	oid
+});

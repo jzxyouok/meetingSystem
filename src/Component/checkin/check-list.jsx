@@ -5,7 +5,7 @@ import { connect } 				from 'react-redux';
 import fetch 					from 'isomorphic-fetch';
 import WrappedNewCheckinForm 	from './add-check-form';
 import * as AC 					from '../../Redux/Action/checkin.action';
-import { addCheckin, getCheckin }
+import { addCheckin, getCheckin, delCheckin }
 					 			from '../../Config/apiUrl';
 
 const mock_url = 'http://www.cfdq.midea.com/wxserv/comm/image/qrcode/sv_10001_1490176856.jpg';
@@ -100,7 +100,17 @@ class CheckinList extends Component {
 	
 	// 删除项目
 	delItem = () => {
-
+		console.log(JSON.stringify(this.props.delOids));
+		fetch(delCheckin, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			body: `sid=${this.props.id}&oid=${JSON.stringify(this.props.delOids)}`
+		})
+		.then(res => res.json())
+		.then(res => console.log(res))
+		.catch(err => console.error(err));
 	}
 
 	render() {
@@ -116,7 +126,12 @@ class CheckinList extends Component {
 			obj.expire_time = expire_time
 			return obj;
 		})
-		const rowSelection = {};
+		const rowSelection = {
+			onChange: (selectedRowKeys, selectedRows) => {
+				const oid = selectedRows.map(item => item.key);
+				this.props.del_oid(oid);
+			}
+		};
 		return (
 			<div className="checkin">
 				<div className="check_list">
@@ -130,9 +145,9 @@ class CheckinList extends Component {
 							<Icon type="delete" />
 						</Button>
 						<Modal 
-							title="新建会议签到"
-							visible={this.state.visible}
-							onOk={this.handleSubmit}
+							title 	="新建会议签到"
+							visible ={this.state.visible}
+							onOk 	={this.handleSubmit}
 							onCancel={this.handleCancel}
 						>
 							<WrappedNewCheckinForm />
@@ -140,12 +155,12 @@ class CheckinList extends Component {
 					</Row>
 					<Row>
 						<Table 
-							columns={columns}
-							dataSource={data}
+							columns 	={columns}
+							dataSource 	={data}
 							rowSelection={rowSelection}
+							pagination 	={{ pageSize: 5 }}
+							size 		="middle"
 							bordered
-							pagination={{ pageSize: 5 }}
-							size="middle"
 						/>
 					</Row>
 				</div>
@@ -157,11 +172,13 @@ class CheckinList extends Component {
 const mapStateToProps = (state) => ({
 	new_checkin_info: state.getIn(['checkin', 'new_checkin']).toJS(),
 	list: state.getIn(['checkin', 'checkin_list']).toJS(),
+	delOids: state.getIn(['checkin', 'del_oid']).toJS(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
 	set_checkin_list: (list) => dispatch( AC.checkin_list(list)),
 	insert_checkin: (item) => dispatch( AC.unshift_checkin(item) ),
+	del_oid: (oids) => dispatch( AC.del_oid(oids) ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckinList);

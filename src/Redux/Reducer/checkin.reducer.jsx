@@ -14,12 +14,22 @@ export const new_checkin = (state = Map({}), action) => {
 
 // 签到列表
 export const checkin_list = (state = List([]), action) => {
-	console.log(action);
 	switch(action.type) {
 		case 'checkin_list':
 			return List(action.list);
 		case 'unshift_checkin':
 			return state.unshift(action.item);
+		default:
+			return state;
+	}
+}
+
+// 需要删除的oid
+export const del_oid = (state = List([]), action) => {
+	console.log(action);
+	switch(action.type) {
+		case 'del_oid':
+			return List(action.oid);
 		default:
 			return state;
 	}

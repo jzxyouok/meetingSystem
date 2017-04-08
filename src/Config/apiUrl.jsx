@@ -33,3 +33,6 @@ export const addCheckin = 'http://www.cfdq.midea.com/meeting/index.php/meetingad
 
 // 获取签到列表
 export const getCheckin = 'http://www.cfdq.midea.com/meeting/index.php/Meetingadmin/signin/signlist';
+
+// 删除签到列表接口
+export const delCheckin = 'http://www.cfdq.midea.com/meeting/index.php/Meetingadmin/signin/deletesign';
