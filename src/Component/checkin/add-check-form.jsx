@@ -1,5 +1,8 @@
 import React, { Component } 			from 'react';
 import { Form, DatePicker, Input } 		from 'antd';
+import { connect } 						from 'react-redux';
+
+import * as AC 							from '../../Redux/Action/checkin.action';
 
 const FormItem = Form.Item;
 
@@ -32,12 +35,36 @@ class NewCheckinForm extends Component {
 							style={{width: '100%'}} 
 							showTime 
 							format="YYYY-MM-DD HH:mm" 
-						s/>
+						/>
 					)}
 				</FormItem>
 			</Form>
 		)
 	}
 }
+const mapStateToProps = (state) => ({})
+const mapDispatchToProps = (dispatch) => ({
+	cName: (v) => dispatch( AC.new_checkin_name(v) ),
+	cEndTime: (t) => dispatch( AC.new_checkin_end_time(t) )
+});
 
-export default Form.create()(NewCheckinForm);
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create({
+	onFieldsChange: (props, fields) => {
+		const fieldName = Object.keys(fields)[0];
+		switch(fieldName) {
+			case 'check_name':
+				props.cName(fields[fieldName].value);
+				break;
+			case 'end_time':
+				props.cEndTime(fields[fieldName].value.format('YYYY-MM-DD HH:mm:ss'));
+				break;
+			default:
+				break;
+		}
+	}
+})(NewCheckinForm));
+
+
+
+
+

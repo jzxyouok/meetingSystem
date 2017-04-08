@@ -11,7 +11,7 @@ export default class Checkin extends Component {
 	render() {
 		return (
 			<div className="checkin">
-				<CheckinList />
+				<CheckinList id={this.props.params.id} />
 				<CheckDetail />
 			</div>
 		)

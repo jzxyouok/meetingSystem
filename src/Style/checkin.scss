@@ -3,6 +3,12 @@
 	width: 96%;
 	margin: 10px auto;
 	padding: 20px 20px 40px;
+
+	.check_list {
+		button {
+			margin-right: 8px;
+		}
+	}
 	.ant-row {
 		margin-bottom: 8px;
 	}

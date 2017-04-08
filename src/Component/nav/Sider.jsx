@@ -49,13 +49,13 @@ export default class SiderBar extends Component {
 							<Menu.Item key="7">
 								<Link to={`/${id}/setting`}>
 									<Icon type="setting" />
-									<span className="nav-text">会议设置</span>
+									<span className="nav-text">会议后勤</span>
 								</Link>
 							</Menu.Item>
 							<Menu.Item key="8">
 								<Link to={`/${id}/support`}>
 									<Icon type="smile" />
-									<span className="nav-text">会议后勤</span>
+									<span className="nav-text">会议设置</span>
 								</Link>
 							</Menu.Item>
 							<Menu.Item key="9">

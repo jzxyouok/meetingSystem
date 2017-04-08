@@ -27,3 +27,9 @@ export const getAttendeeTable = 'http://www.cfdq.midea.com/meeting/mock/getAtten
 
 // 获取省市县接口
 export const getAddress = 'http://www.cfdq.midea.com/wechat/res/php/getCity.php';
+
+// 添加签到接口
+export const addCheckin = 'http://www.cfdq.midea.com/meeting/index.php/meetingadmin/signin/add';
+
+// 获取签到列表
+export const getCheckin = 'http://www.cfdq.midea.com/meeting/index.php/Meetingadmin/signin/signlist';
