@@ -51,3 +51,9 @@ export const total_num = (num) => ({
 	type: 'total_num',
 	num,
 });
+
+// 编辑签到人员
+export const edit_person = (person) => ({
+	type: 'edit_person',
+	person
+});

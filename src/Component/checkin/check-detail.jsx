@@ -1,12 +1,13 @@
 import React, {Component} 		from 'react';
-import { Row, Col, Table, Select, Icon, Button, message, Input } 
+import { Row, Col, Table, Select, Icon, Button, message, Input, Modal, Radio } 
 								from 'antd';
 import { connect } 				from 'react-redux';
 import { getCheckinDetails } 	from '../../Config/apiUrl';
 import * as AC 					from '../../Redux/Action/checkin.action';
 
 
-const Option = Select.Option;
+const Option = Select.Option,
+	  RadioGroup = Radio.Group;
 
 class CheckDetail extends Component{
 	// 组件状态
@@ -14,6 +15,8 @@ class CheckDetail extends Component{
 		phoneFilter: '',
 		filtered: false,
 		filterDropdownVisible: false,
+		editVisible: false,
+		editPersonCheckin: 0,
 	}
 
 	// 电话号码改变时改变状态
@@ -42,6 +45,34 @@ class CheckDetail extends Component{
 	// 返回签到列表
 	reList = () => {
 		this.props.toggleShow();
+	}
+
+	// 编辑用户的签到状态
+	itemEdit = (key) => {
+		const editPerson = this.props.details.filter(item => item.openid === key);
+		this.props.editPerson(editPerson[0]);
+		this.setState({
+			editVisible: true
+		})
+	}
+
+	// 关闭编辑用户的模态框
+	closeEdit = () => {
+		this.setState({
+			editVisible: false,
+		})
+	}
+
+	// 改变正在编辑用户的签到状态
+	changeEditPersonCheckin = (e) => {
+		this.setState({
+			editPersonCheckin: e.target.value
+		})
+	}
+
+	// 短信通知给指定的人
+	notification = () => {
+
 	}
 
 	render() {
@@ -86,6 +117,16 @@ class CheckDetail extends Component{
 				title: '签到时间', 
 				dataIndex: 'time', 
 				key: 'time'
+			},{
+				title: '操作', 
+				dataIndex: 'handle', 
+				key: 'handle',
+				render: (text, record) => (
+					<div className="handler">
+						<Icon data-openid={record.key} type="edit" onClick={this.itemEdit.bind(this, record.key)} />
+						<Icon data-openid={record.key} type="notification" onClick={this.notification.bind(this, record.key)} />
+					</div>
+				)
 			}
 		];
 		const check_data = this.props.filterDetails.map(item => ({
@@ -96,8 +137,31 @@ class CheckDetail extends Component{
 			time: item.load_time
 		}));
 
+		const { username, phone, status } = this.props.editPersonInfo;
+		const edit_username = username ? username : '';
+		const edit_phone    = phone ? phone : '';
+		
 		return (
 			<div className="check_detail">
+				<Modal className="edit-modal" title="编辑" visible={this.state.editVisible} onCancel={this.closeEdit}>
+					<Row>
+						<Col span={4}>姓名</Col>
+						<Col span={20}><Input value={edit_username} disabled={true} /></Col>
+					</Row>
+					<Row>
+						<Col span={4}>手机号</Col>
+						<Col span={20}><Input value={edit_phone} disabled={true} /></Col>
+					</Row>
+					<Row>
+						<Col span={4}>签到状态</Col>
+						<Col span={20} className="checkin-status">
+							<RadioGroup value={this.state.editPersonCheckin} onChange={this.changeEditPersonCheckin}>
+								<Radio value={0}>未签到</Radio>
+								<Radio value={1}>已签到</Radio>
+							</RadioGroup>
+						</Col>
+					</Row>
+				</Modal>
 				<Row>
 					<h2 className="check_detail_title">EDP人员信息</h2>
 					<Col span={4} className="total-num">总人数: {this.props.checkNum}</Col>
@@ -121,7 +185,8 @@ const mapStateToProps = (state) => ({
 	details: state.getIn(['checkin', 'checkin_details']).toJS(),
 	filterDetails: state.getIn(['checkin', 'filter_checkin_details']).toJS(),
 	showOid: state.getIn(['checkin', 'show_oid']),
-	checkNum: state.getIn(['checkin', 'checkin_num'])
+	checkNum: state.getIn(['checkin', 'checkin_num']),
+	editPersonInfo: state.getIn(['checkin', 'edit_person']),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -139,7 +204,8 @@ const mapDispatchToProps = (dispatch) => ({
 		})
 		.catch(err => message.error('网络错误，请稍后重试或联系管理员处理'));
 	}),
-	handleFilterDetails: (v) => dispatch( AC.filter_checkin_details(v) )
+	handleFilterDetails: (v) => dispatch( AC.filter_checkin_details(v) ),
+	editPerson: (p) => dispatch( AC.edit_person(p) ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckDetail);

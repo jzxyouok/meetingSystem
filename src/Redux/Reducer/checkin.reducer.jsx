@@ -73,3 +73,13 @@ export const checkin_num = (state = 0, action) => {
 			return state;
 	}
 }
+
+// 编辑签到人员
+export const edit_person = (state = {}, action) => {
+	switch(action.type) {
+		case 'edit_person':
+			return action.person;
+		default:
+			return state;
+	}
+}
