@@ -32,7 +32,7 @@ const CheckDetail = () => (
 					<Option value="2">未签到</Option>
 				</Select>
 			</Col>						
-			<Col span={4}>
+			<Col span={20}>
 				<Button type="primary" className="search">查询 <Icon type="search" /></Button>
 				<a href="javascript:;" className="ant-btn ant-btn-default">返回签到列表 <Icon type="rollback" /></a>
 			</Col>				

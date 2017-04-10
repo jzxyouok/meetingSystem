@@ -26,7 +26,6 @@ export const checkin_list = (state = List([]), action) => {
 
 // 需要删除的oid
 export const del_oid = (state = List([]), action) => {
-	console.log(action);
 	switch(action.type) {
 		case 'del_oid':
 			return List(action.oid);

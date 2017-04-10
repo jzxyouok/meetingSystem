@@ -1,5 +1,5 @@
 import React, { Component } 	from 'react';
-import { Row, Col, Modal, Table, Button, Icon, message } 
+import { Row, Col, Modal, Table, Button, Icon, message, Popconfirm } 
 								from 'antd';
 import { connect } 				from 'react-redux';
 import fetch 					from 'isomorphic-fetch';
@@ -7,9 +7,6 @@ import WrappedNewCheckinForm 	from './add-check-form';
 import * as AC 					from '../../Redux/Action/checkin.action';
 import { addCheckin, getCheckin, delCheckin }
 					 			from '../../Config/apiUrl';
-
-const mock_url = 'http://www.cfdq.midea.com/wxserv/comm/image/qrcode/sv_10001_1490176856.jpg';
-const mock_name = 'EDP第一日上午签到';
 
 const columns = [
 	{title: '序号', dataIndex: 'oid', key: 'oid'},
@@ -19,19 +16,11 @@ const columns = [
 	{title: '创建时间', dataIndex: 'load_time', key: 'load_time'},
 ];
 
-const data = [{
-	key: '1', 
-	oid: '1', 
-	name: mock_name, 
-	QRcode_url: <img src={mock_url} style={{width: '30px'}} />, 
-	expire_time: '2017-03-29 18:00', 
-	load_time: '2017-03-29 18:00'
-}];
-
-
 class CheckinList extends Component {
 	state = {
-		visible: false
+		visible: false,
+		qrcodeVisible: false,
+		qrcodeUrl: ''
 	}
 	componentDidMount() {
 		fetch(`${getCheckin}?action_id=${this.props.id}`)
@@ -100,7 +89,10 @@ class CheckinList extends Component {
 	
 	// 删除项目
 	delItem = () => {
-		console.log(JSON.stringify(this.props.delOids));
+		if(this.props.delOids.length === 0) {
+			message.warn('请选择需要删除的签到项');
+			return;
+		}
 		fetch(delCheckin, {
 			method: 'POST',
 			headers: {
@@ -109,8 +101,45 @@ class CheckinList extends Component {
 			body: `sid=${this.props.id}&oid=${JSON.stringify(this.props.delOids)}`
 		})
 		.then(res => res.json())
-		.then(res => console.log(res))
+		.then(res => {
+			if(res.code === 1) {
+				this.props.set_checkin_list(res.message);
+			} else {
+				message.warn('删除失败');
+			}
+		})
 		.catch(err => console.error(err));
+	}
+
+	// 展示二维码模态框
+	showQRCode = (e) => {
+		this.setState({
+			qrcodeUrl: e.target.src,
+			qrcodeVisible: true
+		});
+	}
+
+	// 关闭二维码模态框
+	closeQRCode = (e) => {
+		this.setState({
+			qrcodeVisible: false
+		})
+	}
+
+	// 下载二维码
+	downloadQRCode = () => {
+		const oA = document.createElement('a');
+		oA.href = this.state.qrcodeUrl;
+		oA.download = 'qr_code.jpg';
+		oA.style.display = 'none';
+		document.body.appendChild(oA);
+		oA.addEventListener('click', () => console.log('downloading...'));
+		// 模拟点击事件
+		oA.click();
+		// 关闭模态框
+		this.setState({
+			qrcodeVisible: false
+		});
 	}
 
 	render() {
@@ -121,7 +150,7 @@ class CheckinList extends Component {
 			obj.key = oid;
 			obj.name = name;
 			obj.oid = index+1;
-			obj.QRcode_url = <img src={`http://www.cfdq.midea.com/meeting/Uploads/qrcode/${qrcode_url}`} style={{width: '30px'}} />, 
+			obj.QRcode_url = <img onClick={this.showQRCode} src={`http://www.cfdq.midea.com/meeting/Uploads/qrcode/${qrcode_url}`} style={{width: '30px'}} />, 
 			obj.load_time = load_time,
 			obj.expire_time = expire_time
 			return obj;
@@ -134,16 +163,32 @@ class CheckinList extends Component {
 		};
 		return (
 			<div className="checkin">
+				<Modal
+					visible={this.state.qrcodeVisible}
+					title="二维码详情"
+					okText="点击下载"
+					onOk={this.downloadQRCode}
+					onCancel={this.closeQRCode}>
+					<div className="qrcode-img">
+						<img src={this.state.qrcodeUrl} alt="二维码"/>
+					</div>
+				</Modal>
 				<div className="check_list">
 					<Row>
 						<Button type="primary" onClick={this.showModal}>
 							新建签到
 							<Icon type="plus-circle-o" />
 						</Button>
-						<Button type="primary" onClick={this.delItem}>
-							删除
-							<Icon type="delete" />
-						</Button>
+						<Popconfirm 
+							title="确定要删除这些签到项吗"
+							onConfirm={this.delItem}
+							okText='确定'
+							cancelText='取消' >
+							<Button type="primary">
+								删除
+								<Icon type="delete" />
+							</Button>
+						</Popconfirm>
 						<Modal 
 							title 	="新建会议签到"
 							visible ={this.state.visible}
