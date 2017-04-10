@@ -63,3 +63,13 @@ export const show_oid = (state = '', action) => {
 			return state;
 	}
 }
+
+// 本次签到总人数
+export const checkin_num = (state = 0, action) => {
+	switch(action.type) {
+		case 'total_num':
+			return action.num;
+		default:
+			return state;
+	}
+}

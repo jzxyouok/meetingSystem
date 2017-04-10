@@ -100,7 +100,7 @@ class CheckDetail extends Component{
 			<div className="check_detail">
 				<Row>
 					<h2 className="check_detail_title">EDP人员信息</h2>
-					<Col span={4} className="total-num">总人数: 100</Col>
+					<Col span={4} className="total-num">总人数: {this.props.checkNum}</Col>
 					<Col span={20} className="re-list">
 						<a href="javascript:;" onClick={this.reList} className="ant-btn ant-btn-default">返回签到列表 <Icon type="rollback" /></a>
 					</Col>
@@ -121,6 +121,7 @@ const mapStateToProps = (state) => ({
 	details: state.getIn(['checkin', 'checkin_details']).toJS(),
 	filterDetails: state.getIn(['checkin', 'filter_checkin_details']).toJS(),
 	showOid: state.getIn(['checkin', 'show_oid']),
+	checkNum: state.getIn(['checkin', 'checkin_num'])
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -131,6 +132,7 @@ const mapDispatchToProps = (dispatch) => ({
 			if(res.code === 1) {
 				dispatch( AC.checkin_details(res.message.data) );
 				dispatch( AC.filter_checkin_details(res.message.data) );
+				dispatch( AC.total_num(res.message.count) );
 			} else {
 				message.warn('目前没有签到数据');
 			}

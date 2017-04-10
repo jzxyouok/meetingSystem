@@ -45,3 +45,9 @@ export const show_oid = (oid) => ({
 	type: 'show_oid',
 	oid
 });
+
+// 本次签到总人数
+export const total_num = (num) => ({
+	type: 'total_num',
+	num,
+});
