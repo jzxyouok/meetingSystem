@@ -8,11 +8,22 @@ import '../../Style/checkin.scss';
 const Option = Select.Option;
 
 export default class Checkin extends Component {
+	state = {
+		isListShow: true,
+		isDetailsShow: false,
+	}
+	toggleShow = () => {
+		this.setState({
+			isListShow: !this.state.isListShow,
+			isDetailsShow: !this.state.isDetailsShow,
+		})
+	}
 	render() {
+		const {id} = this.props.params;
 		return (
 			<div className="checkin">
-				<CheckinList id={this.props.params.id} />
-				<CheckDetail />
+				{this.state.isListShow ? <CheckinList id={id} toggleShow={this.toggleShow} /> : ''}
+				{this.state.isDetailsShow ? <CheckDetail id={id} toggleShow={this.toggleShow} /> : ''}
 			</div>
 		)
 	}

@@ -4,6 +4,16 @@
 	margin: 10px auto;
 	padding: 20px 20px 40px;
 
+	.re-list {
+		text-align: right;
+		padding-right: 18px;
+	}
+
+	.total-num {
+		line-height: 28px;
+		padding-left: 18px;
+	}
+
 	.check_list {
 		button {
 			margin-right: 8px;

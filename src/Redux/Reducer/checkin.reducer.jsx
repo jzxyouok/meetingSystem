@@ -33,3 +33,23 @@ export const del_oid = (state = List([]), action) => {
 			return state;
 	}
 }
+
+// 单次会议签到的详细信息
+export const checkin_details = (state = List([]), action) => {
+	switch(action.type) {
+		case 'checkin_details':
+			return List(action.info);
+		default:
+			return state;
+	}
+}
+
+// 过滤之后的签到信息
+export const filter_checkin_details = (state = List([]), action) => {
+	switch(action.type) {
+		case 'filter_checkin_details':
+			return List(action.info);
+		default:
+			return state;
+	}
+}

@@ -27,3 +27,15 @@ export const del_oid = (oid) => ({
 	type: 'del_oid',
 	oid
 });
+
+// 签到的详细信息
+export const checkin_details = (info) => ({
+	type: 'checkin_details',
+	info
+});
+
+// 过滤之后的签到信息
+export const filter_checkin_details = (info) =>({
+	type: 'filter_checkin_details',
+	info
+});
