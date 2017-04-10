@@ -8,8 +8,6 @@ import * as AC 					from '../../Redux/Action/checkin.action';
 
 const Option = Select.Option;
 
-
-
 class CheckDetail extends Component{
 	// 组件状态
 	state = {
@@ -27,7 +25,7 @@ class CheckDetail extends Component{
 
 	// 组件加载完成去请求签到人员数据
 	componentDidMount() {
-		this.props.getDetails(this.props.id);
+		this.props.getDetails(this.props.id, this.props.showOid);
 	}
 	
 	// 按电话号码收索
@@ -39,6 +37,11 @@ class CheckDetail extends Component{
 		});
 		const filteredDetails = this.props.details.filter(item => item.phone.indexOf(phoneFilter) !== -1);
 		this.props.handleFilterDetails( filteredDetails );
+	}
+
+	// 返回签到列表
+	reList = () => {
+		this.props.toggleShow();
 	}
 
 	render() {
@@ -99,7 +102,7 @@ class CheckDetail extends Component{
 					<h2 className="check_detail_title">EDP人员信息</h2>
 					<Col span={4} className="total-num">总人数: 100</Col>
 					<Col span={20} className="re-list">
-						<a href="javascript:;" className="ant-btn ant-btn-default">返回签到列表 <Icon type="rollback" /></a>
+						<a href="javascript:;" onClick={this.reList} className="ant-btn ant-btn-default">返回签到列表 <Icon type="rollback" /></a>
 					</Col>
 				</Row>
 				<Row>
@@ -117,16 +120,17 @@ class CheckDetail extends Component{
 const mapStateToProps = (state) => ({
 	details: state.getIn(['checkin', 'checkin_details']).toJS(),
 	filterDetails: state.getIn(['checkin', 'filter_checkin_details']).toJS(),
+	showOid: state.getIn(['checkin', 'show_oid']),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	getDetails: (id) => dispatch(() => {
-		fetch(`${getCheckinDetails}?sid=${id}&qid=14`)
+	getDetails: (id, oid) => dispatch(() => {
+		fetch(`${getCheckinDetails}?sid=${id}&qid=${oid}`)
 		.then(res => res.json())
 		.then(res => {
 			if(res.code === 1) {
-				dispatch( AC.checkin_details(res.message) );
-				dispatch( AC.filter_checkin_details(res.message) );
+				dispatch( AC.checkin_details(res.message.data) );
+				dispatch( AC.filter_checkin_details(res.message.data) );
 			} else {
 				message.warn('目前没有签到数据');
 			}

@@ -39,3 +39,9 @@ export const filter_checkin_details = (info) =>({
 	type: 'filter_checkin_details',
 	info
 });
+
+// 当前显示签到详细信息的OID
+export const show_oid = (oid) => ({
+	type: 'show_oid',
+	oid
+});

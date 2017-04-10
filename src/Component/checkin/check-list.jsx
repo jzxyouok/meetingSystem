@@ -142,13 +142,19 @@ class CheckinList extends Component {
 		});
 	}
 
+	// 显示签到详情
+	showDetails = (e) => {
+		this.props.toggleShow();
+		this.props.change_show_oid(e.target.dataset.oid);
+	}
+
 	render() {
 		const checkin_list = this.props.list;
 		const data = checkin_list.map((item, index) => {
 			const { oid, qrcode_url, load_time, expire_time, name } = item;
 			let obj = {};
 			obj.key = oid;
-			obj.name = name;
+			obj.name = <a data-oid={oid} onClick={this.showDetails} href="javscript:;">{name}</a>;
 			obj.oid = index+1;
 			obj.QRcode_url = <img onClick={this.showQRCode} src={`http://www.cfdq.midea.com/meeting/Uploads/qrcode/${qrcode_url}`} style={{width: '30px'}} />, 
 			obj.load_time = load_time,
@@ -218,12 +224,14 @@ const mapStateToProps = (state) => ({
 	new_checkin_info: state.getIn(['checkin', 'new_checkin']).toJS(),
 	list: state.getIn(['checkin', 'checkin_list']).toJS(),
 	delOids: state.getIn(['checkin', 'del_oid']).toJS(),
+	showOid: state.getIn(['checkin', 'show_oid']),
 });
 
 const mapDispatchToProps = (dispatch) => ({
 	set_checkin_list: (list) => dispatch( AC.checkin_list(list)),
 	insert_checkin: (item) => dispatch( AC.unshift_checkin(item) ),
 	del_oid: (oids) => dispatch( AC.del_oid(oids) ),
+	change_show_oid: (oid) => dispatch( AC.show_oid(oid) ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckinList);

@@ -18,6 +18,11 @@ export default class Checkin extends Component {
 			isDetailsShow: !this.state.isDetailsShow,
 		})
 	}
+	changeQid = (qid) => {
+		this.setState({
+			qid,
+		})
+	}
 	render() {
 		const {id} = this.props.params;
 		return (

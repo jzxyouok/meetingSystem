@@ -53,3 +53,13 @@ export const filter_checkin_details = (state = List([]), action) => {
 			return state;
 	}
 }
+
+// 显示签到详细信息的OID
+export const show_oid = (state = '', action) => {
+	switch(action.type) {
+		case 'show_oid':
+			return action.oid;
+		default:
+			return state;
+	}
+}
