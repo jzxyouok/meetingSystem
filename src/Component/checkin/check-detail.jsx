@@ -5,7 +5,6 @@ import { connect } 				from 'react-redux';
 import { getCheckinDetails } 	from '../../Config/apiUrl';
 import * as AC 					from '../../Redux/Action/checkin.action';
 
-
 const Option = Select.Option,
 	  RadioGroup = Radio.Group;
 
@@ -28,7 +27,8 @@ class CheckDetail extends Component{
 
 	// 组件加载完成去请求签到人员数据
 	componentDidMount() {
-		this.props.getDetails(this.props.id, this.props.showOid);
+		const { id, qid } = this.props.params;
+		this.props.getDetails(id, qid);
 	}
 	
 	// 按电话号码收索
@@ -44,7 +44,7 @@ class CheckDetail extends Component{
 
 	// 返回签到列表
 	reList = () => {
-		this.props.toggleShow();
+		history.go(-1);
 	}
 
 	// 编辑用户的签到状态
@@ -64,10 +64,8 @@ class CheckDetail extends Component{
 	}
 
 	// 改变正在编辑用户的签到状态
-	changeEditPersonCheckin = (e) => {
-		this.setState({
-			editPersonCheckin: e.target.value
-		})
+	changeEditPersonCheckin = (openid) => {
+		this.props.changeCheckinStatus(openid);
 	}
 
 	// 短信通知给指定的人
@@ -137,9 +135,10 @@ class CheckDetail extends Component{
 			time: item.load_time
 		}));
 
-		const { username, phone, status } = this.props.editPersonInfo;
+		const { username, phone, status, openid } = this.props.editPersonInfo;
 		const edit_username = username ? username : '';
-		const edit_phone    = phone ? phone : '';
+		const edit_phone    = phone    ? phone : '';
+		const edit_status   = status   ? 1 : 0; 
 		
 		return (
 			<div className="check_detail">
@@ -155,7 +154,7 @@ class CheckDetail extends Component{
 					<Row>
 						<Col span={4}>签到状态</Col>
 						<Col span={20} className="checkin-status">
-							<RadioGroup value={this.state.editPersonCheckin} onChange={this.changeEditPersonCheckin}>
+							<RadioGroup value={edit_status} onChange={this.changeEditPersonCheckin.bind(this)}>
 								<Radio value={0}>未签到</Radio>
 								<Radio value={1}>已签到</Radio>
 							</RadioGroup>
@@ -206,6 +205,7 @@ const mapDispatchToProps = (dispatch) => ({
 	}),
 	handleFilterDetails: (v) => dispatch( AC.filter_checkin_details(v) ),
 	editPerson: (p) => dispatch( AC.edit_person(p) ),
+	changeCheckinStatus: (openid) => dispatch( AC.change_checkin_status(openid) ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckDetail);

@@ -1,10 +1,11 @@
 import React, { Component } 	from 'react';
-import { Row, Col, Modal, Table, Button, Icon, message, Popconfirm } 
-								from 'antd';
+import { Link } 				from 'react-router';
 import { connect } 				from 'react-redux';
 import fetch 					from 'isomorphic-fetch';
 import WrappedNewCheckinForm 	from './add-check-form';
 import * as AC 					from '../../Redux/Action/checkin.action';
+import { Row, Col, Modal, Table, Button, Icon, message, Popconfirm } 
+								from 'antd';
 import { addCheckin, getCheckin, delCheckin }
 					 			from '../../Config/apiUrl';
 
@@ -23,7 +24,7 @@ class CheckinList extends Component {
 		qrcodeUrl: ''
 	}
 	componentDidMount() {
-		fetch(`${getCheckin}?action_id=${this.props.id}`)
+		fetch(`${getCheckin}?action_id=${this.props.params.id}`)
 		.then(res => res.json())
 		.then(res => {
 			if(res.code === 1) {
@@ -142,19 +143,13 @@ class CheckinList extends Component {
 		});
 	}
 
-	// 显示签到详情
-	showDetails = (e) => {
-		this.props.toggleShow();
-		this.props.change_show_oid(e.target.dataset.oid);
-	}
-
 	render() {
 		const checkin_list = this.props.list;
 		const data = checkin_list.map((item, index) => {
 			const { oid, qrcode_url, load_time, expire_time, name } = item;
 			let obj = {};
 			obj.key = oid;
-			obj.name = <a data-oid={oid} onClick={this.showDetails} href="javscript:;">{name}</a>;
+			obj.name = <Link data-oid={oid} to={`/${this.props.params.id}/checkin/${oid}`} >{name}</Link>;
 			obj.oid = index+1;
 			obj.QRcode_url = <img onClick={this.showQRCode} src={`http://www.cfdq.midea.com/meeting/Uploads/qrcode/${qrcode_url}`} style={{width: '30px'}} />, 
 			obj.load_time = load_time,
@@ -231,7 +226,6 @@ const mapDispatchToProps = (dispatch) => ({
 	set_checkin_list: (list) => dispatch( AC.checkin_list(list)),
 	insert_checkin: (item) => dispatch( AC.unshift_checkin(item) ),
 	del_oid: (oids) => dispatch( AC.del_oid(oids) ),
-	change_show_oid: (oid) => dispatch( AC.show_oid(oid) ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckinList);

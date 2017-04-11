@@ -40,12 +40,6 @@ export const filter_checkin_details = (info) =>({
 	info
 });
 
-// 当前显示签到详细信息的OID
-export const show_oid = (oid) => ({
-	type: 'show_oid',
-	oid
-});
-
 // 本次签到总人数
 export const total_num = (num) => ({
 	type: 'total_num',
@@ -56,4 +50,10 @@ export const total_num = (num) => ({
 export const edit_person = (person) => ({
 	type: 'edit_person',
 	person
+});
+
+// 更改某个人员的签到状态
+export const change_checkin_status = (openid) => ({
+	type: 'change_checkin_status',
+	openid
 });

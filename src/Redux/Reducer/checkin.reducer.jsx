@@ -49,16 +49,14 @@ export const filter_checkin_details = (state = List([]), action) => {
 	switch(action.type) {
 		case 'filter_checkin_details':
 			return List(action.info);
-		default:
-			return state;
-	}
-}
-
-// 显示签到详细信息的OID
-export const show_oid = (state = '', action) => {
-	switch(action.type) {
-		case 'show_oid':
-			return action.oid;
+		case 'change_checkin_status':
+			return state.map(item => {
+				if(item.get('openid') === action.openid) {
+					item.update('status', x => !x);
+				} else {
+					return item;
+				}
+			})
 		default:
 			return state;
 	}

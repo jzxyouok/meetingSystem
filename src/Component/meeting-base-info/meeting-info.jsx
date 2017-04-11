@@ -91,7 +91,6 @@ class CreateMeeting extends Component {
   		})
   	}
 	render() {
-		console.log(this.props);
 		// 表单控件布局
 		const formItemLayout = {
 			labelCol: {
