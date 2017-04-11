@@ -34,7 +34,7 @@ class NewCheckinForm extends Component {
 						<DatePicker 
 							style={{width: '100%'}} 
 							showTime 
-							format="YYYY-MM-DD HH:mm" 
+							format="YYYY-MM-DD HH:mm:ss" 
 						/>
 					)}
 				</FormItem>

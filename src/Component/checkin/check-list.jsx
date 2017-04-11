@@ -62,7 +62,8 @@ class CheckinList extends Component {
 		.then(res => res.json())
 		.then(res => {
 			if(res.code === 1) {
-				message.success(res.message);
+				message.success('创建成功');
+				this.props.insert_checkin(res.message);
 				this.setState({
 					visible: false
 				})
@@ -84,7 +85,7 @@ class CheckinList extends Component {
 			message.warn('请选择会议截止时间');
 			return;
 		}
-		const submitInfo = `id=${this.props.id}&scene_desc=${info.name}&expire_time=${info.end_time}`;
+		const submitInfo = `id=${this.props.params.id}&scene_desc=${info.name}&expire_time=${info.end_time}`;
 		this.submitCheckin(submitInfo);
 	}
 	
@@ -99,7 +100,7 @@ class CheckinList extends Component {
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded'
 			},
-			body: `sid=${this.props.id}&oid=${JSON.stringify(this.props.delOids)}`
+			body: `sid=${this.props.params.id}&oid=${JSON.stringify(this.props.delOids)}`
 		})
 		.then(res => res.json())
 		.then(res => {
