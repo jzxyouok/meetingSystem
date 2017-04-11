@@ -40,10 +40,11 @@ export const filter_checkin_details = (info) =>({
 	info
 });
 
-// 本次签到总人数
-export const total_num = (num) => ({
-	type: 'total_num',
+// 本次签到总人数,标题
+export const total_num_title = (num, title) => ({
+	type: 'total_num_title',
 	num,
+	title
 });
 
 // 编辑签到人员
@@ -52,8 +53,7 @@ export const edit_person = (person) => ({
 	person
 });
 
-// 更改某个人员的签到状态
-export const change_checkin_status = (openid) => ({
-	type: 'change_checkin_status',
-	openid
-});
+// 更改正在编辑人员的签到状态
+export const change_checkin_status = {
+	type: 'change_checkin_status'
+};

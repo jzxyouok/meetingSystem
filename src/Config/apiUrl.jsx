@@ -39,3 +39,6 @@ export const delCheckin = 'http://www.cfdq.midea.com/meeting/index.php/Meetingad
 
 // 获取签到人员信息接口
 export const getCheckinDetails = 'http://www.cfdq.midea.com/meeting/index.php/meetingadmin/signin/signinfo';
+
+// 更改某个签到人员的签到状态
+export const changeCheckinStatus = 'http://www.cfdq.midea.com/meeting/index.php/meetingadmin/signin/checkin';

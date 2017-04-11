@@ -2,7 +2,8 @@ import React, {Component} 		from 'react';
 import { Row, Col, Table, Select, Icon, Button, message, Input, Modal, Radio } 
 								from 'antd';
 import { connect } 				from 'react-redux';
-import { getCheckinDetails } 	from '../../Config/apiUrl';
+import { getCheckinDetails, changeCheckinStatus } 	
+								from '../../Config/apiUrl';
 import * as AC 					from '../../Redux/Action/checkin.action';
 
 const Option = Select.Option,
@@ -68,6 +69,13 @@ class CheckDetail extends Component{
 		this.props.changeCheckinStatus(openid);
 	}
 
+	// 提交正在编辑人员的签到信息
+	submitStatus = (openid) => {
+		const qid = this.props.params.qid;
+		const action_id = this.props.params.id;
+		this.props.submitStatus(qid, action_id, openid);
+	}
+
 	// 短信通知给指定的人
 	notification = () => {
 
@@ -131,18 +139,18 @@ class CheckDetail extends Component{
 			key: item.openid,
 			name: item.username,
 			tel: item.phone,
-			status: item.status ? '已签到' : '未签到',
+			status: item.status === '1' ? '已签到' : '未签到',
 			time: item.load_time
 		}));
 
 		const { username, phone, status, openid } = this.props.editPersonInfo;
 		const edit_username = username ? username : '';
 		const edit_phone    = phone    ? phone : '';
-		const edit_status   = status   ? 1 : 0; 
-		
+		const edit_status   = status === '1'   ? 1 : 0;
+
 		return (
 			<div className="check_detail">
-				<Modal className="edit-modal" title="编辑" visible={this.state.editVisible} onCancel={this.closeEdit}>
+				<Modal className="edit-modal" title="编辑" visible={this.state.editVisible} onCancel={this.closeEdit} onOk={this.submitStatus.bind(this, openid)}>
 					<Row>
 						<Col span={4}>姓名</Col>
 						<Col span={20}><Input value={edit_username} disabled={true} /></Col>
@@ -154,7 +162,9 @@ class CheckDetail extends Component{
 					<Row>
 						<Col span={4}>签到状态</Col>
 						<Col span={20} className="checkin-status">
-							<RadioGroup value={edit_status} onChange={this.changeEditPersonCheckin.bind(this)}>
+							<RadioGroup 
+								value={edit_status} 
+								onChange={this.changeEditPersonCheckin.bind(this)}>
 								<Radio value={0}>未签到</Radio>
 								<Radio value={1}>已签到</Radio>
 							</RadioGroup>
@@ -162,7 +172,7 @@ class CheckDetail extends Component{
 					</Row>
 				</Modal>
 				<Row>
-					<h2 className="check_detail_title">EDP人员信息</h2>
+					<h2 className="check_detail_title">{this.props.title}</h2>
 					<Col span={4} className="total-num">总人数: {this.props.checkNum}</Col>
 					<Col span={20} className="re-list">
 						<a href="javascript:;" onClick={this.reList} className="ant-btn ant-btn-default">返回签到列表 <Icon type="rollback" /></a>
@@ -184,8 +194,9 @@ const mapStateToProps = (state) => ({
 	details: state.getIn(['checkin', 'checkin_details']).toJS(),
 	filterDetails: state.getIn(['checkin', 'filter_checkin_details']).toJS(),
 	showOid: state.getIn(['checkin', 'show_oid']),
-	checkNum: state.getIn(['checkin', 'checkin_num']),
-	editPersonInfo: state.getIn(['checkin', 'edit_person']),
+	checkNum: state.getIn(['checkin', 'total_num_title', 'num']),
+	title: state.getIn(['checkin', 'total_num_title', 'title']),
+	editPersonInfo: state.getIn(['checkin', 'edit_person']).toJS(),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -194,9 +205,10 @@ const mapDispatchToProps = (dispatch) => ({
 		.then(res => res.json())
 		.then(res => {
 			if(res.code === 1) {
-				dispatch( AC.checkin_details(res.message.data) );
-				dispatch( AC.filter_checkin_details(res.message.data) );
-				dispatch( AC.total_num(res.message.count) );
+				const { data, count, name } = res.message;
+				dispatch( AC.checkin_details(data) );
+				dispatch( AC.filter_checkin_details(data) );
+				dispatch( AC.total_num_title(count, name) );
 			} else {
 				message.warn('目前没有签到数据');
 			}
@@ -205,7 +217,26 @@ const mapDispatchToProps = (dispatch) => ({
 	}),
 	handleFilterDetails: (v) => dispatch( AC.filter_checkin_details(v) ),
 	editPerson: (p) => dispatch( AC.edit_person(p) ),
-	changeCheckinStatus: (openid) => dispatch( AC.change_checkin_status(openid) ),
+	changeCheckinStatus: () => dispatch( AC.change_checkin_status ),
+	submitStatus: (qid, action_id, openid) => dispatch( () => {
+		fetch(changeCheckinStatus, {
+			method: 'POST',
+			headers: {
+				'Content-type': 'application/x-www-form-urlencoded'
+			},
+			body: `qid=${qid}&action_id=${action_id}&openid=${openid}`
+		})
+		.then(res => res.json())
+		.then(res => {
+			if(res.code === 1) {
+				message.success(res.message);
+				setTimeout(() => location.reload(), 2000);
+			} else {
+				message.warn(res.message);
+			}
+		})
+		.catch(err => message.error('网络错误，请稍后重试，或联系管理员解决'));
+	}),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CheckDetail);

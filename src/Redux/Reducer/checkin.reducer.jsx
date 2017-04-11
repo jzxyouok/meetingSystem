@@ -49,34 +49,29 @@ export const filter_checkin_details = (state = List([]), action) => {
 	switch(action.type) {
 		case 'filter_checkin_details':
 			return List(action.info);
-		case 'change_checkin_status':
-			return state.map(item => {
-				if(item.get('openid') === action.openid) {
-					item.update('status', x => !x);
-				} else {
-					return item;
-				}
-			})
 		default:
 			return state;
 	}
 }
 
 // 本次签到总人数
-export const checkin_num = (state = 0, action) => {
+export const total_num_title = (state = Map({num: 0, title: ''}), action) => {
 	switch(action.type) {
-		case 'total_num':
-			return action.num;
+		case 'total_num_title':
+			return state.set('num', action.num)
+						.set('title', action.title);
 		default:
 			return state;
 	}
 }
 
 // 编辑签到人员
-export const edit_person = (state = {}, action) => {
+export const edit_person = (state = Map({}), action) => {
 	switch(action.type) {
 		case 'edit_person':
-			return action.person;
+			return Map(action.person);
+		case 'change_checkin_status':
+			return state.update('status', x => x === '1' ? '0' : '1');
 		default:
 			return state;
 	}
