@@ -1,3 +1,6 @@
+/**
+ * 表明表单--自定义选项--公共样式组件
+ */
 import React, { Component } from 'react';
 import { Row, Col } from 'antd';
 

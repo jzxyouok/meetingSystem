@@ -70,6 +70,15 @@ export const add_textarea = (index = 0, title='', name=`textarea-${Date.now()}`,
 	option_type
 });
 
+// 添加联动选择项目
+export const add_linkage = (index = 0, title='', name=`linkage-${Date.now()}`, option_type='linkage') => ({
+	type: 'add_linkage',
+	index,
+	title,
+	name,
+	option_type
+})
+
 // 更新标题信息
 export const update_title = (index, title) => ({
 	type: 'update_title',

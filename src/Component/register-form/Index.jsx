@@ -1,3 +1,6 @@
+/**
+ * 报名表单--入口组件
+ */
 import React, { Component } 		from 'react';
 import { Row, Col, Button, Icon, Tag } 	from 'antd';
 

@@ -1,3 +1,6 @@
+/**
+ * 报名表单--表单的发布状态组件
+ */
 import { Col, Tag } 	from 'antd';
 import React 			from 'react';
 import { connect } 		from 'react-redux';
