@@ -23,7 +23,12 @@ class CheckinList extends Component {
 		qrcodeVisible: false,
 		qrcodeUrl: ''
 	}
+
+	// 组件加载完成时去获取本次会议的签到数据
 	componentDidMount() {
+		// 先初始化
+		this.props.set_checkin_list([]);
+		// 再请求
 		fetch(`${getCheckin}?action_id=${this.props.params.id}`)
 		.then(res => res.json())
 		.then(res => {
