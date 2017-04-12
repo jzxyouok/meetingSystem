@@ -1,8 +1,8 @@
 import React, {Component} 		from 'react';
-import { Row, Col, Table, Select, Icon, Button, message, Input, Modal, Radio } 
+import { Row, Col, Table, Select, Icon, Button, message, Input, Modal, Radio, Popconfirm, notification } 
 								from 'antd';
 import { connect } 				from 'react-redux';
-import { getCheckinDetails, changeCheckinStatus } 	
+import { getCheckinDetails, changeCheckinStatus, noticeManager } 	
 								from '../../Config/apiUrl';
 import * as AC 					from '../../Redux/Action/checkin.action';
 
@@ -77,8 +77,14 @@ class CheckDetail extends Component{
 	}
 
 	// 短信通知给指定的人
-	notification = () => {
-
+	confirmNotice = (tel) => {
+		const { id, qid } = this.props.params;
+		this.props.noticeManager(tel, id, qid, () => {
+			notification.open({
+				message: '通知成功',
+				icon: <Icon type="smile-circle" style={{ color: '#108ee9' }} />
+			});
+		});
 	}
 
 	render() {
@@ -130,7 +136,9 @@ class CheckDetail extends Component{
 				render: (text, record) => (
 					<div className="handler">
 						<Icon data-openid={record.key} type="edit" onClick={this.itemEdit.bind(this, record.key)} />
-						<Icon data-openid={record.key} type="notification" onClick={this.notification.bind(this, record.key)} />
+						<Popconfirm title="确定现在通知吗?" onConfirm={this.confirmNotice.bind(this, record.tel)}>
+							<Icon data-openid={record.key} type="notification" />
+						</Popconfirm>
 					</div>
 				)
 			}
@@ -236,6 +244,24 @@ const mapDispatchToProps = (dispatch) => ({
 			}
 		})
 		.catch(err => message.error('网络错误，请稍后重试，或联系管理员解决'));
+	}),
+	noticeManager: (phone, action_id, qid, callback) => dispatch(() => {
+		fetch(noticeManager, {
+			method: "POST",
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			body: `phone=${phone}&action_id=${action_id}&qid=${qid}`
+		})
+		.then(res => res.json())
+		.then(res => {
+			if(res.code === 1) {
+				callback();
+			} else {
+				message.warn('通知失败');
+			}
+		})
+		.catch(err => message.error('网络错误，请稍后重试或联系管理员处理'));
 	}),
 });
 

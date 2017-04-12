@@ -4,9 +4,6 @@ export const submitFormUrl = 'http://www.cfdq.midea.com/meeting/index.php/meetin
 // 获取报名表单接口
 export const getRegisterForm = 'http://www.cfdq.midea.com/meeting/index.php/meetingadmin/form/viewForm';
 
-// 更新报名表单接口
-// export const updateRegisterForm = 'http://www.cfdq.midea.com/meeting/index.php/meetingadmin/form/updateForm';
-
 // 添加会议接口
 export const newActUrl = 'http://www.cfdq.midea.com/meeting/index.php/meetingadmin/meetings/add';
 
@@ -28,17 +25,18 @@ export const getAttendeeTable = 'http://www.cfdq.midea.com/meeting/mock/getAtten
 // 获取省市县接口
 export const getAddress = 'http://www.cfdq.midea.com/wechat/res/php/getCity.php';
 
+/**
+ * 会议签到页面接口
+ */
 // 添加签到接口
 export const addCheckin = 'http://www.cfdq.midea.com/meeting/index.php/meetingadmin/signin/add';
-
 // 获取签到列表
 export const getCheckin = 'http://www.cfdq.midea.com/meeting/index.php/Meetingadmin/signin/signlist';
-
 // 删除签到列表接口
 export const delCheckin = 'http://www.cfdq.midea.com/meeting/index.php/Meetingadmin/signin/deletesign';
-
 // 获取签到人员信息接口
 export const getCheckinDetails = 'http://www.cfdq.midea.com/meeting/index.php/meetingadmin/signin/signinfo';
-
 // 更改某个签到人员的签到状态
 export const changeCheckinStatus = 'http://www.cfdq.midea.com/meeting/index.php/meetingadmin/signin/checkin';
+// 会议签到通知领导的功能
+export const noticeManager = 'http://www.cfdq.midea.com/meeting/index.php/Meetingadmin/signin/msgnotice';
