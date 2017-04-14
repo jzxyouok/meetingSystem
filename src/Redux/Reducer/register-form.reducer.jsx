@@ -82,3 +82,39 @@ export const status = (state = 0, action) => {
 			return state;
 	}
 }
+
+// 表单的规则
+export const rules = (state = fromJS([]), action) => {
+	switch(action.type) {
+		case 'add_rule':
+			const {title, condition_title, condition_value, constraint, behaviour} = action;
+			return state.push(Map({
+				title, 
+				condition_title, 
+				condition_value, 
+				constraint, 
+				behaviour
+			}));
+			
+		case 'delete_rule':
+			return state.delete(index);
+
+		case 'change_rule_title':
+			return state.setIn([index, 'title'], action.title);
+
+		case 'change_condition_title':
+			return state.setIn([index, 'condition_title'], action.condition_title);
+
+		case 'change_condition_value':
+			return state.setIn([index, 'condition_value'], action.condition_value);
+
+		case 'change_constraint':
+			return state.setIn([index, 'constraint'], action.constraint);
+
+		case 'change_constraint_behaviour':
+			return state.setIn([index, 'behaviour'], action.behaviour);
+
+		default:
+			return state;
+	}
+}
