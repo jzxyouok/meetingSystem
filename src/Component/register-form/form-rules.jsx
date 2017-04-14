@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Row, Col, Button, Modal, Table, Form, Input, Select} from 'antd';
+import {Row, Col, Button, Modal, Table, Form, Input, Select, Popconfirm} from 'antd';
 import {connect} from 'react-redux';
 import {mapStateToProps, mapDispatchToProps} from './form-rules.conn';
 
@@ -12,11 +12,53 @@ class Rules extends Component {
     }
 
     // 显示、隐藏新建规则的模态框
-    toggleNewRuleModal = (e) => {
+    toggleNewRuleModal = (type) => {
+        // 初始化规则表单
+        if(type === 'init') {
+            this.props.form.setFields({
+                title: { value: '' },
+                condition_title: { value: '' }, 
+                condition_value: { value: '' }, 
+                constraint: { value: [] }, 
+                behaviour: { value: '' },
+            })
+        }
         this.setState({
             newRuleModal: !this.state.newRuleModal
         })
     }
+
+    // 添加一条规则
+    addRule = () => {
+        this.props.form.validateFields((err, values) => {
+            if(err) return;
+            const {title, condition_title, condition_value, constraint, behaviour} = values;
+            this.props.addRule(title, condition_title, condition_value, constraint, behaviour);
+            this.toggleNewRuleModal();
+        });
+    }
+
+    // 修改某一项规则
+    modify = (rid) => {
+        const rule = this.props.rules[rid];
+        const {title, condition_title, condition_value, constraint, behaviour} = rule;
+        this.props.form.setFields({
+            title: { value: title },
+            condition_title: { value: condition_title }, 
+            condition_value: { value: condition_value }, 
+            constraint: { value: constraint }, 
+            behaviour: { value: behaviour },
+        });
+        this.setState({
+            newRuleModal: !this.state.newRuleModal
+        })
+    }
+
+    // 删除某一项规则
+    delete = (rid) => {
+        this.props.delRule(rid);
+    }
+
     render() {
         const colums = [{
             title: '序号',
@@ -27,7 +69,7 @@ class Rules extends Component {
             title: '规则名称',
             dataIndex: 'rulename',
             key: 'rulename'
-        },, {
+        }, {
             title: '规则',
             dataIndex: 'rule',
             key: 'rule'
@@ -37,18 +79,30 @@ class Rules extends Component {
             width: 100,
             render: (text, record) => (
                 <div>
-                    <a href="javascript:;">修改</a>
-                    <a href="javascript:;">删除</a>
+                    <a href="javascript:;" onClick={this.modify.bind(this, record.rid - 1)}>修改</a>
+                    <Popconfirm title="确认删除这条规则吗" onConfirm={this.delete.bind(this, record.rid - 1)}>
+                        <a href="javascript:;">删除</a>
+                    </Popconfirm>
                 </div>
             )
         }];
+        const dataSource = this.props.rules.map((item, index) => ({
+            key: index,
+            rid: index+1,
+            rulename: item.title,
+            rule: `当用户选择了${item.condition_title}项的${item.condition_value}时，${item.constraint}变为${item.behaviour}`
+        }))
         const {getFieldDecorator} = this.props.form;
         return (
             <Row>
-                <Modal visible={this.state.newRuleModal} title="新建表单规则" onCancel={this.toggleNewRuleModal}>
-                    <Form onSubmit={() => {}}>
+                <Modal 
+                    visible={this.state.newRuleModal} 
+                    title="新建表单规则" 
+                    onCancel={this.toggleNewRuleModal}
+                    onOk={this.addRule}>
+                    <Form>
                         <FormItem label="规则名">
-                            {getFieldDecorator('rulename', {
+                            {getFieldDecorator('title', {
                                 rules: [{required: true, message: '规则名称不能为空'}]
                             })(
                                 <Input />
@@ -99,9 +153,9 @@ class Rules extends Component {
                     </Form>
                 </Modal>
                 <Col>
-                    <Button type="primary" onClick={this.toggleNewRuleModal}>新建规则</Button>
+                    <Button type="primary" onClick={this.toggleNewRuleModal.bind(this, 'init')}>新建规则</Button>
                 </Col>
-                <Table columns={colums} bordered></Table>
+                <Table columns={colums} dataSource={dataSource} bordered></Table>
                 <Col>
                     <Button type="primary">保存</Button>
                 </Col>
@@ -110,4 +164,8 @@ class Rules extends Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(Rules));
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create({
+    onFieldsChange: (props, fields) => {
+        const dirtyField = Object.keys(fields)[0];
+    }
+})(Rules));

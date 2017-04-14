@@ -97,7 +97,7 @@ export const rules = (state = fromJS([]), action) => {
 			}));
 			
 		case 'delete_rule':
-			return state.delete(index);
+			return state.delete(action.index);
 
 		case 'change_rule_title':
 			return state.setIn([index, 'title'], action.title);

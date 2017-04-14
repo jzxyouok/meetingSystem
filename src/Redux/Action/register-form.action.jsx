@@ -116,3 +116,57 @@ export const update_form_state = (status) => ({
 	type: 'update_form_state',
 	status
 });
+
+/**
+ * 新建规则项
+ */
+// 添加规则项
+export const add_rule = (title, condition_title, condition_value, constraint, behaviour) => ({
+	type: 'add_rule',
+	title,
+	condition_title,
+	condition_value,
+	constraint,
+	behaviour,
+});
+
+// 删除规则项
+export const delete_rule = (index) => ({
+	type: 'delete_rule',
+	index,
+});
+
+// 更改规则的名称
+export const change_rule_title = (index, title) => ({
+	type: 'change_rule_title',
+	index,
+	title
+})
+
+// 更改规则的条件
+export const change_condition_title = (index, condition_title) => ({
+	type: 'change_condition_title',
+	index,
+	condition_title,
+});
+
+// 更改条件的值
+export const change_condition_value = (index, condition_value) => ({
+	type: 'change_condition_value',
+	index,
+	condition_value,
+});
+
+// 更改约束项
+export const change_constraint = (index, constraint) => ({
+	type: 'change_constraint',
+	index,
+	constraint,
+});
+
+// 更改约束项的表现
+export const change_constraint_behaviour = (index, behaviour) => ({
+	type: 'change_constraint_behaviour',
+	index,
+	behaviour,
+});
