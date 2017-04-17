@@ -1,3 +1,8 @@
+// 初始化整个报名表单
+export const init_register = () => ({
+	type: 'init',
+});
+
 // 添加单选
 export const add_single_choice = (index = 0, title = '', options = [], name = `radio-${Date.now()}`, option_type = 'radio') => ({
 	type: 'add_single_choice',

@@ -14,6 +14,7 @@ const button_layout = {
 
 class RegisterFormHandler extends Component {
 	componentDidMount() {
+		this.props.init();
 		// 组件加载完成，请求数据
 		const { get, id } = this.props;
 		get(id);
@@ -38,6 +39,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+	// 初始化
+	init: () => dispatch(AC.init_register()),
+
 	// 请求数据接口
 	get: (id) => dispatch(() => {
 		fetch(getRegisterForm+`?id=${id}`)

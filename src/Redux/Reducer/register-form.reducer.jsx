@@ -5,6 +5,8 @@ export const customize = (state = fromJS([]), action) => {
 	let opt_len = state.size;
 	const { index, title, name, options, option_type } = action;
 	switch(action.type) {
+		case 'init':
+			return fromJS([]);
 		case 'add_single_choice':
 		case 'add_muti_choice':
 		case 'add_select':

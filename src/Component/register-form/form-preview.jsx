@@ -71,7 +71,7 @@ class RegisterPreview extends Component {
                 );
             case 'file':
                 return (
-                    <FormItem label={fieldtitle} key={index}>
+                    <FormItem label={fieldtitle} key={key}>
                         {getFieldDecorator(fieldname)(
                             <Input type="file" />
                         )}
