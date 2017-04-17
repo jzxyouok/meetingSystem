@@ -9,13 +9,17 @@ const Option   = Select.Option;
 class Rules extends Component {
     state = {
         newRuleModal: false,
-        condition_value: []
+        condition_value: [],
+        modalConfirm: 'init',
     }
 
     // 显示、隐藏新建规则的模态框
     toggleNewRuleModal = (type) => {
         // 初始化规则表单
         if(type === 'init') {
+            this.setState({
+                modalConfirm: 'init'
+            });
             this.props.form.setFields({
                 title: { value: '' },
                 condition_title: { value: '' }, 
@@ -31,12 +35,14 @@ class Rules extends Component {
 
     // 添加一条规则
     addRule = () => {
-        this.props.form.validateFields((err, values) => {
-            if(err) return;
-            const {title, condition_title, condition_value, constraint, behaviour} = values;
-            this.props.addRule(title, condition_title, condition_value, constraint, behaviour);
-            this.toggleNewRuleModal();
-        });
+        if(this.state.modalConfirm === 'init'){
+            this.props.form.validateFields((err, values) => {
+                if(err) return;
+                const {title, condition_title, condition_value, constraint, behaviour} = values;
+                this.props.addRule(title, condition_title, condition_value, constraint, behaviour);
+            });
+        }
+        this.toggleNewRuleModal();
     }
 
     // 修改某一项规则
@@ -51,7 +57,8 @@ class Rules extends Component {
             behaviour: { value: behaviour },
         });
         this.setState({
-            newRuleModal: !this.state.newRuleModal
+            newRuleModal: !this.state.newRuleModal,
+            modalConfirm: 'modify'
         })
     }
 
@@ -178,6 +185,17 @@ class Rules extends Component {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form.create({
     onFieldsChange: (props, fields) => {
+        console.log(props);
         const dirtyField = Object.keys(fields)[0];
+        if(dirtyField) {
+            switch(dirtyField) {
+                case 'title':
+                case 'condition_title':
+                case 'condition_value':
+                case 'constraint':
+                default:
+                    break;
+            }
+        }
     }
 })(Rules));
