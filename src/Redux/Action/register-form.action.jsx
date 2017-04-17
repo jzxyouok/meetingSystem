@@ -170,3 +170,9 @@ export const change_constraint_behaviour = (index, behaviour) => ({
 	index,
 	behaviour,
 });
+
+// 正在编辑的规则的索引
+export const edit_index = (index) => ({
+	type: 'edit_index',
+	index,
+});

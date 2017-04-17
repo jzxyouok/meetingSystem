@@ -100,20 +100,30 @@ export const rules = (state = fromJS([]), action) => {
 			return state.delete(action.index);
 
 		case 'change_rule_title':
-			return state.setIn([index, 'title'], action.title);
+			return state.setIn([action.index, 'title'], action.title);
 
 		case 'change_condition_title':
-			return state.setIn([index, 'condition_title'], action.condition_title);
+			return state.setIn([action.index, 'condition_title'], action.condition_title);
 
 		case 'change_condition_value':
-			return state.setIn([index, 'condition_value'], action.condition_value);
+			return state.setIn([action.index, 'condition_value'], action.condition_value);
 
 		case 'change_constraint':
-			return state.setIn([index, 'constraint'], action.constraint);
+			return state.setIn([action.index, 'constraint'], action.constraint);
 
 		case 'change_constraint_behaviour':
-			return state.setIn([index, 'behaviour'], action.behaviour);
+			return state.setIn([action.index, 'behaviour'], action.behaviour);
 
+		default:
+			return state;
+	}
+}
+
+// 正在编辑的表单选项
+export const edit_index = (state = 0, action) => {
+	switch(action.type) {
+		case 'edit_index':
+			return action.index;
 		default:
 			return state;
 	}

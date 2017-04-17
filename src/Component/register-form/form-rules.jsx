@@ -40,6 +40,8 @@ class Rules extends Component {
 
     // 修改某一项规则
     modify = (rid) => {
+        // 首先更改store中存储的当前的index
+        this.props.cEditIndex(rid);
         const rule = this.props.rules[rid];
         const {title, condition_title, condition_value, constraint, behaviour} = rule;
         this.props.form.setFields({
@@ -166,6 +168,25 @@ class Rules extends Component {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form.create({
     onFieldsChange: (props, fields) => {
+        const editIndex  = props.editIdx;
         const dirtyField = Object.keys(fields)[0];
+        if(fields[dirtyField]) {
+            const dirtyValue = fields[dirtyField].value;
+            console.log(dirtyValue);
+            switch(dirtyField) {
+                case 'title':
+                    return props.cTitle(editIndex, dirtyValue);
+                case 'condition_title':
+                    return props.cConditionTitle(editIndex, dirtyValue);
+                case 'condition_value':
+                    return props.cConditionValue(editIndex, dirtyValue);
+                case 'constraint':
+                    return props.cConstraint(editIndex, dirtyValue);
+                case 'behaviour':
+                    return props.cBehaviour(editIndex, dirtyValue);
+                default:
+                    break;
+            }
+        }
     }
 })(Rules));
