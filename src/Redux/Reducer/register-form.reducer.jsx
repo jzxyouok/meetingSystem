@@ -79,26 +79,23 @@ export const status = (state = 0, action) => {
 export const rules = (state = fromJS([]), action) => {
 	switch(action.type) {
 		case 'add_rule':
-			console.log(state.size);
+			const {title, condition_title, condition_value, constraint, behaviour} = action;
+			return state.push(Map({
+				title, 
+				condition_title, 
+				condition_value, 
+				constraint, 
+				behaviour
+			}));
 
-			// TODO BUG!!!
-			if(state.size === 1) {
-				return state;
-			} else {
-				const {title, condition_title, condition_value, constraint, behaviour} = action;
-				return state.push(Map({
-					title, 
-					condition_title, 
-					condition_value, 
-					constraint, 
-					behaviour
-				}));
-			}
+		case 'delete_last':
+			return state.pop();
 			
 		case 'delete_rule':
 			return state.delete(action.index);
 
 		case 'change_rule_title':
+			console.log(action);
 			return state.setIn([action.index, 'title'], action.title);
 
 		case 'change_condition_title':

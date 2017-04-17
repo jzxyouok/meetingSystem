@@ -16,6 +16,7 @@ class Rules extends Component {
     toggleNewRuleModal = (type) => {
         // 初始化规则表单
         if(type === 'init') {
+            this.props.addRule('', '', '', [], '');
             this.props.form.setFields({
                 title: { value: '' },
                 condition_title: { value: '' }, 
@@ -34,10 +35,26 @@ class Rules extends Component {
     addRule = () => {
         this.props.form.validateFields((err, values) => {
             if(err) return;
-            const {title, condition_title, condition_value, constraint, behaviour} = values;
-            this.props.addRule(title, condition_title, condition_value, constraint, behaviour);
+            // const {title, condition_title, condition_value, constraint, behaviour} = values;
+            // this.props.addRule(title, condition_title, condition_value, constraint, behaviour);
             this.toggleNewRuleModal();
         });
+    }
+
+    // 关闭新建规则模态框
+    closeNewRule = (e) => {
+        // 如果该规则还在创建阶段，就要删除这条规则
+        if(this.props.ruleState === 'create') {
+            this.props.delLast();
+        }
+        this.setState({
+            newRuleModal: false,
+        })
+    }
+
+    // 改变规则名
+    handleTitleChange = (e) => {
+        this.props.
     }
 
     // 修改某一项规则
@@ -46,6 +63,7 @@ class Rules extends Component {
         // 首先更改store中存储的当前的index
         this.props.cEditIndex(rid);
         const rule = this.props.rules[rid];
+        console.log(rule);
         const {title, condition_title, condition_value, constraint, behaviour} = rule;
         this.props.form.setFields({
             title: { value: title },
@@ -90,14 +108,15 @@ class Rules extends Component {
             title: '操作',
             key: 'action',
             width: 100,
-            render: (text, record) => (
-                <div>
-                    <a href="javascript:;" onClick={this.modify.bind(this, record.rid - 1)}>修改</a>
-                    <Popconfirm title="确认删除这条规则吗" onConfirm={this.delete.bind(this, record.rid - 1)}>
-                        <a href="javascript:;">删除</a>
-                    </Popconfirm>
-                </div>
-            )
+            render: (text, record) => {
+                return (
+                    <div>
+                        <a href="javascript:;" data-index={record.key} onClick={(e) => this.modify.call(this, +e.target.dataset.index)}>修改</a>
+                        <Popconfirm title="确认删除这条规则吗" data-index={record.key} onConfirm={(e) => this.delete.call(this, +e.target.dataset.index)}>
+                            <a href="javascript:;">删除</a>
+                        </Popconfirm>
+                    </div>
+                )}
         }];
         const dataSource = this.props.rules.map((item, index) => ({
             key: index,
@@ -111,20 +130,19 @@ class Rules extends Component {
             const type = item.option_type;
             return type === 'select' || type === 'radio' || type === 'checkbox';
         });
-
         return (
             <Row>
                 <Modal 
                     visible={this.state.newRuleModal} 
                     title="新建表单规则" 
-                    onCancel={this.toggleNewRuleModal}
+                    onCancel={this.closeNewRule}
                     onOk={this.addRule}>
                     <Form>
                         <FormItem label="规则名">
                             {getFieldDecorator('title', {
                                 rules: [{required: true, message: '规则名称不能为空'}]
                             })(
-                                <Input />
+                                <Input onChange={this.handleTitleChange} />
                             )}
                         </FormItem>
                         <FormItem label="条件">
@@ -182,16 +200,17 @@ class Rules extends Component {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form.create({
     onFieldsChange: (props, fields) => {
-        console.log(props.rules);
-        // 正在编辑的项的索引
-        const editIndex  = props.editIdx;
+        let editIndex  = 0;
+        if(props.ruleState === 'create') {
+            editIndex = props.rules.length - 1;
+        } else {
+            editIndex  = props.editIdx;
+        }
         // 正在编辑的项
         const dirtyField = Object.keys(fields)[0];
         if(fields[dirtyField]) {
             const dirtyValue = fields[dirtyField].value;
             switch(dirtyField) {
-                case 'title':
-                    return props.cTitle(editIndex, dirtyValue);
                 case 'condition_title':
                     return props.cConditionTitle(editIndex, dirtyValue);
                 case 'condition_value':

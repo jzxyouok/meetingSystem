@@ -9,6 +9,7 @@ export const mapStateToProps = (state) => ({
 export const mapDispatchToProps = (dispatch) => ({
     addRule: 			(title, condition_title, condition_value, constraint, behaviour) => dispatch( AC.add_rule(title, condition_title, condition_value, constraint, behaviour)),
     delRule: 			(index) => dispatch( AC.delete_rule(index) ),
+    delLast:            () => dispatch( AC.delete_last() ),
     cEditIndex: 		(index) => dispatch( AC.edit_index(index) ),
     cRuleState:         (state) => dispatch( AC.rule_state(state) ),
     cTitle: 			(index, title) => dispatch( AC.change_rule_title(index, title) ),
