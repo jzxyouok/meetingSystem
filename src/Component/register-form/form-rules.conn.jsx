@@ -1,5 +1,6 @@
 import * as AC from '../../Redux/Action/register-form.action';
 export const mapStateToProps = (state) => ({
+    formdata: state.getIn(['register_form', 'customize']).toJS(),
     rules: state.getIn(['register_form', 'rules']).toJS(),
 });
 
