@@ -45,8 +45,7 @@ const mapDispatchToProps = (dispatch) => ({
 			.then(res => {
 				if(res.code === 1) {
 					const form_data = JSON.parse(res.message.form_data);
-					const { custom, customize } = form_data;
-					dispatch( AC.update_custom_option(custom) );
+					const { customize } = form_data;
 					dispatch( AC.update_form_state(+res.message.status) );
 					customize.forEach((item, index) => {
 						const { title, options, name } = item;

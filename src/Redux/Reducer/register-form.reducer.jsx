@@ -61,16 +61,6 @@ export const customize = (state = fromJS([]), action) => {
 	}
 }
 
-// 表单常用选项
-export const custom = (state=[], action) => {
-	switch(action.type) {
-		case 'update_custom_option':
-			return action.value;
-		default:
-			return state;
-	}
-}
-
 // 表单状态
 // 0 => 未发布
 // 1 => 已发布
@@ -114,6 +104,16 @@ export const rules = (state = fromJS([]), action) => {
 		case 'change_constraint_behaviour':
 			return state.setIn([index, 'behaviour'], action.behaviour);
 
+		default:
+			return state;
+	}
+}
+
+// 预览表单
+export const preview = (state = [], action) => {
+	switch(action.type) {
+		case 'preview_formdata':
+			return action.formdata;
 		default:
 			return state;
 	}

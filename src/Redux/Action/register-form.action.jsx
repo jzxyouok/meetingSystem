@@ -1,9 +1,3 @@
-// 添加会议常用项
-export const update_custom_option = (value) => ({
-	type: 'update_custom_option',
-	value
-});
-
 // 添加单选
 export const add_single_choice = (index = 0, title = '', options = [], name = `radio-${Date.now()}`, option_type = 'radio') => ({
 	type: 'add_single_choice',
@@ -117,9 +111,9 @@ export const update_form_state = (status) => ({
 	status
 });
 
-/**
- * 新建规则项
- */
+/******************************************************************************
+ ****************************** 新建规则项 **************************************
+ ******************************************************************************/
 // 添加规则项
 export const add_rule = (title, condition_title, condition_value, constraint, behaviour) => ({
 	type: 'add_rule',
@@ -169,4 +163,12 @@ export const change_constraint_behaviour = (index, behaviour) => ({
 	type: 'change_constraint_behaviour',
 	index,
 	behaviour,
+});
+
+/******************************************************************************
+ ****************************** 预览表单 **************************************
+ ******************************************************************************/
+export const preview_formdata = (formdata) => ({
+	type: 'preview_formdata',
+	formdata
 });
