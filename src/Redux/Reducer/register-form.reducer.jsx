@@ -111,19 +111,21 @@ export const rules = (state = fromJS([]), action) => {
 	}
 }
 
-<<<<<<< HEAD
 // 正在编辑的表单选项
 export const edit_index = (state = 0, action) => {
 	switch(action.type) {
 		case 'edit_index':
 			return action.index;
-=======
+		default:
+			return state;
+	}
+}
+
 // 预览表单
 export const preview = (state = [], action) => {
 	switch(action.type) {
 		case 'preview_formdata':
 			return action.formdata;
->>>>>>> 2303271f6d452b255daa7738fe4870ed48851dda
 		default:
 			return state;
 	}

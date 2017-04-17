@@ -170,17 +170,16 @@ export const change_constraint_behaviour = (index, behaviour) => ({
 	behaviour,
 });
 
-<<<<<<< HEAD
 // 正在编辑的规则的索引
 export const edit_index = (index) => ({
 	type: 'edit_index',
 	index,
-=======
+});
+
 /******************************************************************************
  ****************************** 预览表单 **************************************
  ******************************************************************************/
 export const preview_formdata = (formdata) => ({
 	type: 'preview_formdata',
 	formdata
->>>>>>> 2303271f6d452b255daa7738fe4870ed48851dda
 });
