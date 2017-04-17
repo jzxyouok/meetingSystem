@@ -5,12 +5,14 @@ import React, { Component } 		from 'react';
 import { Row, Col, Button, Icon, Tag, Tabs } 	
 									from 'antd';
 
-import CustomOptions 				from './custom-options';
 import AddCustomize 				from './add-item-operator';
 import CustomizeOptions 			from './customize-options';
 import FormHandler 					from './form-handler';
 import FormState 					from './form-status';
 import FormRules 					from './form-rules';
+import FormPreview 					from './form-preview';
+import {connect}   					from 'react-redux';
+import {preview_formdata}       	from '../../Redux/Action/register-form.action';
 
 import '../../Style/register-form.scss';
 
@@ -30,14 +32,10 @@ export default class RegisterForm extends Component {
 		return (
 			<div className="register-form">
 				<p className="title">报名表单</p>
-				<Tabs defaultActiveKey="2">
+				<Tabs defaultActiveKey="1">
 					<TabPane key="1" tab="报名表单">
 						<Row>
 							<FormState />
-							<Col {...row_item_layout} className="options" offset={4}>添加表单固有项</Col>
-						</Row>
-						<CustomOptions />
-						<Row>
 							<Col {...row_item_layout} className="options" offset={4}>添加表单自定义项</Col>
 						</Row>
 						<AddCustomize />
@@ -46,6 +44,9 @@ export default class RegisterForm extends Component {
 					</TabPane>
 					<TabPane key="2" tab="新建规则">
 						<FormRules />
+					</TabPane>
+					<TabPane key="3" tab="表单预览">
+						<FormPreview />
 					</TabPane>
 				</Tabs>
 			</div>

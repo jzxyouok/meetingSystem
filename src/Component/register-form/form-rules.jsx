@@ -9,6 +9,7 @@ const Option   = Select.Option;
 class Rules extends Component {
     state = {
         newRuleModal: false,
+        condition_value: []
     }
 
     // 显示、隐藏新建规则的模态框
@@ -61,6 +62,14 @@ class Rules extends Component {
         this.props.delRule(rid);
     }
 
+    // 当条件值发生改变时
+    conditionChange = (val) => {
+        const condition = this.props.formdata.filter(item => item.title === val)[0];
+        this.setState({
+            condition_value: condition.options,
+        })
+    }
+
     render() {
         const colums = [{
             title: '序号',
@@ -92,9 +101,15 @@ class Rules extends Component {
             key: index,
             rid: index+1,
             rulename: item.title,
-            rule: `当用户选择了${item.condition_title}项的${item.condition_value}时，${item.constraint}变为${item.behaviour}`
+            rule: `当用户选择了【${item.condition_title}】项的【${item.condition_value}】时，【${item.constraint}】变为【${item.behaviour}】`
         }))
         const {getFieldDecorator} = this.props.form;
+
+        const conditions = this.props.formdata.filter(item => {
+            const type = item.option_type;
+            return type === 'select' || type === 'radio' || type === 'checkbox';
+        });
+
         return (
             <Row>
                 <Modal 
@@ -114,9 +129,8 @@ class Rules extends Component {
                             {getFieldDecorator('condition_title', {
                                 rules: [{required: true, message: '条件不能为空'}]
                             })(
-                                <Select placeholder="选择条件名">
-                                    <Option value="1">条件一</Option>
-                                    <Option value="2">条件二</Option>
+                                <Select placeholder="选择条件名" onChange={this.conditionChange}>
+                                    {conditions.map((item, index) => <Option key={index} value={item.title}>{item.title}</Option>)}
                                 </Select>
                             )}
                         </FormItem>
@@ -125,8 +139,7 @@ class Rules extends Component {
                                 rules: [{required: true, message: '条件对应的值不能为空'}]
                             })(
                                 <Select placeholder="请选择条件对应的值">
-                                    <Option value="1">条件一</Option>
-                                    <Option value="2">条件二</Option>
+                                    {this.state.condition_value.map((item, index) => <Option key={index} value={item}>{item}</Option>)}
                                 </Select>
                             )}
                         </FormItem>
@@ -135,8 +148,7 @@ class Rules extends Component {
                                 rules: [{required: true, message: '约束项不能为空'}]
                             })(
                                 <Select multiple placeholder="需要约束的项目不能为空" >
-                                    <Option value="1">条件一</Option>
-                                    <Option value="2">条件二</Option>
+                                    {this.props.formdata.map((item, index) => <Option key={index} value={item.title}>{item.title}</Option>)}
                                 </Select>
                             )}
                         </FormItem>
@@ -145,10 +157,10 @@ class Rules extends Component {
                                 rules: [{required: true, message: '约束项的表现不能为空'}]
                             })(
                                 <Select placeholder="请选择约束项的表现">
-                                    <Option value="1">必填</Option>
-                                    <Option value="2">选填</Option>
-                                    <Option value="3">显示</Option>
-                                    <Option value="4">隐藏</Option>
+                                    <Option value="必填">必填</Option>
+                                    <Option value="选填">选填</Option>
+                                    <Option value="显示">显示</Option>
+                                    <Option value="隐藏">隐藏</Option>
                                 </Select>
                             )}
                         </FormItem>

@@ -14,6 +14,7 @@ const button_layout = {
 
 class RegisterFormHandler extends Component {
 	componentDidMount() {
+		this.props.init();
 		// 组件加载完成，请求数据
 		const { get, id } = this.props;
 		get(id);
@@ -38,6 +39,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+	// 初始化
+	init: () => dispatch(AC.init_register()),
+
 	// 请求数据接口
 	get: (id) => dispatch(() => {
 		fetch(getRegisterForm+`?id=${id}`)
@@ -45,8 +49,7 @@ const mapDispatchToProps = (dispatch) => ({
 			.then(res => {
 				if(res.code === 1) {
 					const form_data = JSON.parse(res.message.form_data);
-					const { custom, customize } = form_data;
-					dispatch( AC.update_custom_option(custom) );
+					const { customize } = form_data;
 					dispatch( AC.update_form_state(+res.message.status) );
 					customize.forEach((item, index) => {
 						const { title, options, name } = item;

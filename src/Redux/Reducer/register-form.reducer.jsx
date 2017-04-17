@@ -5,6 +5,8 @@ export const customize = (state = fromJS([]), action) => {
 	let opt_len = state.size;
 	const { index, title, name, options, option_type } = action;
 	switch(action.type) {
+		case 'init':
+			return fromJS([]);
 		case 'add_single_choice':
 		case 'add_muti_choice':
 		case 'add_select':
@@ -61,16 +63,6 @@ export const customize = (state = fromJS([]), action) => {
 	}
 }
 
-// 表单常用选项
-export const custom = (state=[], action) => {
-	switch(action.type) {
-		case 'update_custom_option':
-			return action.value;
-		default:
-			return state;
-	}
-}
-
 // 表单状态
 // 0 => 未发布
 // 1 => 已发布
@@ -119,11 +111,19 @@ export const rules = (state = fromJS([]), action) => {
 	}
 }
 
+<<<<<<< HEAD
 // 正在编辑的表单选项
 export const edit_index = (state = 0, action) => {
 	switch(action.type) {
 		case 'edit_index':
 			return action.index;
+=======
+// 预览表单
+export const preview = (state = [], action) => {
+	switch(action.type) {
+		case 'preview_formdata':
+			return action.formdata;
+>>>>>>> 2303271f6d452b255daa7738fe4870ed48851dda
 		default:
 			return state;
 	}

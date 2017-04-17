@@ -1,7 +1,6 @@
-// 添加会议常用项
-export const update_custom_option = (value) => ({
-	type: 'update_custom_option',
-	value
+// 初始化整个报名表单
+export const init_register = () => ({
+	type: 'init',
 });
 
 // 添加单选
@@ -117,9 +116,9 @@ export const update_form_state = (status) => ({
 	status
 });
 
-/**
- * 新建规则项
- */
+/******************************************************************************
+ ****************************** 新建规则项 **************************************
+ ******************************************************************************/
 // 添加规则项
 export const add_rule = (title, condition_title, condition_value, constraint, behaviour) => ({
 	type: 'add_rule',
@@ -171,8 +170,17 @@ export const change_constraint_behaviour = (index, behaviour) => ({
 	behaviour,
 });
 
+<<<<<<< HEAD
 // 正在编辑的规则的索引
 export const edit_index = (index) => ({
 	type: 'edit_index',
 	index,
+=======
+/******************************************************************************
+ ****************************** 预览表单 **************************************
+ ******************************************************************************/
+export const preview_formdata = (formdata) => ({
+	type: 'preview_formdata',
+	formdata
+>>>>>>> 2303271f6d452b255daa7738fe4870ed48851dda
 });
