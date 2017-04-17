@@ -79,14 +79,21 @@ export const status = (state = 0, action) => {
 export const rules = (state = fromJS([]), action) => {
 	switch(action.type) {
 		case 'add_rule':
-			const {title, condition_title, condition_value, constraint, behaviour} = action;
-			return state.push(Map({
-				title, 
-				condition_title, 
-				condition_value, 
-				constraint, 
-				behaviour
-			}));
+			console.log(state.size);
+
+			// TODO BUG!!!
+			if(state.size === 1) {
+				return state;
+			} else {
+				const {title, condition_title, condition_value, constraint, behaviour} = action;
+				return state.push(Map({
+					title, 
+					condition_title, 
+					condition_value, 
+					constraint, 
+					behaviour
+				}));
+			}
 			
 		case 'delete_rule':
 			return state.delete(action.index);
@@ -116,6 +123,18 @@ export const edit_index = (state = 0, action) => {
 	switch(action.type) {
 		case 'edit_index':
 			return action.index;
+		default:
+			return state;
+	}
+}
+
+// 模态框的状态
+// create --- 新建规则时
+// modify --- 修改规则时
+export const rule_state = (state = 'create', action) => {
+	switch(action.type) {
+		case 'rule_state':
+			return action.state;
 		default:
 			return state;
 	}

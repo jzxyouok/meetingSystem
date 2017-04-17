@@ -10,23 +10,20 @@ class Rules extends Component {
     state = {
         newRuleModal: false,
         condition_value: [],
-        modalConfirm: 'init',
     }
 
     // 显示、隐藏新建规则的模态框
     toggleNewRuleModal = (type) => {
         // 初始化规则表单
         if(type === 'init') {
-            this.setState({
-                modalConfirm: 'init'
-            });
             this.props.form.setFields({
                 title: { value: '' },
                 condition_title: { value: '' }, 
                 condition_value: { value: '' }, 
                 constraint: { value: [] }, 
                 behaviour: { value: '' },
-            })
+            });
+            this.props.cRuleState('create');
         }
         this.setState({
             newRuleModal: !this.state.newRuleModal
@@ -35,18 +32,17 @@ class Rules extends Component {
 
     // 添加一条规则
     addRule = () => {
-        if(this.state.modalConfirm === 'init'){
-            this.props.form.validateFields((err, values) => {
-                if(err) return;
-                const {title, condition_title, condition_value, constraint, behaviour} = values;
-                this.props.addRule(title, condition_title, condition_value, constraint, behaviour);
-            });
-        }
-        this.toggleNewRuleModal();
+        this.props.form.validateFields((err, values) => {
+            if(err) return;
+            const {title, condition_title, condition_value, constraint, behaviour} = values;
+            this.props.addRule(title, condition_title, condition_value, constraint, behaviour);
+            this.toggleNewRuleModal();
+        });
     }
 
     // 修改某一项规则
     modify = (rid) => {
+        this.props.cRuleState('modify');
         // 首先更改store中存储的当前的index
         this.props.cEditIndex(rid);
         const rule = this.props.rules[rid];
@@ -60,7 +56,6 @@ class Rules extends Component {
         });
         this.setState({
             newRuleModal: !this.state.newRuleModal,
-            modalConfirm: 'modify'
         })
     }
 
@@ -187,11 +182,13 @@ class Rules extends Component {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form.create({
     onFieldsChange: (props, fields) => {
+        console.log(props.rules);
+        // 正在编辑的项的索引
         const editIndex  = props.editIdx;
+        // 正在编辑的项
         const dirtyField = Object.keys(fields)[0];
         if(fields[dirtyField]) {
             const dirtyValue = fields[dirtyField].value;
-            console.log(dirtyValue);
             switch(dirtyField) {
                 case 'title':
                     return props.cTitle(editIndex, dirtyValue);
