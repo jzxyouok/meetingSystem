@@ -6,92 +6,106 @@ import {mapStateToProps, mapDispatchToProps} from './form-rules.conn';
 const FormItem = Form.Item;
 const Option   = Select.Option;
 
-class Rules extends Component {
+class Rule extends Component {
     state = {
-        newRuleModal: false,
-        condition_value: [],
+        newRuleModal : false,
+        modifyRuleModal : false,
+        newRuleConditionValue: [],
+        modifyRuleConditionValue: [],
     }
 
-    // 显示、隐藏新建规则的模态框
-    toggleNewRuleModal = (type) => {
-        // 初始化规则表单
-        if(type === 'init') {
-            this.props.addRule('', '', '', [], '');
-            this.props.form.setFields({
-                title: { value: '' },
-                condition_title: { value: '' }, 
-                condition_value: { value: '' }, 
-                constraint: { value: [] }, 
-                behaviour: { value: '' },
-            });
-            this.props.cRuleState('create');
-        }
+    selectStyle = {
+        width: '100%',
+    }
+
+    // 新建一条规则
+    newRule = () => {
         this.setState({
-            newRuleModal: !this.state.newRuleModal
-        })
-    }
-
-    // 添加一条规则
-    addRule = () => {
-        this.props.form.validateFields((err, values) => {
-            if(err) return;
-            // const {title, condition_title, condition_value, constraint, behaviour} = values;
-            // this.props.addRule(title, condition_title, condition_value, constraint, behaviour);
-            this.toggleNewRuleModal();
+            newRuleModal : true,
+        }, () => {
+            // 先在store中新建一条规则
+            this.props.addRule();
+            // 现在已经有的规则数量
+            const len = this.props.rules.length;
+            console.log(len);
+            // 更改现在正在编辑的规则的索引
+            this.props.cEditIndex(len);
         });
     }
-
     // 关闭新建规则模态框
-    closeNewRule = (e) => {
-        // 如果该规则还在创建阶段，就要删除这条规则
-        if(this.props.ruleState === 'create') {
-            this.props.delLast();
-        }
+    closeNewRule = () => {
         this.setState({
-            newRuleModal: false,
-        })
-    }
-
-    // 改变规则名
-    handleTitleChange = (e) => {
-        this.props.
-    }
-
-    // 修改某一项规则
-    modify = (rid) => {
-        this.props.cRuleState('modify');
-        // 首先更改store中存储的当前的index
-        this.props.cEditIndex(rid);
-        const rule = this.props.rules[rid];
-        console.log(rule);
-        const {title, condition_title, condition_value, constraint, behaviour} = rule;
-        this.props.form.setFields({
-            title: { value: title },
-            condition_title: { value: condition_title }, 
-            condition_value: { value: condition_value }, 
-            constraint: { value: constraint }, 
-            behaviour: { value: behaviour },
+            newRuleModal : false,
         });
+        // 关闭规则模态框时，没有点击确认则删除最后一条规则
+        this.props.delLast();
+    }
+    // 新建规则项目中条件项改变
+    newRuleConditionChange = (value) => {
+        const condition = this.props.formdata.filter(item => item.title === value)[0];
         this.setState({
-            newRuleModal: !this.state.newRuleModal,
+            newRuleConditionValue: condition.options,
         })
     }
-
-    // 删除某一项规则
-    delete = (rid) => {
-        this.props.delRule(rid);
-    }
-
-    // 当条件值发生改变时
-    conditionChange = (val) => {
-        const condition = this.props.formdata.filter(item => item.title === val)[0];
-        this.setState({
-            condition_value: condition.options,
+    // 新建规则确定按钮事件
+    newRuleConfirm = () => {
+        const fields = ['title', 'cname', 'cvalue', 'constraint', 'behaviour'];
+        this.props.form.validateFields(fields, (err, values) => {
+            if(err) return;
+            // 如果没有错误，则关闭模态框
+            this.setState({
+                newRuleModal: false,
+            })
         })
     }
-
+    // 修改规则时项目的条件发生改变
+    modifyRuleConditionChange = (value) => {
+        const condition = this.props.formdata.filter(item => item.title === value)[0];
+        this.setState({
+            modifyRuleConditionValue: condition.options,
+        })
+    }
+    // 修改一条规则
+    modifyRule = (rid) => {
+        this.setState({
+            modifyRuleModal : true,
+        }, () => {
+            // 初始化表单的初始值
+            const rule = this.props.rules[rid];
+            this.props.form.setFieldsValue({
+                'modify_title': rule.title,
+                'modify_cname': rule.condition_title,
+                'modify_cvalue': rule.condition_value,
+                'modify_constraint': rule.constraint,
+                'modify_behaviour': rule.behaviour,
+            });
+            // 修改此时正在编辑的规则索引
+            this.props.cEditIndex(rid);
+        })
+    }
+    // 修改规则确定按钮事件
+    modifyRuleConfirm = () => {
+        const fields = ['modify_title', 'modify_cname', 'modify_cvalue', 'modify_constraint', 'modify_behaviour'];
+        this.props.form.validateFields(fields, (err, values) => {
+            if(err) return;
+            this.setState({
+                modifyRuleModal: false,
+            });
+        });
+    }
+    // 关闭修改规则模态框
+    closeModifyRule = () => {
+        this.setState({
+            modifyRuleModal : false,
+        });
+    }
+    // 删除一条规则
+    deleteRule = (rid) => {
+        this.props.delRule(rid)
+    }
     render() {
-        const colums = [{
+        // 规则表格的列
+        const columns = [{
             title: '序号',
             dataIndex: 'rid',
             width: 100,
@@ -111,64 +125,62 @@ class Rules extends Component {
             render: (text, record) => {
                 return (
                     <div>
-                        <a href="javascript:;" data-index={record.key} onClick={(e) => this.modify.call(this, +e.target.dataset.index)}>修改</a>
-                        <Popconfirm title="确认删除这条规则吗" data-index={record.key} onConfirm={(e) => this.delete.call(this, +e.target.dataset.index)}>
+                        <a href="javascript:;" onClick={this.modifyRule.bind(this, record.key)}>修改</a>
+                        <Popconfirm title="确认删除这条规则吗" onConfirm={this.deleteRule.bind(this, record.key)}>
                             <a href="javascript:;">删除</a>
                         </Popconfirm>
                     </div>
                 )}
         }];
+
         const dataSource = this.props.rules.map((item, index) => ({
             key: index,
             rid: index+1,
             rulename: item.title,
-            rule: `当用户选择了【${item.condition_title}】项的【${item.condition_value}】时，【${item.constraint}】变为【${item.behaviour}】`
+            rule: `当用户选择了【${item.condition_title}】项的【${item.condition_value}】时,【${item.constraint}】变为【${item.behaviour}】`
         }))
+
         const {getFieldDecorator} = this.props.form;
 
+        // 可以用来做条件选项的表单项
         const conditions = this.props.formdata.filter(item => {
-            const type = item.option_type;
-            return type === 'select' || type === 'radio' || type === 'checkbox';
+            return item.option_type === 'radio' || item.option_type === 'select' || item.option_type === 'checkbox';
         });
+
         return (
             <Row>
-                <Modal 
-                    visible={this.state.newRuleModal} 
-                    title="新建表单规则" 
-                    onCancel={this.closeNewRule}
-                    onOk={this.addRule}>
-                    <Form>
+                <Modal title="新建规则" visible={this.state.newRuleModal} onCancel={this.closeNewRule} onOk={this.newRuleConfirm}>
                         <FormItem label="规则名">
                             {getFieldDecorator('title', {
                                 rules: [{required: true, message: '规则名称不能为空'}]
                             })(
-                                <Input onChange={this.handleTitleChange} />
+                                <Input placeholder="请输入规则名称" />
                             )}
                         </FormItem>
-                        <FormItem label="条件">
-                            {getFieldDecorator('condition_title', {
-                                rules: [{required: true, message: '条件不能为空'}]
+                        <FormItem label="条件名">
+                            {getFieldDecorator('cname', {
+                                rules: [{required: true, message: '条件名称不能为空'}]
                             })(
-                                <Select placeholder="选择条件名" onChange={this.conditionChange}>
-                                    {conditions.map((item, index) => <Option key={index} value={item.title}>{item.title}</Option>)}
+                                <Select style={this.selectStyle} placeholder="请输入条件名称" onChange={this.newRuleConditionChange}>
+                                    {conditions.map(item => <Option value={item.title} key={item.index}>{item.title}</Option>)}
                                 </Select>
                             )}
                         </FormItem>
-                        <FormItem label="条件值">
-                            {getFieldDecorator('condition_value', {
+                        <FormItem label="条件名对应的选项">
+                            {getFieldDecorator('cvalue', {
                                 rules: [{required: true, message: '条件对应的值不能为空'}]
                             })(
-                                <Select placeholder="请选择条件对应的值">
-                                    {this.state.condition_value.map((item, index) => <Option key={index} value={item}>{item}</Option>)}
+                                <Select style={this.selectStyle} placeholder="请选择条件对应的值">
+                                    {this.state.newRuleConditionValue.map((item, index) => <Option value={item} key={index}>{item}</Option>)}
                                 </Select>
                             )}
                         </FormItem>
-                        <FormItem label="约束项">
+                        <FormItem label="约束项(多选)">
                             {getFieldDecorator('constraint', {
                                 rules: [{required: true, message: '约束项不能为空'}]
                             })(
-                                <Select multiple placeholder="需要约束的项目不能为空" >
-                                    {this.props.formdata.map((item, index) => <Option key={index} value={item.title}>{item.title}</Option>)}
+                                <Select style={this.selectStyle} multiple placeholder="请选择约束项">
+                                    {this.props.formdata.map(item => <Option value={item.title} key={item.index}>{item.title}</Option>)}
                                 </Select>
                             )}
                         </FormItem>
@@ -176,7 +188,7 @@ class Rules extends Component {
                             {getFieldDecorator('behaviour', {
                                 rules: [{required: true, message: '约束项的表现不能为空'}]
                             })(
-                                <Select placeholder="请选择约束项的表现">
+                                <Select style={this.selectStyle} placeholder="请选择约束项的表现">
                                     <Option value="必填">必填</Option>
                                     <Option value="选填">选填</Option>
                                     <Option value="显示">显示</Option>
@@ -184,44 +196,98 @@ class Rules extends Component {
                                 </Select>
                             )}
                         </FormItem>
-                    </Form>
                 </Modal>
-                <Col>
-                    <Button type="primary" onClick={this.toggleNewRuleModal.bind(this, 'init')}>新建规则</Button>
-                </Col>
-                <Table columns={colums} dataSource={dataSource} bordered></Table>
-                <Col>
-                    <Button type="primary">保存</Button>
-                </Col>
+
+
+                <Modal title="修改规则" visible={this.state.modifyRuleModal} onCancel={this.closeModifyRule} onOk={this.modifyRuleConfirm}>
+                        <FormItem label="规则名">
+                            {getFieldDecorator('modify_title', {
+                                rules: [{required: true, message: '规则名称不能为空'}]
+                            })(
+                                <Input placeholder="请输入规则名称" />
+                            )}
+                        </FormItem>
+                        <FormItem label="条件名">
+                            {getFieldDecorator('modify_cname', {
+                                rules: [{required: true, message: '条件名称不能为空'}]
+                            })(
+                                <Select style={this.selectStyle} placeholder="请输入条件名称" onChange={this.modifyRuleConditionChange}>
+                                    {conditions.map(item => <Option value={item.title} key={item.index}>{item.title}</Option>)}
+                                </Select>
+                            )}
+                        </FormItem>
+                        <FormItem label="条件名对应的选项">
+                            {getFieldDecorator('modify_cvalue', {
+                                rules: [{required: true, message: '条件对应的值不能为空'}]
+                            })(
+                                <Select style={this.selectStyle} placeholder="请选择条件对应的值">
+                                    {this.state.modifyRuleConditionValue.map((item, index) => <Option value={item} key={index}>{item}</Option>)}
+                                </Select>
+                            )}
+                        </FormItem>
+                        <FormItem label="约束项(多选)">
+                            {getFieldDecorator('modify_constraint', {
+                                rules: [{required: true, message: '约束项不能为空'}]
+                            })(
+                                <Select style={this.selectStyle} multiple placeholder="请选择约束项">
+                                    {this.props.formdata.map(item => <Option value={item.title} key={item.index}>{item.title}</Option>)}
+                                </Select>
+                            )}
+                        </FormItem>
+                        <FormItem label="约束项的表现">
+                            {getFieldDecorator('modify_behaviour', {
+                                rules: [{required: true, message: '约束项的表现不能为空'}]
+                            })(
+                                <Select style={this.selectStyle} placeholder="请选择约束项的表现">
+                                    <Option value="必填">必填</Option>
+                                    <Option value="选填">选填</Option>
+                                    <Option value="显示">显示</Option>
+                                    <Option value="隐藏">隐藏</Option>
+                                </Select>
+                            )}
+                        </FormItem>
+                </Modal>
+                <Button type="primary" onClick={this.newRule}>新建规则</Button>
+                <Table columns={columns} dataSource={dataSource} />
+                <Button type="primary">保存规则</Button>
             </Row>
         )
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create({
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Form.create({
     onFieldsChange: (props, fields) => {
-        let editIndex  = 0;
-        if(props.ruleState === 'create') {
-            editIndex = props.rules.length - 1;
-        } else {
-            editIndex  = props.editIdx;
-        }
-        // 正在编辑的项
         const dirtyField = Object.keys(fields)[0];
         if(fields[dirtyField]) {
+            const editIndex = props.editIdx;
             const dirtyValue = fields[dirtyField].value;
             switch(dirtyField) {
-                case 'condition_title':
+                case 'title':
+                    return props.cTitle(editIndex, dirtyValue);
+                case 'cname':
                     return props.cConditionTitle(editIndex, dirtyValue);
-                case 'condition_value':
+                case 'cvalue':
                     return props.cConditionValue(editIndex, dirtyValue);
                 case 'constraint':
                     return props.cConstraint(editIndex, dirtyValue);
                 case 'behaviour':
+                    return props.cBehaviour(editIndex, dirtyValue);
+                case 'modify_title':
+                    return props.cTitle(editIndex, dirtyValue);
+                case 'modify_cname':
+                    return props.cConditionTitle(editIndex, dirtyValue);
+                case 'modify_cvalue':
+                    return props.cConditionValue(editIndex, dirtyValue);
+                case 'modify_constraint':
+                    return props.cConstraint(editIndex, dirtyValue);
+                case 'modify_behaviour':
                     return props.cBehaviour(editIndex, dirtyValue);
                 default:
                     break;
             }
         }
     }
-})(Rules));
+})(Rule));
