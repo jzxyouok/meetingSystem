@@ -87,7 +87,8 @@ class RegisterPreview extends Component {
         const items = this.props.prevData.map(item => {
             const {title, name, index, option_type, options} = item;
             return this.addItem(title, name, index, option_type, options);
-        })
+        });
+        console.log(this.props.prevData);
         return (
             <Form className="form-preview">
                 {items}
@@ -98,10 +99,58 @@ class RegisterPreview extends Component {
 
 const mapStateToProps = (state) => ({
     prevData: state.getIn(['register_form', 'customize']).toJS(),
+    rules: state.getIn(['register_form', 'rules']).toJS(),
 });
 const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Form.create()(RegisterPreview));
+)(Form.create({
+    onFieldsChange: (props, fields) => {
+        // 变化的表单项的name和value
+        const fieldname = Object.keys(fields)[0];
+        const fieldvalue = fields[fieldname].value;
+        // 查出班花表单项的title
+        const dirty = props.prevData.filter(item => item.name === fieldname);
+        const fieldtitle = dirty[0].title;
+
+        // 再去规则中查找这个题目有没有限制
+        const rule = props.rules.filter(item => item.condition_title === fieldtitle);
+        
+        // 如果本规则的长度为0 则return
+        if(rule.length) {
+            return;
+        }
+    }
+})(RegisterPreview));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
