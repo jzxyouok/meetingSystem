@@ -156,6 +156,7 @@ class CheckDetail extends Component{
 		const edit_phone    = phone    ? phone : '';
 		const edit_status   = status === '1'   ? 1 : 0;
 
+		const mobileCheck = 'http://www.cfdq.midea.com/wechat/checkin/index.html';
 		return (
 			<div className="check_detail">
 				<Modal className="edit-modal" title="编辑" visible={this.state.editVisible} onCancel={this.closeEdit} onOk={this.submitStatus.bind(this, openid)}>
@@ -181,8 +182,12 @@ class CheckDetail extends Component{
 				</Modal>
 				<Row>
 					<h2 className="check_detail_title">{this.props.title}</h2>
-					<Col span={4} className="total-num">总人数: {this.props.checkNum}</Col>
-					<Col span={20} className="re-list">
+					<Col span={3} className="total-num">总人数: {this.props.checkNum}</Col>
+					<Col span={15}>
+						<Button type="primary" icon="copy">复制</Button>
+						<Input className="mobileUrl" disabled value={`${mobileCheck}?action_id=${this.props.params.qid}`}/>
+					</Col>
+					<Col span={6} className="re-list">
 						<a href="javascript:;" onClick={this.reList} className="ant-btn ant-btn-default">返回签到列表 <Icon type="rollback" /></a>
 					</Col>
 				</Row>
