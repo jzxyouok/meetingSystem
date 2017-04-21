@@ -4,56 +4,11 @@
 	margin: 20px auto;
 	padding: 40px 20px;
 
-	.title {
-		width: 150px;
-		height: 50px;
-		font: 16px/50px 'Microsoft Yahei';
-		color: #fff;
-		background-color: #00a0e8;
-		text-align: center;
-		margin: -42px 0 20px 10%;
-	}
-
-	.options {
-		font-size: 16px;
-	}
-
 	.ant-row {
 		margin-bottom: 8px;
 	}
-	.label {
-		text-align: right;
-		height: 28px;
-		line-height: 28px;
-		padding-right: 10px;
-	}
-	.add-customize button {
-		margin-right: 8px;
-	}
-	.muti-options {
-		margin-top: 4px;
-	}
-	.customize-item-handler {
-		height: 28px;
-		& > div {
-			height: 100%;
-		}
-		i {
-			margin-left: 8px;
-			font: 16px/28px 'Microsoft Yahei';
-			transition: color .3s;
 
-			&:hover {
-				color: red;
-				cursor: pointer;
-			}
-		}
-	}
-	.button-handler button {
-		margin-right: 8px;
-	}
-	.form-preview {
-		width: 60%;
-		margin: 0 auto;
+	.form-select button {
+		margin-right: 10px;
 	}
 }
