@@ -8,7 +8,12 @@
 		margin-bottom: 8px;
 	}
 
-	.form-select button {
-		margin-right: 10px;
+	.form-select {
+		button {
+			margin-right: 10px;
+		}
+		.edit {
+			margin-left: 10px;
+		}
 	}
 }

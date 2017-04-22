@@ -22,8 +22,17 @@ export const getAllRegister = 'http://www.cfdq.midea.com/meeting/mock/downloadAl
 // 获取参与人员表中数据
 export const getAttendeeTable = 'http://www.cfdq.midea.com/meeting/mock/getAttendeeTable.php';
 
-// 获取省市县接口
-export const getAddress = 'http://www.cfdq.midea.com/wechat/res/php/getCity.php';
+/**
+ * 报名表单页面
+ */
+// 增加报名通道接口
+export const addRigisterChannel = 'http://www.cfdq.midea.com/meeting/index.php/Meetingadmin/form/addticket';
+// 获取报名通道接口
+export const getRegisterChannel = 'http://www.cfdq.midea.com/meeting/index.php/Meetingadmin/form/ticketlist';
+// 删除报名通道接口
+export const delRegisterChannel = 'http://www.cfdq.midea.com/meeting/index.php/Meetingadmin/form/deletetlist';
+// 修改报名通道接口
+export const modRegisterChannel = 'http://www.cfdq.midea.com/meeting/index.php/Meetingadmin/form/modifyticket';
 
 /**
  * 会议签到页面接口

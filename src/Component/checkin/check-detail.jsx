@@ -187,9 +187,9 @@ class CheckDetail extends Component{
 					<Col span={3} className="total-num">总人数: {this.props.checkNum}</Col>
 					<Col span={15}>
 						<Tooltip placement="left" title="已复制" trigger="click" mouseLeaveDelay={1}>
-							<Button type="primary" className="copy" icon="copy" data-clipboard-text={`${mobileCheck}?action_id=${this.props.params.qid}`}>复制</Button>
+							<Button type="primary" className="copy" icon="copy" data-clipboard-text={`${mobileCheck}?action_id=${this.props.params.id}&qid=${this.props.params.qid}`}>复制</Button>
 						</Tooltip>
-						<Input className="mobileUrl" disabled value={`${mobileCheck}?action_id=${this.props.params.qid}`}/>
+						<Input className="mobileUrl" disabled value={`${mobileCheck}?action_id=${this.props.params.id}&qid=${this.props.params.qid}`}/>
 					</Col>
 					<Col span={6} className="re-list">
 						<a href="javascript:;" onClick={this.reList} className="ant-btn ant-btn-default">返回签到列表 <Icon type="rollback" /></a>
