@@ -14,6 +14,7 @@
     "antd": "^2.8.2",
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
+    "clipboard": "^1.6.1",
     "core-decorators": "^0.15.0",
     "draft-js": "^0.10.0",
     "es6-promise": "^4.0.5",

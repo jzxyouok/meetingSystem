@@ -1,10 +1,11 @@
 import React, {Component} 		from 'react';
-import { Row, Col, Table, Select, Icon, Button, message, Input, Modal, Radio, Popconfirm, notification } 
+import { Row, Col, Table, Select, Icon, Button, message, Input, Modal, Radio, Popconfirm, notification, Tooltip } 
 								from 'antd';
 import { connect } 				from 'react-redux';
 import { getCheckinDetails, changeCheckinStatus, noticeManager } 	
 								from '../../Config/apiUrl';
 import * as AC 					from '../../Redux/Action/checkin.action';
+import Clipboard 				from 'clipboard';
 
 const Option = Select.Option,
 	  RadioGroup = Radio.Group;
@@ -28,6 +29,7 @@ class CheckDetail extends Component{
 
 	// 组件加载完成去请求签到人员数据
 	componentDidMount() {
+		new Clipboard('.copy');
 		const { id, qid } = this.props.params;
 		this.props.getDetails(id, qid);
 	}
@@ -184,7 +186,9 @@ class CheckDetail extends Component{
 					<h2 className="check_detail_title">{this.props.title}</h2>
 					<Col span={3} className="total-num">总人数: {this.props.checkNum}</Col>
 					<Col span={15}>
-						<Button type="primary" icon="copy">复制</Button>
+						<Tooltip placement="left" title="已复制" trigger="click" mouseLeaveDelay={1}>
+							<Button type="primary" className="copy" icon="copy" data-clipboard-text={`${mobileCheck}?action_id=${this.props.params.qid}`}>复制</Button>
+						</Tooltip>
 						<Input className="mobileUrl" disabled value={`${mobileCheck}?action_id=${this.props.params.qid}`}/>
 					</Col>
 					<Col span={6} className="re-list">
