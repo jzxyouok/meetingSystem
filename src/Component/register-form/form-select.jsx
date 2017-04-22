@@ -36,7 +36,7 @@ class FormSelect extends Component {
         render: (text, record) => (
             <div>
                 <a href="javascript:;" onClick={this.toggleModChannel.bind(this, record.tid)}>修改</a>
-                <Popconfirm onConfirm={this.delChannel.bind(this, record.tid)} title="确定删除吗?">
+                <Popconfirm onConfirm={this.delChannel.bind(this, record.key)} title="确定删除吗?">
                     <a href="javascript:;">删除</a>
                 </Popconfirm>
             </div>
@@ -46,9 +46,9 @@ class FormSelect extends Component {
     // 报名通道表单内容
     dataSource = () => {
         const { existChannel } = this.props.formChannel;
-        return existChannel.map(channel => ({
+        return existChannel.map((channel, index) => ({
             key: channel.tid,
-            tid: channel.tid,
+            tid: index+1,
             name: channel.name,
         }));
     }
@@ -124,6 +124,7 @@ class FormSelect extends Component {
     delChannel = (tid) => {
         const { action_id } = this.props;
         this.props.delChannel(action_id, tid);
+        this.toggleChannelInfo();
     }
 
     render() {

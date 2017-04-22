@@ -30,7 +30,7 @@ export const addRigisterChannel = 'http://www.cfdq.midea.com/meeting/index.php/M
 // 获取报名通道接口
 export const getRegisterChannel = 'http://www.cfdq.midea.com/meeting/index.php/Meetingadmin/form/ticketlist';
 // 删除报名通道接口
-export const delRegisterChannel = 'http://www.cfdq.midea.com/meeting/index.php/Meetingadmin/form/deletetlist';
+export const delRegisterChannel = 'http://www.cfdq.midea.com/meeting/index.php/Meetingadmin/form/deleteticket';
 // 修改报名通道接口
 export const modRegisterChannel = 'http://www.cfdq.midea.com/meeting/index.php/Meetingadmin/form/modifyticket';
 

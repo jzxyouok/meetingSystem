@@ -46,7 +46,10 @@ export const mapDispatchToProps = (dispatch) => ({
             body: `action_id=${id}&tid=${tid}`
         })
         .then(res => res.json())
-        .then(res => console.log(res))
+        .then(res => {
+            message.success('删除成功');
+            dispatch( AC.add_register_channel(res.message) );
+        })
         .catch(err => message.error('网络错误请稍后重试或联系系统管理员'));
     }),
 
