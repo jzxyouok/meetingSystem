@@ -1,8 +1,18 @@
 // 表单详情组件
 import React, { Component } from 'react';
+import {RegSelect, RegRadio, RegCheckbox, RegInput, RegTimer, RegFile} from './form-item';
 
 export default class FormDetail extends Component {
     render() {
-        return <h2>FormDetail</h2>;
+        return (
+        	<div className="form-detail">
+        		<RegSelect />
+        		<RegRadio />
+        		<RegCheckbox />
+        		<RegInput />
+        		<RegTimer />
+        		<RegFile />
+        	</div>
+        )
     }
 }

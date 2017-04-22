@@ -14,8 +14,8 @@ export default class Register extends Component {
 					<FormSelect action_id={this.props.params.id} />
 				</Row>
 				<Row>
-					<Col span={18}><FormField /></Col>
-					<Col span={6}><FormDetail /></Col>
+					<Col span={18}><FormDetail /></Col>
+					<Col span={6}><FormField /></Col>
 				</Row>
 			</div>
 		)
