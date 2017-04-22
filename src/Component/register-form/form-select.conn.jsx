@@ -21,7 +21,13 @@ export const mapDispatchToProps = (dispatch) => ({
     }),
 
     addChannel: (id, name) => dispatch(() => {
-        fetch(addRigisterChannel+`?action_id=${id}&name=${name}`)
+        fetch(addRigisterChannel, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `action_id=${id}&name=${name}`
+        })
         .then(res => res.json())
         .then(res => {
             if(res.code === 1) {
@@ -32,7 +38,13 @@ export const mapDispatchToProps = (dispatch) => ({
     }),
 
     delChannel: (id, tid) => dispatch(() => {
-        fetch(delRegisterChannel+`?action_id=${id}&tid=${tid}`)
+        fetch(delRegisterChannel, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `action_id=${id}&tid=${tid}`
+        })
         .then(res => res.json())
         .then(res => console.log(res))
         .catch(err => message.error('网络错误请稍后重试或联系系统管理员'));
@@ -41,9 +53,17 @@ export const mapDispatchToProps = (dispatch) => ({
     modChannel: (tid, name) => dispatch(() => {
         fetch(modRegisterChannel+`?tid=${tid}&name=${name}`)
         .then(res => res.json())
-        .then(res => console.log(res))
+        .then(res => {
+            if(res.code === 1) {
+                const duration = 2;
+                message.success(res.message, duration,() => location.reload());
+            }
+        })
         .catch(err => message.error('网络错误请稍后重试或联系系统管理员'));
     }),
 
     cChannel: (name) => dispatch( AC.update_register_channel(name) ),
+
+    // 更改正在编辑的通道信息
+    cEditChannelInfo: (tid, name) => dispatch( AC.update_edit_channel(tid, name) ),
 });
