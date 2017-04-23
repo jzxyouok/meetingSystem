@@ -1,6 +1,7 @@
 // 不同类型的表单类型
 import React, {Component} from 'react';
 import {Input, Select, Radio, Checkbox, DatePicker} from 'antd';
+import FormItemHandler from './form-item-operator';
 
 const Option 		= Select.Option;
 const RadioGroup 	= Radio.Group;
@@ -19,6 +20,7 @@ export class RegSelect extends Component {
 						<Option value="2">B</Option>
 					</Select>
 				</div>
+				<FormItemHandler />
 			</div>
 		)
 	}
