@@ -16,4 +16,48 @@
 			margin-left: 10px;
 		}
 	}
+
+	.title {
+		font-size: 14px;
+		line-height: 20px;
+		margin-bottom: 8px;
+	}
+
+	.form-item {
+		border: 1px dashed #ccc;
+		padding: 8px 16px;
+		margin-bottom: 8px;
+		border-radius: 6px;
+
+		&:hover {
+			border-color: #108ee9;
+		}
+	}
+
+	.choice {
+		margin-bottom: 6px;
+	}
+
+	.item-hanlder {
+		margin-bottom: 10px;
+		button {
+			margin-right: 8px;
+		}
+	}
+}
+
+.ant-modal-body  {
+	.ant-col-4 {
+		text-align: right;
+		padding-right: 8px;
+		line-height: 26px;
+	}
+
+	.as-title {
+		line-height: 26px;
+	}
+
+	.ant-row {
+		margin-bottom: 8px;
+	}
 }

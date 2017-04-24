@@ -11,11 +11,13 @@ export default class Register extends Component {
 		return (
 			<div className="register-form">
 				<Row>
-					<FormSelect action_id={this.props.params.id} />
+					<Col offset={3}>
+						<FormSelect action_id={this.props.params.id} />
+					</Col>
 				</Row>
 				<Row>
-					<Col span={18}><FormDetail /></Col>
-					<Col span={6}><FormField /></Col>
+					<Col span={12} offset={3}><FormDetail /></Col>
+					<Col span={6} offset={3}><FormField /></Col>
 				</Row>
 			</div>
 		)
